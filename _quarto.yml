@@ -1,0 +1,53 @@
+project:
+  type: book
+  output-dir: docs
+  preview:
+    browser: true
+    port: 4200
+    watch-inputs: true
+
+book:
+  title: "Mathematical Ecology and Epidemiology"
+  subtitle: "Lecture notes for Spring 2025"
+  author:
+    - name: Gustav Delius
+      email: gustav.delius@york.ac.uk
+      affiliation:
+      - name: Department of Mathematics, University of York
+  date: today
+  license: CC BY-NC-SA
+  description: Work in progress
+  repo-url: https://github.com/gustavdelius/MathematicalEcologyAndEpidemiology2025/
+  repo-branch: main
+  repo-actions: edit
+  favicon: virus.png
+  twitter-card: true
+  open-graph: true
+  sidebar:
+    subtitle: Lecture notes
+    tools:
+      - icon: mortarboard-fill
+        href: https://vle.york.ac.uk/ultra/courses/_111662_1/outline
+        text: VLE
+  chapters:
+    - index.qmd
+    - continuous_time.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    code-fold: true
+    link-external-newwindow: true
+    fig-width: 6
+    fig-height: 4
+  pdf:
+    documentclass: scrreport
+
+toc: true
+toc-depth: 4
+number-depth: 3
+number-sections: true
+crossref:
+  eq-prefix: Eq.
