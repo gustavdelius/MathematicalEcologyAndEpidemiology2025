@@ -262,7 +262,15 @@ relatively easily
 ## Allee effect
 Warder Clyde Allee (1885-1955) was an American ecologist who studied the effects of population density on the growth rate of a population. He found that in some cases the per-capita growth rate can increase with $N$. This is called the Allee effect. It is not captured by the logistic model because there the per-capita growth rate decreases linearly iwth population size.
 
-There can be several causes for an Allee effect. For example as the population number increases, the individuals are able to shelter each other better against the wind or against predators. Or it becomes easier for them to find compatible mates. But even in the case of an Allee effect, eventually the population growth has to slow again as the population reaches the carrying capacity of the ecosystem.
+There can be several causes for an Allee effect. For example:
+
+- In many plant species, pollination becomes less effective at low densities because pollinators are less likely to visit sparse populations
+- Social animals like wolves hunt more successfully in packs, so individuals in larger groups have higher survival rates
+- Colonial seabirds like puffins rely on large colony sizes for protection from predators
+- Many marine broadcast spawners (like sea urchins or abalone) require sufficient population density for successful fertilization
+- Small populations of endangered species may suffer from genetic inbreeding, reducing reproductive success
+
+But even in the case of an Allee effect, eventually the population growth has to slow again as the population reaches the carrying capacity of the ecosystem.
 
 Figure @fig-per-capita-growth-rate shows the per-capita growth rate as a function of the population number for exponential growth in black, for logistic growth in blue and two different growth rates exhibiting the Allee effect in green and red.
 
@@ -659,7 +667,7 @@ This chapter introduced several key models for population dynamics in continuous
      * Introduces critical depensation
      * More risky management approach
 
-Key concepts:
+**Key concepts:**
 
    - Population dynamics can be modelled by specifying the rates of change coming from processes such as 
      birth, death, immigration, emigration, harvesting, etc.
