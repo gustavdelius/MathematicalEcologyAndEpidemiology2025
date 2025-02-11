@@ -51,6 +51,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./discrete_time.html" rel="next">
 <link href="./index.html" rel="prev">
 <link href="./virus.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -176,6 +177,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./continuous_time.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Continuous-time population models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./discrete_time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discrete-time population models</span></span></a>
   </div>
 </li>
     </ul>
@@ -441,7 +448,8 @@ f'(N)=r\left(1-\frac{2N}{K}\right).
 <p>We assume that in the absence of fishing the fish population number <span class="math inline">\(N(t)\)</span> is governed by the logistic equation <a href="#eq-logistic" class="quarto-xref">Eq.&nbsp;<span>1.4</span></a>. We also assume that the fish are harvested at a rate <span class="math inline">\(E N(t)\)</span>, where <span class="math inline">\(E\)</span> is the harvesting rate, which is determined by the effort that is put into fishing. This means that the rate of change in the fish population number is given by <span id="eq-logistic-harvesting"><span class="math display">\[
 \frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)-EN = f(N).
 \tag{1.14}\]</span></span> We can rewrite this equation in the form of a logistic equation with modified parameters: <span id="eq-logistic-harvesting-parameters"><span class="math display">\[
-\frac{dN}{dt}=rN\left(\left(1-\frac{E}{r}\right)-\frac{N}{K}\right).
+\frac{dN}{dt}=rN\left(\left(1-\frac{E}{r}\right)-\frac{N}{K}\right)
+=(r-E)N\left(1-\frac{N}{K\left(1-\frac{E}{r}\right)}\right).
 \tag{1.15}\]</span></span> This makes it easy to read off the fixed points <span class="math inline">\(N^*=0\)</span> and <span class="math inline">\(N^*=K\left(1-\frac{E}{r}\right)\)</span>. The non-zero fixed point gets smaller when fishing effort <span class="math inline">\(E\)</span> increases. This is illustrated in <a href="#fig-logistic-harvesting" class="quarto-xref">Figure&nbsp;<span>1.6</span></a>.</p>
 <div id="cell-fig-logistic-harvesting" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
@@ -1014,6 +1022,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./discrete_time.html" class="pagination-link" aria-label="Discrete-time population models">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discrete-time population models</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

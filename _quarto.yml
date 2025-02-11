@@ -32,6 +32,7 @@ book:
   chapters:
     - index.qmd
     - continuous_time.qmd
+    - discrete_time.qmd
 
 bibliography: references.bib
 
