@@ -19,7 +19,7 @@ $$
 $$ {#eq-dNdt}
 The idea behind this approach is that if we understand how the rates at which these processes take place depend on the population number $N$, then we can find $N(t)$ by solving the above differential equation. Different assumptions about how these rates depend on the population size (or possibly other factors such as available resources or competition) lead to different population models. In the following sections, we will examine some influential models that help us understand different population growth scenarios.
 
-## Learning Objectives
+## Learning Objectives {.unnumbered}
 
 After completing this chapter, you should be able to:
 
@@ -638,7 +638,7 @@ the fishers and set the quota at this level?
 
 ----------------------------------------------------------------------
 
-## Summary
+## Summary {.unnumbered}
 
 This chapter introduced several key models for population dynamics in continuous time:
 
@@ -679,7 +679,7 @@ This chapter introduced several key models for population dynamics in continuous
 
 ----------------------------------------------------------------------
 
-## Further exercises
+## Further exercises {.unnumbered}
 
 ::: {#exr-Hornet}
 #### Wasp model

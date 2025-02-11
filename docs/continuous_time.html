@@ -188,18 +188,18 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives"><span class="header-section-number">1.1</span> Learning Objectives</a></li>
-  <li><a href="#exponential-model" id="toc-exponential-model" class="nav-link" data-scroll-target="#exponential-model"><span class="header-section-number">1.2</span> Exponential model</a></li>
-  <li><a href="#logistic-model" id="toc-logistic-model" class="nav-link" data-scroll-target="#logistic-model"><span class="header-section-number">1.3</span> Logistic model</a></li>
-  <li><a href="#allee-effect" id="toc-allee-effect" class="nav-link" data-scroll-target="#allee-effect"><span class="header-section-number">1.4</span> Allee effect</a></li>
-  <li><a href="#general-autonomous-ode-model" id="toc-general-autonomous-ode-model" class="nav-link" data-scroll-target="#general-autonomous-ode-model"><span class="header-section-number">1.5</span> General autonomous ODE model</a></li>
-  <li><a href="#harvesting-a-renewable-resource" id="toc-harvesting-a-renewable-resource" class="nav-link" data-scroll-target="#harvesting-a-renewable-resource"><span class="header-section-number">1.6</span> Harvesting a renewable resource</a>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#exponential-model" id="toc-exponential-model" class="nav-link" data-scroll-target="#exponential-model"><span class="header-section-number">1.1</span> Exponential model</a></li>
+  <li><a href="#logistic-model" id="toc-logistic-model" class="nav-link" data-scroll-target="#logistic-model"><span class="header-section-number">1.2</span> Logistic model</a></li>
+  <li><a href="#allee-effect" id="toc-allee-effect" class="nav-link" data-scroll-target="#allee-effect"><span class="header-section-number">1.3</span> Allee effect</a></li>
+  <li><a href="#general-autonomous-ode-model" id="toc-general-autonomous-ode-model" class="nav-link" data-scroll-target="#general-autonomous-ode-model"><span class="header-section-number">1.4</span> General autonomous ODE model</a></li>
+  <li><a href="#harvesting-a-renewable-resource" id="toc-harvesting-a-renewable-resource" class="nav-link" data-scroll-target="#harvesting-a-renewable-resource"><span class="header-section-number">1.5</span> Harvesting a renewable resource</a>
   <ul>
-  <li><a href="#harvesting-with-fixed-effort" id="toc-harvesting-with-fixed-effort" class="nav-link" data-scroll-target="#harvesting-with-fixed-effort"><span class="header-section-number">1.6.1</span> Harvesting with fixed effort</a></li>
-  <li><a href="#harvesting-with-fixed-quota" id="toc-harvesting-with-fixed-quota" class="nav-link" data-scroll-target="#harvesting-with-fixed-quota"><span class="header-section-number">1.6.2</span> Harvesting with fixed quota</a></li>
+  <li><a href="#harvesting-with-fixed-effort" id="toc-harvesting-with-fixed-effort" class="nav-link" data-scroll-target="#harvesting-with-fixed-effort"><span class="header-section-number">1.5.1</span> Harvesting with fixed effort</a></li>
+  <li><a href="#harvesting-with-fixed-quota" id="toc-harvesting-with-fixed-quota" class="nav-link" data-scroll-target="#harvesting-with-fixed-quota"><span class="header-section-number">1.5.2</span> Harvesting with fixed quota</a></li>
   </ul></li>
-  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary"><span class="header-section-number">1.7</span> Summary</a></li>
-  <li><a href="#further-exercises" id="toc-further-exercises" class="nav-link" data-scroll-target="#further-exercises"><span class="header-section-number">1.8</span> Further exercises</a></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  <li><a href="#further-exercises" id="toc-further-exercises" class="nav-link" data-scroll-target="#further-exercises">Further exercises</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/MathematicalEcologyAndEpidemiology2025/edit/main/continuous_time.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -237,8 +237,8 @@ window.Quarto = {
 <p>These processes together determine the overall rate of change of the population, which we can express mathematically as: <span id="eq-dNdt"><span class="math display">\[
 \frac{dN}{dt} = \text{birth rate} - \text{death rate} + \text{immigration rate} - \text{emigration rate}.
 \tag{1.1}\]</span></span> The idea behind this approach is that if we understand how the rates at which these processes take place depend on the population number <span class="math inline">\(N\)</span>, then we can find <span class="math inline">\(N(t)\)</span> by solving the above differential equation. Different assumptions about how these rates depend on the population size (or possibly other factors such as available resources or competition) lead to different population models. In the following sections, we will examine some influential models that help us understand different population growth scenarios.</p>
-<section id="learning-objectives" class="level2" data-number="1.1">
-<h2 data-number="1.1" class="anchored" data-anchor-id="learning-objectives"><span class="header-section-number">1.1</span> Learning Objectives</h2>
+<section id="learning-objectives" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <p>After completing this chapter, you should be able to:</p>
 <ol type="1">
 <li><strong>Mathematical Modeling</strong>
@@ -264,8 +264,8 @@ window.Quarto = {
 </ol>
 <hr>
 </section>
-<section id="exponential-model" class="level2" data-number="1.2">
-<h2 data-number="1.2" class="anchored" data-anchor-id="exponential-model"><span class="header-section-number">1.2</span> Exponential model</h2>
+<section id="exponential-model" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="exponential-model"><span class="header-section-number">1.1</span> Exponential model</h2>
 <p>This is the simplest and oldest model, introduced by Thomas Robert Malthus in 1798. If we assume that the per-capita birth rate <span class="math inline">\(b\)</span> and the per-capita death rate <span class="math inline">\(d\)</span> are fixed constants, then the general differential equation <a href="#eq-dNdt" class="quarto-xref">Eq.&nbsp;<span>1.1</span></a> becomes the linear equation <span id="eq-exponential"><span class="math display">\[
 \frac{dN}{dt}=bN-dN=rN,
 \tag{1.2}\]</span></span> where we introduced the new parameter <span class="math inline">\(r=b-d\)</span>. This equation is easy to solve: <span id="eq-exponential-solution"><span class="math display">\[
@@ -297,8 +297,8 @@ Figure&nbsp;1.1: Solutions to the exponential model.
 </div>
 <hr>
 </section>
-<section id="logistic-model" class="level2" data-number="1.3">
-<h2 data-number="1.3" class="anchored" data-anchor-id="logistic-model"><span class="header-section-number">1.3</span> Logistic model</h2>
+<section id="logistic-model" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="logistic-model"><span class="header-section-number">1.2</span> Logistic model</h2>
 <p>Exponential population growth can not be maintained for ever. There will be a limit to the size of population that an ecosystem can maintain. When the population gets closer to this limit its growth rate will decrease, for example due to competition for limited food sources or space, or due to disease. This decrease in the growth rate is captured by the logistic equation <span id="eq-logistic"><span class="math display">\[
 \frac{dN}{dt}=rN\left(1-\frac{N}{K}\right),
 \tag{1.4}\]</span></span> where <span class="math inline">\(K\)</span> is the carrying capacity of the environment. The extra factor of <span class="math inline">\(1-N/K\)</span> decreases the growth rate towards zero as the population number <span class="math inline">\(N\)</span> approaches the carrying capacity <span class="math inline">\(K\)</span>.</p>
@@ -342,8 +342,8 @@ N(t)=\frac{K}{1+\left(\frac{K}{N_0}-1\right)e^{-rt}}=\frac{N_0 K e^{rt}}{K+N_0(e
 </div>
 <hr>
 </section>
-<section id="allee-effect" class="level2" data-number="1.4">
-<h2 data-number="1.4" class="anchored" data-anchor-id="allee-effect"><span class="header-section-number">1.4</span> Allee effect</h2>
+<section id="allee-effect" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="allee-effect"><span class="header-section-number">1.3</span> Allee effect</h2>
 <p>Warder Clyde Allee (1885-1955) was an American ecologist who studied the effects of population density on the growth rate of a population. He found that in some cases the per-capita growth rate can increase with <span class="math inline">\(N\)</span>. This is called the Allee effect. It is not captured by the logistic model because there the per-capita growth rate decreases linearly iwth population size.</p>
 <p>There can be several causes for an Allee effect. For example:</p>
 <ul>
@@ -394,8 +394,8 @@ Figure&nbsp;1.5: The Allee growth rate as a function of the population number.
 </div>
 <hr>
 </section>
-<section id="general-autonomous-ode-model" class="level2" data-number="1.5">
-<h2 data-number="1.5" class="anchored" data-anchor-id="general-autonomous-ode-model"><span class="header-section-number">1.5</span> General autonomous ODE model</h2>
+<section id="general-autonomous-ode-model" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="general-autonomous-ode-model"><span class="header-section-number">1.4</span> General autonomous ODE model</h2>
 <p>The logistic model is a special case of a general autonomous ordinary differential equation (ODE) model <span id="eq-autonomous"><span class="math display">\[
 \frac{dN}{dt}=f(N),
 \tag{1.7}\]</span></span> where <span class="math inline">\(f(N)\)</span> is a function of <span class="math inline">\(N\)</span> only, not <span class="math inline">\(t\)</span>. The logistic equation <a href="#eq-logistic" class="quarto-xref">Eq.&nbsp;<span>1.4</span></a> is an example of such a model with<br>
@@ -432,12 +432,12 @@ f'(N)=r\left(1-\frac{2N}{K}\right).
 </div>
 <hr>
 </section>
-<section id="harvesting-a-renewable-resource" class="level2" data-number="1.6">
-<h2 data-number="1.6" class="anchored" data-anchor-id="harvesting-a-renewable-resource"><span class="header-section-number">1.6</span> Harvesting a renewable resource</h2>
+<section id="harvesting-a-renewable-resource" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="harvesting-a-renewable-resource"><span class="header-section-number">1.5</span> Harvesting a renewable resource</h2>
 <p>Ecologists model populations not only out of academic interest but also for practical purposes. Humans are interested in exploiting the natural resources. They want to harvest fish from the sea, to hunt deer in the forest, and to cut down trees in the jungle. These days they want to do this in a way that is sustainable, i.e.&nbsp;that does not lead to the extinction of the resource, while at the same time giving the highest yield.</p>
 <p>My personal interest is in understanding how fish populations react to different kinds of fishing. I use coupled partial integro-differential equations for that purpose, but most fisheries management is based on simpler models and we get a good first idea by using the logistic model, which we will now modify to include harvesting.</p>
-<section id="harvesting-with-fixed-effort" class="level3" data-number="1.6.1">
-<h3 data-number="1.6.1" class="anchored" data-anchor-id="harvesting-with-fixed-effort"><span class="header-section-number">1.6.1</span> Harvesting with fixed effort</h3>
+<section id="harvesting-with-fixed-effort" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="harvesting-with-fixed-effort"><span class="header-section-number">1.5.1</span> Harvesting with fixed effort</h3>
 <p>We assume that in the absence of fishing the fish population number <span class="math inline">\(N(t)\)</span> is governed by the logistic equation <a href="#eq-logistic" class="quarto-xref">Eq.&nbsp;<span>1.4</span></a>. We also assume that the fish are harvested at a rate <span class="math inline">\(E N(t)\)</span>, where <span class="math inline">\(E\)</span> is the harvesting rate, which is determined by the effort that is put into fishing. This means that the rate of change in the fish population number is given by <span id="eq-logistic-harvesting"><span class="math display">\[
 \frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)-EN = f(N).
 \tag{1.14}\]</span></span> We can rewrite this equation in the form of a logistic equation with modified parameters: <span id="eq-logistic-harvesting-parameters"><span class="math display">\[
@@ -474,8 +474,8 @@ MSY=\frac{r}{2}K\left(1-\frac{r}{2r}\right)=\frac{rK}{4}.
 </div>
 <hr>
 </section>
-<section id="harvesting-with-fixed-quota" class="level3" data-number="1.6.2">
-<h3 data-number="1.6.2" class="anchored" data-anchor-id="harvesting-with-fixed-quota"><span class="header-section-number">1.6.2</span> Harvesting with fixed quota</h3>
+<section id="harvesting-with-fixed-quota" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="harvesting-with-fixed-quota"><span class="header-section-number">1.5.2</span> Harvesting with fixed quota</h3>
 <p>Fisheries managers in the Mediterranean are aiming to control the fishing effort in order to achieve the maximum sustainable yield, and we have seen how to model that in the previous section. Fisheries in the North Sea or the North Atlantic however are instead managed by setting the total allowable catch (TAC) for the whole fleet. This is a fixed quota for the total amount of fish that can be harvested in a year. To model that policy we use the logistic equation with harvesting, but we replace the harvesting rate <span class="math inline">\(EN\)</span> by a harvesting quota <span class="math inline">\(Q\)</span>: <span id="eq-logistic-quota"><span class="math display">\[
 \frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)-Q.
 \tag{1.21}\]</span></span> This is visualised in <a href="#fig-logistic-quota" class="quarto-xref">Figure&nbsp;<span>1.7</span></a>.</p>
@@ -501,8 +501,8 @@ Figure&nbsp;1.7: Growth rate when harvesting with fixed quota.
 <hr>
 </section>
 </section>
-<section id="summary" class="level2" data-number="1.7">
-<h2 data-number="1.7" class="anchored" data-anchor-id="summary"><span class="header-section-number">1.7</span> Summary</h2>
+<section id="summary" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="summary">Summary</h2>
 <p>This chapter introduced several key models for population dynamics in continuous time:</p>
 <ol type="1">
 <li><strong>Exponential Model</strong>
@@ -550,8 +550,8 @@ Figure&nbsp;1.7: Growth rate when harvesting with fixed quota.
 </ul>
 <hr>
 </section>
-<section id="further-exercises" class="level2" data-number="1.8">
-<h2 data-number="1.8" class="anchored" data-anchor-id="further-exercises"><span class="header-section-number">1.8</span> Further exercises</h2>
+<section id="further-exercises" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="further-exercises">Further exercises</h2>
 <div id="exr-Hornet" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 1.7 (Wasp model)</strong></span> In a colony of the European Hornet there is a single queen that produces all the offspring. It produces two kinds of offspring: workers and reproducers. We’ll denote the number of workers alive at time <span class="math inline">\(t\)</span> by <span class="math inline">\(n(t)\)</span> and the number of reproducers by <span class="math inline">\(N(t)\)</span>. The workers are responsible for collecting food. They can’t breed themselves and they die in the winter. However they are necessary to allow the queen to reproduce because without the food that they are collecting the queen would have nothing to eat. So we need workers. But because they die in winter, they don’t help the survival of the colony in the long run. That’s where the reproducers come in. They don’t do any work, but they can, if they survive the winter, breed in the next spring as new queens.</p>
 <p>So the queen now has a strategy of how to proceed: It first of all needs to produce workers, and from time zero to time <span class="math inline">\(t_c\)</span> it only produces workers. We assume that the birth rate is proportional to the number of workers, so that the total birth rate of workers is <span class="math inline">\(r n(t)\)</span> for some constant <span class="math inline">\(r&gt;0\)</span>. The queen then switches to producing only reproducers from time <span class="math inline">\(t_c\)</span> up to the start of winter at time <span class="math inline">\(T\)</span> and we assume that the total birth rate of reproducers is <span class="math inline">\(R n(t)\)</span> for some constant <span class="math inline">\(R&gt;0\)</span>. We also assume that until the start of winter there are no deaths.</p>
