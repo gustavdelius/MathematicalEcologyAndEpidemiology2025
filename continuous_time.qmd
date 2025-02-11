@@ -488,7 +488,8 @@ $$
 $$ {#eq-logistic-harvesting}
 We can rewrite this equation in the form of a logistic equation with modified parameters:
 $$
-\frac{dN}{dt}=rN\left(\left(1-\frac{E}{r}\right)-\frac{N}{K}\right).
+\frac{dN}{dt}=rN\left(\left(1-\frac{E}{r}\right)-\frac{N}{K}\right)
+=(r-E)N\left(1-\frac{N}{K\left(1-\frac{E}{r}\right)}\right).
 $$ {#eq-logistic-harvesting-parameters}
 This makes it easy to read off the fixed points $N^*=0$ and $N^*=K\left(1-\frac{E}{r}\right)$. The non-zero fixed point gets smaller when fishing effort $E$ increases. This is illustrated in @fig-logistic-harvesting.
 
