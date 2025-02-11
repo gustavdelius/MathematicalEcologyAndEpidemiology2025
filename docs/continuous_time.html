@@ -202,8 +202,8 @@ window.Quarto = {
   <li><a href="#general-autonomous-ode-model" id="toc-general-autonomous-ode-model" class="nav-link" data-scroll-target="#general-autonomous-ode-model"><span class="header-section-number">1.4</span> General autonomous ODE model</a></li>
   <li><a href="#harvesting-a-renewable-resource" id="toc-harvesting-a-renewable-resource" class="nav-link" data-scroll-target="#harvesting-a-renewable-resource"><span class="header-section-number">1.5</span> Harvesting a renewable resource</a>
   <ul>
-  <li><a href="#harvesting-with-fixed-effort" id="toc-harvesting-with-fixed-effort" class="nav-link" data-scroll-target="#harvesting-with-fixed-effort"><span class="header-section-number">1.5.1</span> Harvesting with fixed effort</a></li>
-  <li><a href="#harvesting-with-fixed-quota" id="toc-harvesting-with-fixed-quota" class="nav-link" data-scroll-target="#harvesting-with-fixed-quota"><span class="header-section-number">1.5.2</span> Harvesting with fixed quota</a></li>
+  <li><a href="#fixed-fishing-effort" id="toc-fixed-fishing-effort" class="nav-link" data-scroll-target="#fixed-fishing-effort"><span class="header-section-number">1.5.1</span> Fixed fishing effort</a></li>
+  <li><a href="#fixed-fishing-quota" id="toc-fixed-fishing-quota" class="nav-link" data-scroll-target="#fixed-fishing-quota"><span class="header-section-number">1.5.2</span> Fixed fishing quota</a></li>
   </ul></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   <li><a href="#further-exercises" id="toc-further-exercises" class="nav-link" data-scroll-target="#further-exercises">Further exercises</a></li>
@@ -443,8 +443,8 @@ f'(N)=r\left(1-\frac{2N}{K}\right).
 <h2 data-number="1.5" class="anchored" data-anchor-id="harvesting-a-renewable-resource"><span class="header-section-number">1.5</span> Harvesting a renewable resource</h2>
 <p>Ecologists model populations not only out of academic interest but also for practical purposes. Humans are interested in exploiting the natural resources. They want to harvest fish from the sea, to hunt deer in the forest, and to cut down trees in the jungle. These days they want to do this in a way that is sustainable, i.e.&nbsp;that does not lead to the extinction of the resource, while at the same time giving the highest yield.</p>
 <p>My personal interest is in understanding how fish populations react to different kinds of fishing. I use coupled partial integro-differential equations for that purpose, but most fisheries management is based on simpler models and we get a good first idea by using the logistic model, which we will now modify to include harvesting.</p>
-<section id="harvesting-with-fixed-effort" class="level3" data-number="1.5.1">
-<h3 data-number="1.5.1" class="anchored" data-anchor-id="harvesting-with-fixed-effort"><span class="header-section-number">1.5.1</span> Harvesting with fixed effort</h3>
+<section id="fixed-fishing-effort" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="fixed-fishing-effort"><span class="header-section-number">1.5.1</span> Fixed fishing effort</h3>
 <p>We assume that in the absence of fishing the fish population number <span class="math inline">\(N(t)\)</span> is governed by the logistic equation <a href="#eq-logistic" class="quarto-xref">Eq.&nbsp;<span>1.4</span></a>. We also assume that the fish are harvested at a rate <span class="math inline">\(E N(t)\)</span>, where <span class="math inline">\(E\)</span> is the harvesting rate, which is determined by the effort that is put into fishing. This means that the rate of change in the fish population number is given by <span id="eq-logistic-harvesting"><span class="math display">\[
 \frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)-EN = f(N).
 \tag{1.14}\]</span></span> We can rewrite this equation in the form of a logistic equation with modified parameters: <span id="eq-logistic-harvesting-parameters"><span class="math display">\[
@@ -466,13 +466,13 @@ Figure&nbsp;1.6: Growth rate when harvesting with fixed effort.
 </div>
 </div>
 <p>We are now interested in finding out at what level we should fish in order to achieve the maximum sustainable yield (MSY). This is the level of fishing effort that gives the highest possible yield that can be sustained indefinitely. So we are interested in the yield at the non-zero fixed point <span class="math inline">\(N^*=K\left(1-\frac{E}{r}\right)\)</span>. The yield is the amount of fish that can be harvested per unit time, and it is given at the fixed point by <span id="eq-yield"><span class="math display">\[
-Y=EN^*=EK\left(1-\frac{E}{r}\right).
-\tag{1.16}\]</span></span> We can find the maximum of <span class="math inline">\(Y\)</span> by differentiating with respect to <span class="math inline">\(E\)</span> and setting the derivative equal to zero: <span id="eq-yield-derivative"><span class="math display">\[
-\frac{dY}{dE}=K\left(1-\frac{2E}{r}\right)=0.
+Y^*(E)=EN^*=EK\left(1-\frac{E}{r}\right).
+\tag{1.16}\]</span></span> We can find the maximum of <span class="math inline">\(Y^*\)</span> by differentiating with respect to <span class="math inline">\(E\)</span> and setting the derivative equal to zero: <span id="eq-yield-derivative"><span class="math display">\[
+\frac{dY^*}{dE}=K\left(1-\frac{2E}{r}\right)=0.
 \tag{1.17}\]</span></span> We can solve this equation for <span class="math inline">\(E\)</span> to find the optimal fishing effort <span class="math inline">\(E^*\)</span>: <span id="eq-yield-optimal-effort"><span class="math display">\[
 E^*=\frac{r}{2}.
 \tag{1.18}\]</span></span> The resulting maximum sustainable yield is <span id="eq-yield-optimal-yield"><span class="math display">\[
-MSY=\frac{r}{2}K\left(1-\frac{r}{2r}\right)=\frac{rK}{4}.
+MSY=Y^*(E^*)=\frac{r}{2}K\left(1-\frac{r}{2r}\right)=\frac{rK}{4}.
 \tag{1.19}\]</span></span></p>
 <hr>
 <div id="exr-harvest_effort" class="theorem exercise">
@@ -482,8 +482,8 @@ MSY=\frac{r}{2}K\left(1-\frac{r}{2r}\right)=\frac{rK}{4}.
 </div>
 <hr>
 </section>
-<section id="harvesting-with-fixed-quota" class="level3" data-number="1.5.2">
-<h3 data-number="1.5.2" class="anchored" data-anchor-id="harvesting-with-fixed-quota"><span class="header-section-number">1.5.2</span> Harvesting with fixed quota</h3>
+<section id="fixed-fishing-quota" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="fixed-fishing-quota"><span class="header-section-number">1.5.2</span> Fixed fishing quota</h3>
 <p>Fisheries managers in the Mediterranean are aiming to control the fishing effort in order to achieve the maximum sustainable yield, and we have seen how to model that in the previous section. Fisheries in the North Sea or the North Atlantic however are instead managed by setting the total allowable catch (TAC) for the whole fleet. This is a fixed quota for the total amount of fish that can be harvested in a year. To model that policy we use the logistic equation with harvesting, but we replace the harvesting rate <span class="math inline">\(EN\)</span> by a harvesting quota <span class="math inline">\(Q\)</span>: <span id="eq-logistic-quota"><span class="math display">\[
 \frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)-Q.
 \tag{1.21}\]</span></span> This is visualised in <a href="#fig-logistic-quota" class="quarto-xref">Figure&nbsp;<span>1.7</span></a>.</p>
@@ -530,9 +530,11 @@ Figure&nbsp;1.7: Growth rate when harvesting with fixed quota.
 <li><strong>Allee Effect Model</strong>
 <ul>
 <li>Captures reduced growth at low population densities</li>
-<li>Strong Allee effect has critical population threshold <span class="math inline">\(K_0\)</span></li>
+<li>Strong Allee effect has critical population threshold <span class="math inline">\(K_0\)</span>
+<ul>
 <li>Below <span class="math inline">\(K_0\)</span>: population declines to extinction</li>
 <li>Above <span class="math inline">\(K_0\)</span>: population grows to carrying capacity</li>
+</ul></li>
 </ul></li>
 <li><strong>Harvesting Models</strong>
 <ul>

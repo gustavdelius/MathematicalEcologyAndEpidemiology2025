@@ -480,7 +480,7 @@ Ecologists model populations not only out of academic interest but also for prac
 My personal interest is in understanding how fish populations react to different kinds of fishing. I use coupled partial integro-differential equations for that purpose, but most fisheries management is based on simpler models and we get a good first idea by using the logistic model, which we will now modify to include harvesting.
 
 
-### Harvesting with fixed effort
+### Fixed fishing effort
 
 We assume that in the absence of fishing the fish population number $N(t)$ is governed by the logistic equation @eq-logistic. We also assume that the fish are harvested at a rate $E N(t)$, where $E$ is the harvesting rate, which is determined by the effort that is put into fishing. This means that the rate of change in the fish population number is given by
 $$
@@ -540,11 +540,11 @@ plt.show()
 
 We are now interested in finding out at what level we should fish in order to achieve the maximum sustainable yield (MSY). This is the level of fishing effort that gives the highest possible yield that can be sustained indefinitely. So we are interested in the yield at the non-zero fixed point $N^*=K\left(1-\frac{E}{r}\right)$. The yield is the amount of fish that can be harvested per unit time, and it is given at the fixed point by 
 $$
-Y=EN^*=EK\left(1-\frac{E}{r}\right).
+Y^*(E)=EN^*=EK\left(1-\frac{E}{r}\right).
 $$ {#eq-yield}
-We can find the maximum of $Y$ by differentiating with respect to $E$ and setting the derivative equal to zero:
+We can find the maximum of $Y^*$ by differentiating with respect to $E$ and setting the derivative equal to zero:
 $$
-\frac{dY}{dE}=K\left(1-\frac{2E}{r}\right)=0.
+\frac{dY^*}{dE}=K\left(1-\frac{2E}{r}\right)=0.
 $$ {#eq-yield-derivative}
 We can solve this equation for $E$ to find the optimal fishing effort $E^*$:
 $$
@@ -552,7 +552,7 @@ E^*=\frac{r}{2}.
 $$ {#eq-yield-optimal-effort}
 The resulting maximum sustainable yield is
 $$
-MSY=\frac{r}{2}K\left(1-\frac{r}{2r}\right)=\frac{rK}{4}.
+MSY=Y^*(E^*)=\frac{r}{2}K\left(1-\frac{r}{2r}\right)=\frac{rK}{4}.
 $$ {#eq-yield-optimal-yield}
 
 ----------------------------------------------------------------------
@@ -573,7 +573,7 @@ fixed points and their stability. Find the maximum sustainable yield, i.e., the 
 ----------------------------------------------------------------------
 
 
-### Harvesting with fixed quota
+### Fixed fishing quota
 Fisheries managers in the Mediterranean are aiming to control the fishing effort in order to achieve the maximum sustainable yield, and we have seen how to model that in the previous section. Fisheries in the North Sea or the North Atlantic however are instead managed by setting the total allowable catch (TAC) for the whole fleet. This is a fixed quota for the total amount of fish that can be harvested in a year. To model that policy we use the logistic equation with harvesting, but we replace the harvesting rate $EN$ by a harvesting quota $Q$:
 $$
 \frac{dN}{dt}=rN\left(1-\frac{N}{K}\right)-Q.
@@ -658,8 +658,8 @@ This chapter introduced several key models for population dynamics in continuous
 3. **Allee Effect Model**
    - Captures reduced growth at low population densities
    - Strong Allee effect has critical population threshold $K_0$
-   - Below $K_0$: population declines to extinction
-   - Above $K_0$: population grows to carrying capacity
+     * Below $K_0$: population declines to extinction
+     * Above $K_0$: population grows to carrying capacity
 
 4. **Harvesting Models**
    - Fixed effort ($E$): $\frac{dN}{dt} = rN(1-\frac{N}{K}) - EN$
