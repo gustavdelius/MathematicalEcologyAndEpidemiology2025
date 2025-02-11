@@ -34,7 +34,7 @@ After completing this chapter, you should be able to:
    - Analyze harvesting strategies in discrete-time models
    - Understand critical depensation in discrete systems
    
-## Key Ecological Concepts
+## Key Ecological Concepts {.unnumbered}
 
 Before diving into the mathematical models, let's clarify some ecological terminology:
 
@@ -81,13 +81,15 @@ It turns out that there are several models which all deserve to be called the di
 
 $$
 \begin{split}
-N_{t+1} &= (R_0+1)N_t\left(1 - \frac{N_t}{K(R_0+1)/R_0}\right)\\
-&=N_t + R_0 N_t\left(1 - \frac{N_t}{K}\right)=f(N_t).
+N_{t+1} 
+&=N_t + R_0 N_t\left(1 - \frac{N_t}{K}\right)\\
+&= (R_0+1)N_t\left(1 - \frac{N_t}{K(R_0+1)/R_0}\right)\\
+&= RN_t\left(1-\frac{N_t}{\tilde{K}}\right)=f(N_t),
 \end{split}
 $$ {#eq-verhulst}
-Again it is important to stress that $R_0$ is not a growth _rate_ but a dimensionless growth factor. We are interested in the case where $R_0>0$ and $K>0$.
+We have written the model in two alternative forms, with $R=R_0+1$ and $\tilde{K}=K(R_0+1)/R_0$, because the first form makes it easier to read off the fixed point, while the second form makes the analogy with the continuous-time logistic model more obvious. @eq-verhulst is also often referred to as the logistic map and is a famous example of a chaotic system.
 
-We have written the model in two alternative forms because the first form makes the analogy with the continuous-time logistic model more obvious, while the second form makes it easier to read off the fixed point. @eq-verhulst is also often referred to as the logistic map and is a famous example of a chaotic system.
+Again it is important to stress that $R_0$ is not a growth _rate_ but a dimensionless growth factor. We are interested in the case where $R_0>0$ and $K>0$.
 
 A fixed point is a value for which $N_{t+1}=N_t$, i.e. a value of $N$ for which the population number does not change from year to year. Thus it is a value $N^*$ for which $f(N^*)=N^*$. Using the second form of the model, we can see easily that the fixed points are $N^*=0$ and $N^*=K$, so $K$ is the carrying capacity.
 
@@ -115,6 +117,17 @@ So we have found that:
 * If $|f'(N^*)|>1$, then $n_t$ will increase with time and the fixed point is unstable. 
 
 If $|f'(N^*)|=1$, then we cannot say anything about the stability of the fixed point from this analysis.
+
+-------------------------------------------------------------------------
+
+:::{#exr-fpl1}
+#### + Stability in Verhulst model
+Use the stability criterion that we just derived to derive a condition on
+the parameter $R_0$ of the Verhulst model that makes the non-zero fixed point
+$N^*=K$ a stable fixed point.
+:::
+
+-------------------------------------------------------------------------
 
 ##  Cobweb diagrams
 
@@ -354,7 +367,7 @@ HTML(ani.to_jshtml())
 #### + Verhulst model
 For some choices of the parameters, the Verhulst model
 $$
-N_{t+1}=rN_t\left(1-\frac{N_t}{K}\right)
+N_{t+1}=RN_t\left(1-\frac{N_t}{\tilde{K}}\right)
 $$ {#eq-ex_Verhulst}
 can
 lead to negative population numbers even when initially starting with a positive population below
