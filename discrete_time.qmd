@@ -218,9 +218,11 @@ HTML(ani.to_jshtml())
 #| fig-cap: Cobweb diagram for an unstable fixed point.
 #| fig-alt: Cobweb diagram for an unstable fixed point.
 #| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
 # Define the function
 def f(x):
-    return x+2.5*x*(1-x)
+    return x+2.2*x*(1-x)
 
 # Set up the figure and axis
 fig, ax = plt.subplots(figsize=(6,3))
@@ -286,13 +288,24 @@ plt.close()
 HTML(ani.to_jshtml())
 ```
 
-The oscillatory nature of the sequence $N_t$, hopping from one side of the fixed point to the other, that creates the cobweb pattern is due to the fact that the slope of $f$ is negative at the fixed point. The graphical method for visualising the iterations will work also when the slope is positive at the fixed point, but it will not look like a cobweb. @fig-cobweb-positive-slope shows the cobweb for a stable fixed point with positive slope.
+The oscillatory nature of the sequence $N_t$, hopping from one side of the fixed point to the other, that creates the cobweb pattern is due to the fact that the slope of $f$ is negative at the fixed point. 
+Ecologically, what is happening as the growth factor increases through $R=3$ is that in 
+a single year the population grows so much that it exceeds its carrying capacity. That then
+leads to unfavourable conditions in the following year, leading to a decrease below carrying capacity.
+Such oscillations in population numbers are not possible in a continuous-time model for a single un-structured population.
+
+In @fig-cobweb-stable the oscillations get damped over time and the system evolves towards a steady state. In @fig-cobweb-stable the system evolves towards a state where the population number oscillates between two values. This is called a period-two orbit. We will have more to say about this in @sec-period-doubling.
+
+The graphical method for visualising the iterations will work also when the slope is positive at the fixed point, but it will not look like a cobweb because the system will not be oscillating around the fixed
+point but will be evolving towards it. @fig-cobweb-positive-slope shows the cobweb for a stable fixed point with positive slope.
 
 ```{python}
 #| label: fig-cobweb-positive-slope
 #| fig-cap: Cobweb diagram for a fixed point with positive slope.
 #| fig-alt: Cobweb diagram for a fixed point with positive slope.
 #| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
 # Define the function
 def f(x):
     return x+0.8*x*(1-x)
@@ -378,6 +391,150 @@ such a scenario.
 
 ----------------------------------------------------------------------
 
+## Period-doubling route to chaos {#sec-period-doubling}
+
+Take another look at @fig-cobweb-stable and @fig-cobweb-unstable. Just a little change in
+the function $f(N)$ changed the nature of the fixed point. Such a change can be the consequence
+of a small change in a model parameter, for example the intrinsic growth rate. For example,
+@fig-period-doubling-bifurcation shows the graph of $f(N)$ of the Verhulst model at
+three different values of the intrinsic growth factor $R$. For $R=2.8$ the slope of 
+$f$ at the fixed point is less steep than $-1$ and thus the fixed point is stable, as in
+@fig-cobweb-stable. For $R=3.2$ the slope of $f$ at the fixed point is steeper than $-1$
+and thus the fixed point is unstable and the population number starts to oscillate, as in @fig-cobweb-unstable. At $R=3$ the system switches from one behaviour to the other. That
+is the bifurcation point.
+
+```{python}
+#| label: fig-period-doubling-bifurcation
+#| fig-cap: Plot showing a period-doubling bifurcation in the Verhulst model.
+#| fig-alt: Graph illustrating a period-doubling bifurcation where a stable fixed point loses stability and a stable period-2 orbit emerges.
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+def logistic_map(x, r):
+    # Logistic map: f(x) = r*x*(1-x)
+    return r * x * (1-x)
+
+# Set up the figure and axis for the period-doubling bifurcation plot
+plt.figure(figsize=(8,6))
+plt.yticks([])
+plt.xticks([])
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+# Define the range for x from 0 to 1
+x_vals = np.linspace(0, 1, 400)
+
+# Plot the logistic map for different values of r to illustrate the bifurcation
+for r in [2.8, 3.0, 3.2]:
+    label = "$R=" + str(r) + "$"
+    plt.plot(x_vals, logistic_map(x_vals, r), label=label)
+
+# Plot the diagonal line y=x
+plt.plot(x_vals, x_vals, 'k-')
+ax.legend(loc=(0.1, 0.6))
+plt.xlabel("$N$")
+plt.ylabel(r"$f(N)=RN(1-N/\tilde{K})$")
+plt.show()
+```
+
+@fig-period-doubling-new shows a simplified bifurcation diagram for the Verhulst model. A bifurcation diagram shows the location of fixed points or periodic orbits, with stable fixed points or stable periodic orbits represented by solid lines and unstable fixed points or unstable periodic orbits represented by dashed lines. Reading the diagram from left to right, which corresponds to increasing growth factor $R$ in the Verhulst model, we see how at first the stable fixed point (which is located at the carrying capacity $K$) moves towards larger population sizes. At $R=3$ it becomes unstable and spawns a stable periodic orbit whose
+amplitude grows until that periodic orbit itself becomes unstable, in another period-doubling bifurcation.
+
+```{python}
+#| label: fig-period-doubling-new
+#| fig-cap: Bifurcation diagram for the period-doubling bifurcation.
+#| fig-alt: Diagram showing analytic fixed points and the period-2 orbit of the logistic map as a function of r.
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Fixed point of the logistic map: x* = 1 - 1/r (for r > 1).
+r_vals_fp = np.linspace(1, 4, 300)
+x_fp = 1 - 1 / r_vals_fp
+
+# The fixed point is stable for 1 < r < 3 and becomes unstable for r ≥ 3.
+stable_mask = r_vals_fp < 3
+unstable_mask = r_vals_fp >= 3
+
+r_stable_fp = r_vals_fp[stable_mask]
+x_stable_fp = x_fp[stable_mask]
+r_unstable_fp = r_vals_fp[unstable_mask]
+x_unstable_fp = x_fp[unstable_mask]
+
+# For r ≥ 3, the period-2 orbit is given by:
+# x_{1,2} = (r+1 ± sqrt((r+1)(r-3)))/(2r)
+r_vals_pd = np.linspace(3, 4, 300)
+x_pd_plus = (r_vals_pd + 1 + np.sqrt((r_vals_pd+1)*(r_vals_pd-3))) / (2*r_vals_pd)
+x_pd_minus = (r_vals_pd + 1 - np.sqrt((r_vals_pd+1)*(r_vals_pd-3))) / (2*r_vals_pd)
+
+# Define a stability threshold for the period-2 orbit (approximately, r_pd_crit ≈ 1+√6 ~ 3.449).
+r_pd_crit = 1 + np.sqrt(6)
+mask_stable_pd = r_vals_pd <= r_pd_crit
+mask_unstable_pd = r_vals_pd > r_pd_crit
+r_pd_stable = r_vals_pd[mask_stable_pd]
+x_pd_plus_stable = x_pd_plus[mask_stable_pd]
+x_pd_minus_stable = x_pd_minus[mask_stable_pd]
+r_pd_unstable = r_vals_pd[mask_unstable_pd]
+x_pd_plus_unstable = x_pd_plus[mask_unstable_pd]
+x_pd_minus_unstable = x_pd_minus[mask_unstable_pd]
+
+plt.figure(figsize=(8,6))
+# Plot fixed point branch.
+plt.plot(r_stable_fp, x_stable_fp, 'b-', linewidth=2, label='Stable fixed point')
+plt.plot(r_unstable_fp, x_unstable_fp, 'r--', linewidth=2, label='Unstable fixed point')
+# Plot period-2 branches.
+plt.plot(r_pd_stable, x_pd_plus_stable, 'b-', linewidth=2, label='Stable period-2')
+plt.plot(r_pd_stable, x_pd_minus_stable, 'b-', linewidth=2)
+plt.plot(r_pd_unstable, x_pd_plus_unstable, 'r--', linewidth=2, label='Unstable period-2')
+plt.plot(r_pd_unstable, x_pd_minus_unstable, 'r--', linewidth=2)
+plt.xlabel("$R$")
+plt.ylabel("$N^*$")
+plt.title("Bifurcation Diagram: Period–Doubling (Logistic Map)")
+plt.legend(loc='best')
+plt.show()
+```
+
+
+@fig-period-doubling-new does not show the period 4 orbit that emerges when the period 2 orbit becomes unstable. The full diagram quickly becomes very messy as $R$ increases, as shown in @fig-period-doubling-new-full. Period-doubling cascades continue until the system enters a chaotic regime for $R>3.56995$.
+
+
+```{python}
+#| label: fig-period-doubling-new-full
+#| fig-cap: Bifurcation diagram for the period-doubling bifurcation.
+#| fig-alt: Diagram showing analytic fixed points and the period-2 orbit of the logistic map as a function of r.
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+# Compute and plot the bifurcation diagram for the logistic map,
+# illustrating the period-doubling route to chaos.
+
+# Define a dense array of r values over the interval of interest.
+r_values = np.linspace(3.4, 4.0, 10000)
+# Start with an initial condition for each r value.
+x = 0.5 * np.ones_like(r_values)
+
+# Iterate the logistic map to let transients die out.
+transient_iterations = 1000
+for i in range(transient_iterations):
+    x = r_values * x * (1 - x)
+
+# Iterate further and plot the remaining iterations (the attractor points).
+attractor_iterations = 200
+for i in range(attractor_iterations):
+    x = r_values * x * (1 - x)
+    plt.plot(r_values, x, ',k', alpha=0.25)
+
+plt.xlabel("r")
+plt.ylabel("x")
+plt.title("Bifurcation Diagram: Period-Doubling Route to Chaos in the Logistic Map")
+plt.show()
+```
+
+In the chaotic regime the system displays highly sensitive dependence on initial conditions, where small differences in the starting population can result in vastly different outcomes over time. The period-doubling route to chaos, as seen in the logistic map, is a classic example of how simple nonlinear equations can produce complex and unpredictable behavior. How important chaos is for ecological systems is a subject of ongoing debate.
 
 ## Other models with limited carrying capacity
 
@@ -519,6 +676,8 @@ If we now draw something that has all these features, we will have a sufficientl
 #| fig-cap: Graph of the function $f(N)=\frac{bN^2}{1+N^2}$.
 #| fig-alt: Graph of the function $f(N)=\frac{bN^2}{1+N^2}$.
 #| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 
 # Define the function
@@ -587,6 +746,8 @@ We can now add harvesting to the model. The extra term in the function $f(N)$ is
 #| fig-cap: Graph of the function $f(N)=\frac{bN^2}{1+N^2}-EN$.
 #| fig-alt: Graph of the function $f(N)=\frac{bN^2}{1+N^2}-EN$.
 #| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
 # Define the function
 def f(N, b, E):
     return b*N**2/(1+N**2)-E*N
@@ -641,7 +802,405 @@ This is solved by
 $$
 N^*_\pm = \frac{\frac{b}{1+E}\pm\sqrt{\left(\frac{b}{1+E}\right)^2-4}}{2}.
 $$
+
 We see that these solutions are real only if $\left(\frac{b}{1+E}\right)^2-4\geq 0$, i.e., if $E< \frac{b-2}{2}$. Thus the critical effort is $E_c=\frac{b-2}{2}$. Fishing above this level will lead to extinction of the population. But even fishing just near this level is risky because the population number will be very close to the minimum viable population and a small disturbance could lead to extinction.
 
 
+```{python}
+#| label: fig-discrete-harvesting-function-bifurcation
+#| fig-cap: Bifurcation diagram for the discrete-time harvesting model.
+#| fig-alt: Diagram showing the fixed point of the discrete-time harvesting model as a function of the harvesting effort.
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
 
+def fixed_point_stable(E):
+    C = 2.4 / (1 + E)
+    return (C + np.sqrt(C**2 - 4))/2
+
+def fixed_point_unstable(E):
+    C = 2.4 / (1 + E)
+    return (C - np.sqrt(C**2 - 4))/2
+
+# Generate a range of harvesting efforts E between 0 and 0.3.
+E_vals = np.linspace(0, 0.2, 200)
+N_stable = fixed_point_stable(E_vals)  # Analytical fixed points for each E.
+N_unstable = fixed_point_unstable(E_vals)
+E_extinction = np.linspace(0, 0.3, 300)
+N_extinction = 0 * E_extinction
+
+# Set up the bifurcation diagram plot.
+plt.figure(figsize=(6,3))
+plt.xlabel('$E$', loc='right')
+plt.ylabel('$N^*$', loc='top')
+
+# Hide the top and right spines, and reposition the bottom and left spines.
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+# Plot the analytical fixed point branch.
+plt.plot(E_vals, N_stable, 'b-', label='Coexistence fixed point')
+plt.plot(E_vals, N_unstable, 'r--', label='Extinction threshold')
+plt.plot(E_extinction, N_extinction, 'b-', label='Extinction fixed point')
+plt.legend(loc=(0.5,0.75))
+plt.show()
+```
+
+
+## Transcritical and pitchfork bifurcations
+
+As mentioned before, a bifurcation is a change in the existence and stability of fixed points or periodic orbits as the parameters of the model are varied.
+You have met bifurcations in continuous-time models already in your Classical Dynamics module. You have seen there that in one-dimensional systems described by a single ODE there are three different types of bifurcation: saddle-node, pitchfork, transcritical. The same types of bifurcations can occur in discrete-time models and we will discuss and visualise each of these bifurcation types below. These bifurcations happen if there is a fixed point with $f'(N^*)=1$. Then there is also one more type: the period-doubling bifurcation, which happens when $f'(N^*)=-1$, and which we have met in @sec-period-doubling.
+
+### Saddle-node bifurcation
+
+We have already seen a saddle-node bifurcation in the discrete-time harvesting mode, where two fixed points merge and disappear as the parameter is varied. This is also sometimes referred to as a tangent bifurcation.
+@fig-saddle-node-bifurcation shows an example of a function $f(N)$ that depends on a parameter $r$ in such a way that for $r>0$ the graph of $f(N)$ crosses the diagonal twice, which means that there are two fixed points. Then at exactly $r=0$ the function is tangent to the diagonal, i.e, there is only a single fixed point. Then for $r<0$ the function does not touch the diagonal so that there are no fixed points left. 
+
+
+```{python}
+#| label: fig-saddle-node-bifurcation
+#| fig-cap: Plot showing a saddle-node bifurcation.
+#| fig-alt: Graph illustrating a saddle-node bifurcation
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+# Create a function for plotting
+def f(N, r):
+    return 2*N*(1-N) - 0.125 + r
+
+# Set up the plot
+plt.figure(figsize=(8, 6))
+
+plt.figure(figsize=(6,3))
+plt.xlabel('$N_t$', loc='right')
+plt.ylabel('$N_{t+1}$', loc='top')
+
+# Hide the top and right spines
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+# Move the bottom spine to y=0 and the left spine to x=0
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+# Plot the function for different values of r
+N_vals = np.linspace(0, 0.5, 200)
+plt.plot(N_vals, f(N_vals, -0.075), label='$r<0$')
+plt.plot(N_vals, f(N_vals, 0), label='$r=0$')
+plt.plot(N_vals, f(N_vals, 0.075), label='$r>0$')
+
+# Add diagonal line
+plt.plot(N_vals, N_vals, 'k-')
+
+ax.legend(loc=(0.1,0.6))
+plt.show()
+```
+
+@fig-saddle-node-new shows the corresponding bifurcation diagram.
+```{python}
+#| label: fig-saddle-node-new
+#| fig-cap: Bifurcation diagram for a saddle-node bifurcation.
+#| fig-alt: Diagram showing analytic fixed points for a saddle-node bifurcation.
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Analytic fixed points: N = (1 ± sqrt(8*r))/4 (for r >= 0).
+r_vals = np.linspace(0, 0.075, 300)
+N_plus = (1 + np.sqrt(8 * r_vals)) / 4    # Candidate branch (stable for 0 < r < 0.5)
+N_minus = (1 - np.sqrt(8 * r_vals)) / 4   # Always unstable
+
+plt.figure(figsize=(8,6))
+plt.plot(r_vals, N_plus, 'b-', linewidth=2, label='Stable branch')
+plt.plot(r_vals, N_minus, 'r--', linewidth=2, label='Unstable branch')
+plt.xlabel("$r$")
+plt.ylabel("$N^*$")
+plt.title("Bifurcation Diagram: Saddle–Node Bifurcation")
+plt.legend(loc='best')
+# Set x-axis range
+plt.xlim(-0.075, 0.075)
+plt.show()
+```
+
+### Transcritical bifurcation
+
+```{python}
+#| label: fig-transcritical-bifurcation
+#| fig-cap: Plot showing a transcritical bifurcation.
+#| fig-alt: Graph illustrating a transcritical bifurcation with fixed points exchanging stability.
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+def f_trans(N, r):
+  # Transcritical bifurcation normal form:
+  # f(N) = (1+r)N - N^2, with fixed points at N=0 and N=r.
+  return 1 + (1+r)*(N-1) - (N-1)**2
+
+# Set up the figure and axis for the transcritical bifurcation
+plt.figure(figsize=(8, 6))
+plt.yticks([])
+plt.xticks([])
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+# Define the range for N
+N_vals = np.linspace(0, 0.5, 200)
+# Plot f(N) for different values of r to illustrate the bifurcation
+for rv in [-0.5, 0, 0.5]:
+  if rv < 0:
+    label = '$r<0$'
+  elif rv == 0:
+    label = '$r=0$'
+  else:
+    label = '$r>0$'
+  plt.plot(N_vals, f_trans(N_vals, rv), label=label)
+# Plot the diagonal line where y = N
+plt.plot(N_vals, N_vals, 'k-')
+ax.legend(loc=(0.1, 0.6))
+plt.show()
+```
+
+```{python}
+#| label: diag-transcritical-new
+#| fig-cap: Bifurcation diagram for a transcritical bifurcation.
+#| fig-alt: Diagram showing analytic fixed points for a transcritical bifurcation.
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Analytic fixed points: N = 0.25  and  N = 0.25 + r.
+r_vals = np.linspace(-2, 2, 300)
+N1 = 0.25 * np.ones_like(r_vals)
+N2 = 0.25 + r_vals
+
+plt.figure(figsize=(8,6))
+# Split parameter range for different stability behaviors:
+r_neg = r_vals[r_vals < 0]
+r_pos = r_vals[r_vals >= 0]
+N1_neg = 0.25 * np.ones_like(r_neg)
+N1_pos = 0.25 * np.ones_like(r_pos)
+N2_neg = 0.25 + r_neg
+N2_pos = 0.25 + r_pos
+
+plt.plot(r_neg, N1_neg, 'b-', linewidth=2, label='Stable: $N=0.25$')
+plt.plot(r_neg, N2_neg, 'r--', linewidth=2, label='Unstable: $N=0.25+r$')
+plt.plot(r_pos, N1_pos, 'r--', linewidth=2)
+plt.plot(r_pos, N2_pos, 'b-', linewidth=2, label='Stable: $N=0.25+r$')
+plt.xlabel("$r$")
+plt.ylabel("$N^*$")
+plt.title("Bifurcation Diagram: Transcritical Bifurcation")
+plt.legend(loc='best')
+plt.show()
+```
+
+### Pitchfork bifurcation
+
+```{python}
+#| label: fig-pitchfork-bifurcation
+#| fig-cap: Plot showing a pitchfork bifurcation.
+#| fig-alt: Graph illustrating a pitchfork bifurcation with symmetric fixed points.
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+def f_pitchfork(N, r):
+    # Pitchfork bifurcation normal form with bifurcation at N = 0.25:
+    # f(N) = 0.25 + (1+r)*(N-0.25) - (N-0.25)**3,
+    # which has a fixed point at N = 0.25 for all r, and for r > 0,
+    # two symmetric fixed points at N = 0.25 ± √r.
+    return 1 + (1+r)*(N-1) - (N-1)**3
+
+# Set up the figure and axis for the pitchfork bifurcation
+plt.figure(figsize=(8,6))
+plt.yticks([])
+plt.xticks([])
+ax = plt.gca()
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+# Define the range for N to capture symmetric dynamics
+N_vals = np.linspace(0, 2, 300)
+
+# Plot f(N) for different values of r to illustrate the bifurcation
+for rv in [-0.4, 0, 0.4]:
+    if rv < 0:
+        label = '$r<0$'
+    elif rv == 0:
+        label = '$r=0$'
+    else:
+        label = '$r>0$'
+    plt.plot(N_vals, f_pitchfork(N_vals, rv), label=label)
+
+# Plot the diagonal line where y = N
+plt.plot(N_vals, N_vals, 'k-')
+ax.legend(loc=(0.1, 0.6))
+plt.show()
+```
+
+```{python}
+#| label: diag-pitchfork-new
+#| fig-cap: Bifurcation diagram for a pitchfork bifurcation.
+#| fig-alt: Diagram showing analytic fixed points for a pitchfork bifurcation.
+#| echo: false
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Analytic fixed points (after translating x = N-1):
+# Trivial branch: N = 1 for all r.
+# Nontrivial branches: N = 1 ± √r for r ≥ 0.
+r_all = np.linspace(-2, 1, 300)
+N_triv = np.ones_like(r_all)
+r_pos = np.linspace(0, 1, 300)
+N_plus = 1 + np.sqrt(r_pos)
+N_minus = 1 - np.sqrt(r_pos)
+
+plt.figure(figsize=(8,6))
+# For r < 0, only the trivial branch exists and is assumed stable.
+plt.plot(r_all[r_all < 0], N_triv[r_all < 0], 'b-', linewidth=2, label='Stable: $N=1$')
+# For r ≥ 0, the trivial branch becomes unstable.
+plt.plot(r_pos, np.ones_like(r_pos), 'r--', linewidth=2, label='Unstable: $N=1$')
+# The nontrivial branches (stable when they appear).
+plt.plot(r_pos, N_plus, 'b-', linewidth=2, label='Stable: $N=1+\\sqrt{r}$')
+plt.plot(r_pos, N_minus, 'b-', linewidth=2, label='Stable: $N=1-\\sqrt{r}$')
+plt.xlabel("$r$")
+plt.ylabel("$N^*$")
+plt.title("Bifurcation Diagram: Pitchfork Bifurcation")
+plt.legend(loc='best')
+plt.show()
+```
+
+
+
+-----------------------------------------
+
+::: {#exr-finches}
+#### o House finches
+
+_[Note: in this problem we combine a continuous time model for the dynamics within a single year with
+a discrete model for the dynamics from one year to the next.
+ The subscript $t \in \mathbb{Z}$ refers to the discrete year whereas
+$\tau\in\mathbb{R}$ will indicate the continuous time within a single year.]_
+
+A population of house finches resides in an isolated region in North America. 
+In this problem you want to find out about the long-term prospects for the population.
+
+Each year the
+males and females begin their search for mates at the beginning of winter with a
+combined population number $N_t$ in year $t$, and form $P_t$ breeding pairs by the end
+of this search period, the start of the breeding season.
+
+The mate search period lasts from within-year time $\tau = 0$ to the end of the search
+period at within-year time $\tau = T$. Assume that there is a 1:1 sex ratio and that
+males $M(\tau)$ and females $F(\tau)$ locate one another randomly to make a pair 
+at rate $\sigma$, such that the number  $M(\tau)$ of males  that are not in a pair at time $\tau$ satisfies
+$$\frac{dM}{d\tau}=-\sigma \,M\,F $$
+and similarly  the number  $F$ of females  that are not in a pair at time $\tau$  satisfies
+$$\frac{dF}{d\tau}=-\sigma \,M\,F. $$
+
+You are given that the number of breeding pairs that establish a nest and breed
+successfully is $G(P_t)P_t$, where the fraction $G(P_t)$ takes the particular form
+$$G(P_t) = \frac{1}{1+P_t/\delta},$$
+where $\delta$ represents the density of available nesting sites.
+Each pair that reproduces successfully has a mean number $c$ of offspring.
+
+The probability that a bird will survive from one year to the next is $s$.
+
+a) Show that the number $n(\tau)=M(\tau)+F(\tau)$ of birds _not_ in a pair 
+is governed by
+$$\frac{dn}{d\tau}=-\frac{\sigma}{2}n^2, ~~~n(0)=N_t.$$
+
+b) Using the above, show that the number $n(T)$ of birds that have not found a mate at the start of
+the breeding season in year $t$ is
+$$n(T)=\frac{r\,N_t}{r+2N_t}$$
+where $N_t$ is the number of birds at the start of the season in that particular year and
+where $r=4/(\sigma T)$.
+
+c) Explain why the number of pairs $P(\tau)$ is governed by
+$$\frac{dP}{d\tau}=-\frac12\frac{dn}{d\tau},~~~P(0)=0.$$
+
+d) Use the above to show that the number of breeding pairs at the start of the
+breeding season in year $t$ is 
+$$P_t:=P(T)=\frac{N_t^2}{r+2N_t}.$$
+
+e) Show that the population $N_{t+1}$ at the beginning of winter in year $t+1$ is given
+by
+$$
+N_{t+1}=s\,N_t+\frac{c\,N_t^2}{r+2N_t+N_t^2/\delta}.
+$$ {#eq-Nt}
+
+f) Find the realistic steady states of the model in @eq-Nt for the case that
+$$\frac{c}{1-s}-2\geq \sqrt{\frac{4r}{\delta}}.$$
+
+g) Draw a cobweb diagram to illustrate the stability of the steady states in the case that there
+are two positive steady states. Label key features of the curves.
+
+h) What type of bifurcation occurs when there is equality in the condition in part f)?
+
+:::
+
+----------------------------------------------------------------------
+
+
+::: {#exr-1.1}
+#### Period-doubling and tangent bifurcations
+Consider the discrete time model
+$$
+N_{t+1}=\frac{rN_t}{1+(N_t/K)^b}
+$$ {#eq-ex_discrete_time}
+where $r$, $b$ and $K$ are positive parameters with $b>1$. Show that
+the model has two steady states. Investigate the stability of the
+extinction steady state. Show that the non-trivial (non-zero) steady state can lose
+stability through a period doubling bifurcation at $b=2r/(r-1)$, or a
+tangent bifurcation at $r=1$. 
+:::
+
+----------------------------------------------------------------------
+
+
+
+## Summary {.unnumbered}
+
+This chapter introduced several key concepts in discrete-time population dynamics:
+
+1. **Discrete vs Continuous Time**
+   - Discrete models track populations at fixed time intervals
+   - Useful for populations with seasonal reproduction
+   - Can exhibit more complex dynamics than continuous models
+
+2. **Key Models**
+   - Discrete exponential: $N_{t+1} = RN_t$
+   - Verhulst model: Shows logistic-type growth but can give negative populations
+   - Ricker model: Prevents negative populations, used for salmon populations
+   - Beverton-Holt model: Important in fisheries science
+
+3. **Analysis Tools**
+   - Fixed points found by solving $N^* = f(N^*)$
+   - Linear analysis near fixed points: Stability when $|f'(N^*)|<1$
+   - Cobweb diagrams visualize iteration dynamics
+
+4. **Bifurcations**
+   - Four types possible in discrete-time models:
+     * Saddle-node (tangent)
+     * Transcritical
+     * Pitchfork
+     * Period-doubling (unique to discrete-time models)
+   - Period-doubling leads to oscillatory behavior
+
+5. **Harvesting**
+   - Can introduce critical depensation
+   - Critical harvesting thresholds exist
+   - Risk of population collapse near thresholds
+
+**Key differences from continuous models:**
+
+- Can exhibit more complex dynamics
+- Period-doubling bifurcations possible
+- Cobweb diagrams replace phase lines
+- Solutions can oscillate or become chaotic
