@@ -206,7 +206,7 @@ def animate(n):
         y = new_y
 
 # Creating the animation
-ani = animation.FuncAnimation(fig, animate, frames=9, repeat=False)
+ani = animation.FuncAnimation(fig, animate, frames=11, repeat=False)
 
 # Display the animation
 plt.close()
@@ -220,6 +220,9 @@ HTML(ani.to_jshtml())
 #| echo: false
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from IPython.display import HTML
+
 # Define the function
 def f(x):
     return x+2.2*x*(1-x)
@@ -281,7 +284,7 @@ def animate(n):
         y = new_y
 
 # Creating the animation
-ani = animation.FuncAnimation(fig, animate, frames=20, repeat=False)
+ani = animation.FuncAnimation(fig, animate, frames=28, repeat=False)
 
 # Display the animation
 plt.close()
@@ -301,8 +304,8 @@ point but will be evolving towards it. @fig-cobweb-positive-slope shows the cobw
 
 ```{python}
 #| label: fig-cobweb-positive-slope
-#| fig-cap: Cobweb diagram for a fixed point with positive slope.
-#| fig-alt: Cobweb diagram for a fixed point with positive slope.
+#| fig-cap: Cobweb diagram for a stable fixed point with positive slope.
+#| fig-alt: Cobweb diagram for a stable fixed point with positive slope.
 #| echo: false
 import numpy as np
 import matplotlib.pyplot as plt
@@ -371,6 +374,77 @@ ani = animation.FuncAnimation(fig, animate, frames=7, repeat=False)
 
 # Display the animation
 plt.close()
+HTML(ani.to_jshtml())
+```
+
+
+
+```{python}
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+from IPython.display import HTML
+
+# Define the quadratic function with fixed points at 0 and 1.
+def f(x):
+    return 0.5*x + 0.5*x**2
+
+# Set up the figure and axis
+fig, ax = plt.subplots(figsize=(6, 3))
+ax.set_xlabel("$x_t$", loc='right')
+ax.set_ylabel("$x_{t+1}$", loc='top')
+
+# Remove numerical labels from the axes
+ax.set_xticks([])
+ax.set_yticks([])
+
+# Hide the top and right spines; reposition bottom and left spines
+ax.spines['top'].set_visible(False)
+ax.spines['right'].set_visible(False)
+ax.spines['bottom'].set_position(('data', 0))
+ax.spines['left'].set_position(('data', 0))
+
+# Set axis limits to cover the fixed points and the orbit
+ax.set_xlim(0, 1.1)
+ax.set_ylim(0, 1.1)
+
+# Initialize the orbit; starting near the unstable fixed point at 1
+x, y = 0.9, f(0.9)
+first_call = True  # flag to ignore the very first call
+
+def animate(n):
+    global x, y, first_call
+    # The first call (used for initialization) is skipped.
+    if first_call:
+        first_call = False
+    elif n == 0:
+        # Plot the function and the identity line.
+        x_vals = np.linspace(0, 1.1, 300)
+        ax.plot(x_vals, f(x_vals), label='$y=f(x)$')
+        ax.plot(x_vals, x_vals, color='black', label='$y=x$')
+        # Mark the fixed points: stable at 0 and unstable at 1.
+        ax.vlines(x=1, ymin=0, ymax=f(1), color='gray', linestyle=':')
+        ax.text(1, -0.05, '$x^*=1$', verticalalignment='top', horizontalalignment='center')
+        ax.vlines(x=0, ymin=0, ymax=f(0), color='gray', linestyle=':')
+        ax.text(0, -0.05, '$x^*=0$', verticalalignment='top', horizontalalignment='center')
+        ax.legend(loc=(0.1, 0.9))
+    elif n == 1:
+        # First iteration: draw vertical then horizontal segments.
+        ax.plot([x, x], [x, y], color='red')
+        ax.plot([x, y], [y, y], color='red')
+    else:
+        # Draw vertical segment from (x, x) to (x, f(x))
+        ax.plot([x, x], [x, y], color='red')
+        # Draw horizontal segment from (x, f(x)) to (f(x), f(x))
+        ax.plot([x, y], [y, y], color='red')
+        # Update the orbit
+        x, y = y, f(y)
+
+# Create the animation with 14 frames (non-repeating)
+ani = animation.FuncAnimation(fig, animate, frames=14, repeat=False)
+
+# Display the animation (for Jupyter Notebook use)
+plt.close()  # Prevent duplicate static output in some environments
 HTML(ani.to_jshtml())
 ```
 
@@ -710,7 +784,9 @@ plt.show()
 
 Take another look at @fig-cobweb-stable and @fig-cobweb-unstable. Just a little change in
 the function $f(N)$ changed the nature of the fixed point. Such a change can be the consequence
-of a small change in a model parameter, for example the intrinsic growth rate. For example,
+of a small change in a model parameter, for example the intrinsic growth rate. 
+
+For example,
 @fig-period-doubling-bifurcation shows the graph of $f(N)$ of the Verhulst model at
 three different values of the intrinsic growth factor $R$. For $R=2.8$ the slope of 
 $f$ at the fixed point is less steep than $-1$ and thus the fixed point is stable, as in
