@@ -150,7 +150,7 @@ def f(x):
     return x+1.8*x*(1-x)
 
 # Set up the figure and axis
-fig, ax = plt.subplots(figsize=(6,3))
+fig, ax = plt.subplots(figsize=(6,6))
 
 # Add axis labels
 ax.set_xlabel("$N_t$", loc='right')
@@ -228,7 +228,7 @@ def f(x):
     return x+2.2*x*(1-x)
 
 # Set up the figure and axis
-fig, ax = plt.subplots(figsize=(6,3))
+fig, ax = plt.subplots(figsize=(6,6))
 
 # Add axis labels
 ax.set_xlabel("$N_t$", loc='right')
@@ -300,7 +300,7 @@ Such oscillations in population numbers are not possible in a continuous-time mo
 In @fig-cobweb-stable the oscillations get damped over time and the system evolves towards a steady state. In @fig-cobweb-stable the system evolves towards a state where the population number oscillates between two values. This is called a period-two orbit. We will have more to say about this in @sec-period-doubling.
 
 The graphical method for visualising the iterations will work also when the slope is positive at the fixed point, but it will not look like a cobweb because the system will not be oscillating around the fixed
-point but will be evolving towards it. @fig-cobweb-positive-slope shows the cobweb for a stable fixed point with positive slope.
+point but will be evolving towards it. @fig-cobweb-positive-slope shows the cobweb for a stable fixed point with positive slope $0<f'(N^*)<1$ and @fig-cobweb-positive-slope-unstable shows the cobweb for an unstable fixed point with positive slope $f'(N^*)>1$.
 
 ```{python}
 #| label: fig-cobweb-positive-slope
@@ -314,7 +314,7 @@ def f(x):
     return x+0.8*x*(1-x)
 
 # Set up the figure and axis
-fig, ax = plt.subplots(figsize=(6,3))
+fig, ax = plt.subplots(figsize=(6,6))
 
 # Add axis labels
 ax.set_xlabel("$N_t$", loc='right')
@@ -380,6 +380,10 @@ HTML(ani.to_jshtml())
 
 
 ```{python}
+#| label: fig-cobweb-positive-slope-unstable
+#| fig-cap: Cobweb diagram for an unstable fixed point with positive slope.
+#| fig-alt: Cobweb diagram for an unstable fixed point with positive slope.
+#| echo: false
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.animation as animation
@@ -390,7 +394,7 @@ def f(x):
     return 0.5*x + 0.5*x**2
 
 # Set up the figure and axis
-fig, ax = plt.subplots(figsize=(6, 3))
+fig, ax = plt.subplots(figsize=(6, 6))
 ax.set_xlabel("$x_t$", loc='right')
 ax.set_ylabel("$x_{t+1}$", loc='top')
 
@@ -490,6 +494,8 @@ $$
 N_{t+1} = N_t\, e^{R_0\left(1 - \frac{N_t}{K}\right)}.
 $$ {#eq-ex_ricker}
 and investigate their stability. Do this both analytically and by drawing cobweb diagrams.
+Allow also negative values of $R_0$ in your analysis, even though this is not ecologically realistic.
+Note that you will then need at least three cobweb diagrams because there are then two bifurcations.
 :::
 
 ----------------------------------------------------------------------
@@ -544,8 +550,9 @@ N_t &= \frac{1}{u_t}=\frac{K R^t}{Ku_0-1+R^t}\\
 $$ {#eq-beverton_holt_solution}
 
 This is the solution to the Beverton-Holt model. Comparing this to the solution of the continuous-time logistic model
+from @eq-logistic-solution,
 $$
-N(t) = \frac{KN_0}{N_0+(K-N_0)\exp(-rt)}
+N(t) = \frac{KN_0}{N_0+(K-N_0)\exp(-rt)},
 $$ {#eq-recall_logistic_solution}
 we see that they agree at integer times $t$ if we measure time in years and set
 $R=\exp(r \cdot 1\text{ year}).$
@@ -623,7 +630,7 @@ Np = (b+np.sqrt(b**2-4))/2
 Nm = (b-np.sqrt(b**2-4))/2
 
 # Adding axis labels
-plt.figure(figsize=(6,3))
+plt.figure(figsize=(6,6))
 plt.xlabel('$N_t$', loc='right')
 plt.ylabel('$N_{t+1}$', loc='top')
 
@@ -690,7 +697,7 @@ E2 = 0.2
 E3 = 0.3
 
 # Adding axis labels
-plt.figure(figsize=(6,3))
+plt.figure(figsize=(6,6))
 plt.xlabel('$N_t$', loc='right')
 plt.ylabel('$N_{t+1}$', loc='top')
 
@@ -786,8 +793,13 @@ Take another look at @fig-cobweb-stable and @fig-cobweb-unstable. Just a little 
 the function $f(N)$ changed the nature of the fixed point. Such a change can be the consequence
 of a small change in a model parameter, for example the intrinsic growth rate. 
 
-For example,
-@fig-period-doubling-bifurcation shows the graph of $f(N)$ of the Verhulst model at
+We will use the logistic map to illustrate the period-doubling route to chaos, although
+the phenomenon is more general. The logistic map is a simple discrete-time model for population growth that exhibits a period-doubling route to chaos. It is defined as
+$$
+X_{t+1} = R\,X_t\,(1-X_t) =: f(X_t).
+$$
+It is the same as the Verhulst model @eq-verhulst, just written in terms of $X_t = N_t/\tilde{K}$.
+@fig-period-doubling-bifurcation shows the graph of $f(X)$ of the Verhulst model at
 three different values of the intrinsic growth factor $R$. For $R=2.8$ the slope of 
 $f$ at the fixed point is less steep than $-1$ and thus the fixed point is stable, as in
 @fig-cobweb-stable. For $R=3.2$ the slope of $f$ at the fixed point is steeper than $-1$
@@ -807,9 +819,7 @@ def logistic_map(x, r):
     return r * x * (1-x)
 
 # Set up the figure and axis for the period-doubling bifurcation plot
-plt.figure(figsize=(8,6))
-plt.yticks([])
-plt.xticks([])
+plt.figure(figsize=(6,6))
 ax = plt.gca()
 ax.spines['top'].set_visible(False)
 ax.spines['right'].set_visible(False)
@@ -827,8 +837,8 @@ for r in [2.8, 3.0, 3.2]:
 # Plot the diagonal line y=x
 plt.plot(x_vals, x_vals, 'k-')
 ax.legend(loc=(0.1, 0.6))
-plt.xlabel("$N$")
-plt.ylabel(r"$f(N)=RN(1-N/\tilde{K})$")
+plt.xlabel("$X_t$")
+plt.ylabel(r"$X_{t+1}$")
 plt.show()
 ```
 
