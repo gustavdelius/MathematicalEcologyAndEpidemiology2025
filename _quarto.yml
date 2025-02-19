@@ -26,9 +26,12 @@ book:
   sidebar:
     subtitle: Lecture notes
     tools:
-      - icon: mortarboard-fill
+      - icon: house-door-fill
         href: https://vle.york.ac.uk/ultra/courses/_111662_1/outline
         text: VLE
+      - icon: mortarboard-fill
+        href: https://maths.york.ac.uk/moodle/course/view.php?id=2726
+        text: Moodle quizzes
   chapters:
     - index.qmd
     - continuous_time.qmd
