@@ -342,13 +342,15 @@ s=\lim_{t\to\infty}\frac{M(t)}{F(t)}=\frac{\mu_M-\mu_F+2b_F}{-\mu_M+2b_M+\mu_F}.
 <p>Even though the sex ratio approaches a fixed point as <span class="math inline">\(t\to\infty\)</span>, the population numbers themselves do not. Once the sex ratio has settled to the value <span class="math inline">\(s\)</span>, we have <span class="math inline">\(M=sF\)</span> and we can use this to get a single ODE for <span class="math inline">\(F\)</span>: <span id="eq-ss31"><span class="math display">\[
 \begin{split}
 \frac{dF}{dt}&amp;=-\mu_F F+b_F\frac{2MF}{F+M}\\
-&amp;=-\mu_F F+\frac{2s}{s+1}b_FF.
+&amp;=-\mu_F F+\frac{2s}{s+1}b_FF\\
+&amp;=rF
 \end{split}
-\tag{4.30}\]</span></span> This is a linear equation and has the solution <span id="eq-ss32"><span class="math display">\[
-F(t)=F_0e^{\left(-\mu_F+\frac{2s}{s+1}b_F\right)t}.
-\tag{4.31}\]</span></span> Similarly we obtain <span id="eq-ss33"><span class="math display">\[
-M(t)=M_0e^{(-\mu_M+\frac{2s}{s+1}b_M)t}.
-\tag{4.32}\]</span></span> So we have an exponential growth model for both <span class="math inline">\(F\)</span> and <span class="math inline">\(M\)</span>, but the exponent has a modified birth rate that takes the sex ratio into account.</p>
+\tag{4.30}\]</span></span> where <span class="math display">\[
+r=-\mu_F+b_F\frac{2s}{s+1}=\frac{2b_Mb_F-\mu_Mb_F-\mu_Fb_M}{b_M+b_F}.
+\]</span> This is a linear equation and has the solution <span id="eq-ss32"><span class="math display">\[
+F(t)=F_0e^{rt}.
+\tag{4.31}\]</span></span></p>
+<p>So we have an exponential growth model for both <span class="math inline">\(F\)</span> and <span class="math inline">\(M\)</span>, but the exponent has a modified birth rate that takes the sex ratio into account.</p>
 <p>To arrive at more realistic models we should introduce a carrying capacity into the model.</p>
 </section>
 <section id="exercises" class="level2" data-number="4.4">

@@ -223,17 +223,19 @@ Even though the sex ratio approaches a fixed point as $t\to\infty$, the populati
 $$
 \begin{split}
 \frac{dF}{dt}&=-\mu_F F+b_F\frac{2MF}{F+M}\\
-&=-\mu_F F+\frac{2s}{s+1}b_FF.
+&=-\mu_F F+\frac{2s}{s+1}b_FF\\
+&=rF
 \end{split}
 $$ {#eq-ss31}
+where
+$$
+r=-\mu_F+b_F\frac{2s}{s+1}=\frac{2b_Mb_F-\mu_Mb_F-\mu_Fb_M}{b_M+b_F}.
+$$
 This is a linear equation and has the solution
 $$
-F(t)=F_0e^{\left(-\mu_F+\frac{2s}{s+1}b_F\right)t}.
+F(t)=F_0e^{rt}.
 $$ {#eq-ss32}
-Similarly we obtain
-$$
-M(t)=M_0e^{(-\mu_M+\frac{2s}{s+1}b_M)t}.
-$$ {#eq-ss33}
+
 So we have an exponential growth model for both $F$ and $M$, but the exponent has a modified birth rate that takes the sex ratio into account.
 
 To arrive at more realistic models we should introduce a carrying capacity into the model.
