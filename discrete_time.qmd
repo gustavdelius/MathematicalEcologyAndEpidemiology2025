@@ -1,4 +1,4 @@
-# Discrete-time population models
+# Discrete-time population models {#sec-discrete}
 
 So far we have assumed that the rate of change of the population number has no explicit time dependence. However births and also deaths often happen on an annual cycle. Many fish have their spawning season in the spring, and many birds breed in the summer and annual plants produce their seed and then die in winter. In this case, the rate of change of the population number is not constant, but depends on the time of the year. We can model this by introducing a time dependence in the birth and death rates. However this will lead to equations that will be difficult to analyse. Instead we can give up on the idea of modelling the population numbers continuously through time and instead only follow how the population changes from year to year. 
 
