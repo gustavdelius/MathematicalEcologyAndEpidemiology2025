@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.42">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="description" content="Work in progress">
+
+<title>5&nbsp; Age-structured population model – Mathematical Ecology and Epidemiology</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./sex_structured.html" rel="prev">
+<link href="./virus.png" rel="icon" type="image/png">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2b37b0a2d7675c40fc14763bc2dd14a3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<meta property="og:title" content="5&nbsp; Age-structured population model – Mathematical Ecology and Epidemiology">
+<meta property="og:description" content="Work in progress">
+<meta property="og:image" content="figures/Age/leslie1.png">
+<meta property="og:site_name" content="Mathematical Ecology and Epidemiology">
+<meta name="twitter:title" content="5&nbsp; Age-structured population model – Mathematical Ecology and Epidemiology">
+<meta name="twitter:description" content="Work in progress">
+<meta name="twitter:image" content="figures/Age/leslie1.png">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./age_structured.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Age-structured population model</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Mathematical Ecology and Epidemiology</a> 
+        <div class="sidebar-tools-main tools-wide">
+    <a href="https://vle.york.ac.uk/ultra/courses/_111662_1/outline" title="VLE" class="quarto-navigation-tool px-1" aria-label="VLE"><i class="bi bi-house-door-fill"></i></a>
+    <a href="https://maths.york.ac.uk/moodle/course/view.php?id=2726" title="Moodle quizzes" class="quarto-navigation-tool px-1" aria-label="Moodle quizzes"><i class="bi bi-mortarboard-fill"></i></a>
+    <a href="https://github.com/gustavdelius/MathematicalEcologyAndEpidemiology2025/" title="Source Code" class="quarto-navigation-tool px-1" aria-label="Source Code"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Welcome</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./continuous_time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Continuous-time population models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./discrete_time.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Discrete-time population models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./interacting.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Interacting populations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./sex_structured.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sex-structured population models</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./age_structured.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Age-structured population model</span></span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#discrete-time-model" id="toc-discrete-time-model" class="nav-link" data-scroll-target="#discrete-time-model"><span class="header-section-number">5.1</span> Discrete time model</a>
+  <ul>
+  <li><a href="#model-description" id="toc-model-description" class="nav-link" data-scroll-target="#model-description"><span class="header-section-number">5.1.1</span> Model description</a></li>
+  <li><a href="#leslie-matrix" id="toc-leslie-matrix" class="nav-link" data-scroll-target="#leslie-matrix"><span class="header-section-number">5.1.2</span> Leslie matrix</a></li>
+  <li><a href="#stable-age-distribution" id="toc-stable-age-distribution" class="nav-link" data-scroll-target="#stable-age-distribution"><span class="header-section-number">5.1.3</span> Stable age distribution</a></li>
+  <li><a href="#condition-for-extinction" id="toc-condition-for-extinction" class="nav-link" data-scroll-target="#condition-for-extinction"><span class="header-section-number">5.1.4</span> Condition for extinction</a></li>
+  <li><a href="#solution-of-the-leslie-matrix-equation" id="toc-solution-of-the-leslie-matrix-equation" class="nav-link" data-scroll-target="#solution-of-the-leslie-matrix-equation"><span class="header-section-number">5.1.5</span> Solution of the Leslie matrix equation</a></li>
+  <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.1.6</span> Exercises</a></li>
+  </ul></li>
+  <li><a href="#sec-age-continuous" id="toc-sec-age-continuous" class="nav-link" data-scroll-target="#sec-age-continuous"><span class="header-section-number">5.2</span> Continuous time model</a>
+  <ul>
+  <li><a href="#model-description-1" id="toc-model-description-1" class="nav-link" data-scroll-target="#model-description-1"><span class="header-section-number">5.2.1</span> Model description</a></li>
+  <li><a href="#stable-age-distribution-1" id="toc-stable-age-distribution-1" class="nav-link" data-scroll-target="#stable-age-distribution-1"><span class="header-section-number">5.2.2</span> Stable age distribution</a></li>
+  <li><a href="#condition-for-extinction-1" id="toc-condition-for-extinction-1" class="nav-link" data-scroll-target="#condition-for-extinction-1"><span class="header-section-number">5.2.3</span> Condition for extinction</a></li>
+  <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1"><span class="header-section-number">5.2.4</span> Exercises</a></li>
+  </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/MathematicalEcologyAndEpidemiology2025/edit/main/age_structured.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Age-structured population model</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="learning-objectives" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>By the end of this chapter, you should be able to:</p>
+<ul>
+<li>Understand how age structure affects population dynamics in both discrete and continuous time models</li>
+<li>Formulate and analyze discrete-time age-structured models using Leslie matrices</li>
+<li>Solve the McKendrick-von Foerster equation for continuous-time age-structured populations</li>
+<li>Apply the condition for population persistence or extinction based on the reproductive number</li>
+<li>Determine the stable age distribution and long-term growth factor of a population</li>
+<li>Derive and interpret the Euler-Lotka equation for both discrete and continuous time models</li>
+</ul>
+<p>In the previous chapter we structured the population by a discrete variable, the sex of the individuals. This gave rise to a system of coupled ODEs, one ODE for each class of individuals. In this section we will structure the population by a continuous variable, the age of the individuals. In the continuous-time model this will give rise to a partial differential equation (PDE) for the age-dependent population density. We will discuss that PDE in <a href="#sec-age-continuous" class="quarto-xref"><span>Section 5.2</span></a>. But first we will discuss the discrete-time model, where the age structure this will give rise to a system of coupled difference equations, one equation for each age class.</p>
+</section>
+<section id="discrete-time-model" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="discrete-time-model"><span class="header-section-number">5.1</span> Discrete time model</h2>
+<p>As we discussed in <span class="quarto-unresolved-ref">?sec-discrete</span>, a discrete-time model is the natural choice if reproduction is an annual event, taking place in a short breeding season for example. We will now introduce a discrete-time age-structured population model. We will derive the model and then study the long-term behaviour of the population and its age distribution.</p>
+<section id="model-description" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="model-description"><span class="header-section-number">5.1.1</span> Model description</h3>
+<p>Both time and age will be discrete variables. We will take them to be integers counting years. We will describe the population by the numbers <span class="math inline">\(N_{a,t}\)</span> of individuals of age <span class="math inline">\(a\)</span> at time <span class="math inline">\(t\)</span>, with <span class="math inline">\(a\)</span> and <span class="math inline">\(t\)</span> both integers and <span class="math inline">\(a\geq 0\)</span>. The total number <span class="math inline">\(N_t\)</span> of individuals in the population at time <span class="math inline">\(t\)</span> is then given by the sum of <span class="math inline">\(N_{a,t}\)</span> over all ages.</p>
+<p>The parameters of our model will be the probabilities <span class="math inline">\(S_a\)</span> of surviving from age <span class="math inline">\(a\)</span> to age <span class="math inline">\(a+1\)</span> and the number of offspring <span class="math inline">\(b_a\)</span> produced by an individual when they reach age <span class="math inline">\(a\)</span>. Because the number of individuals at age <span class="math inline">\(a\)</span> at time <span class="math inline">\(t+1\)</span> is the number of individuals that a year earlier were at age <span class="math inline">\(a-1\)</span> and have survived to age <span class="math inline">\(a\)</span>, we have <span id="eq-a16"><span class="math display">\[
+N_{a,t+1} = S_{a-1} N_{a-1,t}
+\tag{5.1}\]</span></span> for <span class="math inline">\(a=1,2,\dots\)</span>.</p>
+<p>When individuals reach age <span class="math inline">\(a\)</span>, they each produce <span class="math inline">\(b_a\)</span> offspring. The total number of offspring produced at time <span class="math inline">\(t\)</span> is therefore obtained by summing over all ages <span class="math inline">\(a\)</span> the number of individuals at age <span class="math inline">\(a\)</span> at time <span class="math inline">\(t\)</span> times the number of offspring produced by an individual of age <span class="math inline">\(a\)</span>: <span id="eq-a17"><span class="math display">\[
+N_{0,t} = \sum_{a=1}^\infty b_a N_{a,t}.
+\tag{5.2}\]</span></span></p>
+<p>In <a href="#eq-a17" class="quarto-xref">Eq.&nbsp;<span>5.2</span></a> both sides of the equation are at time <span class="math inline">\(t\)</span>. That is because reproduction is taken to happen instantaneously at the start of year <span class="math inline">\(t\)</span>. It is conventional to use <a href="#eq-a16" class="quarto-xref">Eq.&nbsp;<span>5.1</span></a> to rewrite <a href="#eq-a17" class="quarto-xref">Eq.&nbsp;<span>5.2</span></a> as an equation for <span class="math inline">\(N_{0,t+1}\)</span>: <span id="eq-a18"><span class="math display">\[
+N_{0,t+1} = \sum_{a=1}^\infty b_a N_{a,t+1}= \sum_{a=1}^\infty b_a S_{a-1} N_{a-1,t}
+= \sum_{a=1}^\infty F_{a-1} N_{a-1,t},
+\tag{5.3}\]</span></span> where we have introduced the fecundity <span class="math display">\[
+F_a:=b_{a+1} S_{a}.
+\]</span></p>
+<p><a href="#eq-a16" class="quarto-xref">Eq.&nbsp;<span>5.1</span></a> and <a href="#eq-a18" class="quarto-xref">Eq.&nbsp;<span>5.3</span></a> are the equations for the discrete-time age-structured population model. They are a system of coupled difference equations, one equation for each age class. Let us write them out again more explicitly: <span id="eq-a18d"><span class="math display">\[
+\begin{split}
+N_{0,t+1}&amp;=F_0 N_{0,t}+F_1N_{1,t}+\cdots +F_{m-1}N_{m-1}+F_{m}N_{m}+\cdots, \\
+N_{1,t+1}&amp;=S_0 N_{0,t}, \\
+N_{2,t+1}&amp;=S_1 N_{1,t}, \\
+&amp;\vdots \\
+N_{m-1,t+1}&amp;=S_{m-2} N_{m-2,t}, \\
+N_{m,t+1}&amp;=S_{m-1} N_{m-1,t}, \\
+&amp;\vdots
+\end{split}
+\tag{5.4}\]</span></span> Annoyingly, the equation for <span class="math inline">\(N_{0,t+1}\)</span> couples all these infinitely many equations together. We would like to solve these coupled equations to determine the numbers <span class="math inline">\(N_{a,t}\)</span> of individuals at each age at each time, given the initial numbers <span class="math inline">\(N_{a,0}\)</span> for all ages <span class="math inline">\(a\)</span> at time <span class="math inline">\(t=0\)</span>. This can generally not be done analytically.</p>
+<!----
+Notice that @eq-a16 looks very simple and we could use it to determine $N_{a,t}$ for all $t\leq a$:
+$$
+\begin{split}
+N_{a,t} &= S_{a-1} N_{a-1,t-1} = S_{a-1} S_{a-2} N_{a-2,t-2} = \cdots \\
+&= S_{a-1}S_{a-2}\cdots S_{a-t} N_{a-t,0}
+= \frac{l_{a}}{l_{a-t}} N_{a-t,0}
+\end{split}
+$$ {#eq-ac18}
+where
+$$
+l_a=S_{a-1}S_{a-2}\cdots S_0
+$$ {#eq-la-discrete}
+is the probability of surviving from age $0$ to age $a$.
+
+However for $t> a$ we will need to stop when we reach age 0:
+$$
+\begin{split}
+N_{a,t} &= S_{a-1} N_{a-1,t-1} = S_{a-1} S_{a-2} N_{a-2,t-2} = \cdots \\
+&= S_{a-1}S_{a-2}\cdots S_{0} N_{0,t-a}
+= l_{a} N_{0,t-a},
+\end{split}
+$$ {#eq-ac18}
+And now @eq-a18 spoils the game because it tells us that the number of individuals at age $0$ at time $-a$ depends on the number of individuals at all other ages at time $t-a$. 
+--->
+</section>
+<section id="leslie-matrix" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="leslie-matrix"><span class="header-section-number">5.1.2</span> Leslie matrix</h3>
+<p>So far we have dealt with an infinite set of age classes. However there are two situations where we can reduce the infinite set of equations <a href="#eq-a18d" class="quarto-xref">Eq.&nbsp;<span>5.4</span></a> to a finite set. In those cases we can rewrite the equations in matrix form and analyse them using matrix algebra.</p>
+<p>The first situation where only a finite number of equations is coupled together is when there is a maximal age <span class="math inline">\(m\)</span> beyond which there is no reproduction, either because <span class="math inline">\(b_a = 0\)</span> for <span class="math inline">\(a&gt;m\)</span> or because there are no older individuals because <span class="math inline">\(S_{m} = 0\)</span>. In this case we can collect the equations for <span class="math inline">\(N_{a,t+1}\)</span> for <span class="math inline">\(a=0,1,2,\ldots,m-1\)</span> into the matrix equation <span id="eq-a19"><span class="math display">\[
+\begin{pmatrix}
+N_{0} \\
+N_{1} \\
+N_{2} \\
+\vdots \\
+N_{m-1}
+\end{pmatrix}_{t+1}
+=
+\begin{pmatrix}
+F_0 &amp; F_1 &amp; \cdots &amp; F_{m-2} &amp; F_{m-1} \\
+S_0 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\
+0 &amp; S_1 &amp; \cdots &amp; 0 &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; S_{m-2} &amp; 0
+\end{pmatrix}
+\begin{pmatrix}
+N_{0} \\
+N_{1} \\
+N_{2} \\
+\vdots \\
+N_{m-1}
+\end{pmatrix}_{t}.
+\tag{5.5}\]</span></span> The matrix on the right-hand side is called the Leslie matrix.</p>
+<p>We can represent this Leslie matrix with the directed graph in <a href="#fig-leslie1" class="quarto-xref">Figure&nbsp;<span>5.1</span></a>. The graph has one node for each age class <span class="math inline">\(a=0,1,2,\ldots,m-1\)</span> and a directed edge from node <span class="math inline">\(i\)</span> to node <span class="math inline">\(j\)</span> if and only if the Leslie matrix has a non-zero entry in column <span class="math inline">\(i\)</span> and row <span class="math inline">\(j\)</span>. The graph is called the Leslie graph.</p>
+<div id="fig-leslie1" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-leslie1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/Age/leslie1.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-leslie1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.1: Leslie graph when there is no reproduction from ages greater than <span class="math inline">\(m\)</span>.
+</figcaption>
+</figure>
+</div>
+<p>Note that we did not need to include the age class <span class="math inline">\(m\)</span> because it is not needed to calculate the reproduction because <span class="math inline">\(F_m=b_{m+1}S_{m}=0\)</span>. Once the matrix equation <a href="#eq-a19" class="quarto-xref">Eq.&nbsp;<span>5.5</span></a> is solved, we can determine <span class="math inline">\(N_{m,t+1}\)</span> separately from <a href="#eq-a16" class="quarto-xref">Eq.&nbsp;<span>5.1</span></a> if we are interested, and similarly for all older age classes that do not reproduce, if any.</p>
+<p>Let us denote the Leslie matrix by <span class="math inline">\(L\)</span>. The equations <a href="#eq-a19" class="quarto-xref">Eq.&nbsp;<span>5.5</span></a> and <a href="#eq-a19a" class="quarto-xref">Eq.&nbsp;<span>5.12</span></a> are matrix equations of the form <span id="eq-a20"><span class="math display">\[
+\mathbf{N}_{t+1} = L\, \mathbf{N}_t,
+\tag{5.6}\]</span></span> where <span class="math inline">\(\mathbf{N}_t\)</span> is the column vector of the numbers <span class="math inline">\(N_{a,t}\)</span> and <span class="math inline">\(L\)</span> is the Leslie matrix.</p>
+<hr>
+<div id="exm-leslie1" class="theorem example">
+<p><span class="theorem-title"><strong>Example 5.1</strong></span> Consider a population with the reproduction numbers <span class="math inline">\(b_a\)</span> and the survival probabilities <span class="math inline">\(S_a\)</span> given in the following table:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(a\)</span></th>
+<th><span class="math inline">\(b_a\)</span></th>
+<th><span class="math inline">\(S_a\)</span></th>
+<th><span class="math inline">\(F_a\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0</td>
+<td>1/2</td>
+<td>1/2</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>1</td>
+<td>1/2</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>2</td>
+<td>1/2</td>
+<td>0</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>0</td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+<td><span class="math inline">\(\vdots\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>The final column in that table is calculated from the previous ones using <span class="math inline">\(F_a:=b_{a+1}S_{a}\)</span>. In this example the maximum age <span class="math inline">\(m\)</span> beyond which there is no reproduction is <span class="math inline">\(m=3\)</span>. Hence the corresponding Leslie matrix is a <span class="math inline">\(3\times 3\)</span> matrix. It is given by <span id="eq-a25"><span class="math display">\[
+L = \begin{pmatrix}
+F_0&amp;F_1&amp;F_2 \\
+S_0 &amp; 0 &amp; 0 \\
+0 &amp; S_1 &amp; 0
+\end{pmatrix}=\begin{pmatrix}
+0 &amp; 1/2 &amp; 1 \\
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1/2 &amp; 0
+\end{pmatrix}.
+\tag{5.7}\]</span></span></p>
+<p>Assume that the at time <span class="math inline">\(t=0\)</span> we only have 10 individuals all of age 0, i.e., <span id="eq-a26"><span class="math display">\[
+\mathbf{N}_0 = \begin{pmatrix}
+10 \\
+0 \\
+0
+\end{pmatrix}.
+\tag{5.8}\]</span></span> We can then calculate the numbers at the following times <span class="math inline">\(t=1,2,3,\ldots\)</span> by repeated multiplication by the Leslie matrix <span class="math inline">\(L\)</span>: <span class="math display">\[
+\mathbf{N}_1 = L \mathbf{N}_0 = \begin{pmatrix}
+0 &amp; 1/2 &amp; 1 \\
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1/2 &amp; 0
+\end{pmatrix}
+\begin{pmatrix}
+10 \\
+0 \\
+0
+\end{pmatrix}
+= \begin{pmatrix}
+0 \\
+10 \\
+0
+\end{pmatrix},
+\]</span> <span id="eq-a26b"><span class="math display">\[
+\mathbf{N}_2 = L \mathbf{N}_1
+= \begin{pmatrix}
+5 \\
+0 \\
+5
+\end{pmatrix},
+~~~
+\mathbf{N}_3 = L \mathbf{N}_2 = \begin{pmatrix}
+5 \\
+5 \\
+0
+\end{pmatrix}, \cdots.
+\tag{5.9}\]</span></span> Continuing like this (using a computer) we observe that the population converges to a stable age distribution. <span id="eq-a27"><span class="math display">\[
+\lim_{t\to\infty}\mathbf{N}_t = \begin{pmatrix}
+4 \\
+4 \\
+2
+\end{pmatrix}.
+\tag{5.10}\]</span></span> This means that the population will eventually consist of <span class="math inline">\(4\)</span> individuals of age <span class="math inline">\(0\)</span>, <span class="math inline">\(4\)</span> individuals of age <span class="math inline">\(1\)</span>, and <span class="math inline">\(2\)</span> individuals of age <span class="math inline">\(2\)</span>. We can calculate the number of older individuals as follows <span class="math inline">\(N_{3,t} = S_2 N_{2,t} = 1, N_{4,t}=S_3N_{3,t}=1/2,\cdots\)</span> as <span class="math inline">\(t\to\infty\)</span>.</p>
+</div>
+<hr>
+<p>The other situation where we only need a finite number of age classes is where the survival probabilities and the reproduction numbers are constant for all ages above a certain age <span class="math inline">\(m-1\)</span>. We can then collapse all individuals of age <span class="math inline">\(m\)</span> or larger into the same age class <span class="math inline">\(m\)</span>. The survivors from age class <span class="math inline">\(m\)</span> are thus put back into the same age class <span class="math inline">\(m\)</span>. This modifies the equation for <span class="math inline">\(N_{m,t+1}\)</span> to <span id="eq-a19e"><span class="math display">\[
+N_{m,t+1} = S_{m-1} N_{m-1,t} + S_{m} N_{m,t}.
+\tag{5.11}\]</span></span> In this case we can write the model as a matrix equation of the form <span id="eq-a19a"><span class="math display">\[
+\begin{pmatrix}
+N_{0} \\
+N_{1} \\
+N_{2} \\
+\vdots \\
+N_{m}
+\end{pmatrix}_{t+1}
+=
+\begin{pmatrix}
+F_0 &amp; F_1 &amp; \cdots &amp; F_{m-1} &amp; F_{m} \\
+S_0 &amp; 0 &amp; \cdots &amp; 0 &amp; 0 \\
+0 &amp; S_1 &amp; \cdots &amp; 0 &amp; 0 \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+0 &amp; 0 &amp; \cdots &amp; S_{m-1} &amp; S_m
+\end{pmatrix}
+\begin{pmatrix}
+N_{0} \\
+N_{1} \\
+N_{2} \\
+\vdots \\
+N_{m}
+\end{pmatrix}_{t}.
+\tag{5.12}\]</span></span> Now <span class="math inline">\(N_{m,t}\)</span> is the number of all individuals of age <span class="math inline">\(m\)</span> or older at time <span class="math inline">\(t\)</span>. We can represent this Leslie matrix with the graph in <a href="#fig-leslie2" class="quarto-xref">Figure&nbsp;<span>5.2</span></a> .</p>
+<div id="fig-leslie2" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-leslie2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/Age/leslie2.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-leslie2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.2: Leslie graph when the last age class contains all individuals with age <span class="math inline">\(\geq m\)</span>.
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="stable-age-distribution" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="stable-age-distribution"><span class="header-section-number">5.1.3</span> Stable age distribution</h3>
+<p>The phenomenon that we observed in <a href="#exm-leslie1" class="quarto-xref">Example&nbsp;<span>5.1</span></a> that the age distribution settles down to a stable age distribution as time goes on is a general phenomenon. To understand it we will now look for a solution of the form <span id="eq-ab19"><span class="math display">\[
+N_{a,t} = \lambda^t r_a
+\tag{5.13}\]</span></span> This is a solution in which the age distribution <span class="math inline">\(r_a\)</span> remains stable from one year to the next, but the total population grows or shrinks by a factor <span class="math inline">\(\lambda\)</span> each year. It was untypical that in <a href="#exm-leslie1" class="quarto-xref">Example&nbsp;<span>5.1</span></a> we had <span class="math inline">\(\lambda=1\)</span> so that the population neither grew nor shrank.</p>
+<p>The Ansatz <a href="#eq-ab19" class="quarto-xref">Eq.&nbsp;<span>5.13</span></a> means in particular that, for this solution, <span class="math inline">\(N_{a,t+1} = \lambda N_{a,t}\)</span> for all ages <span class="math inline">\(a\)</span>. For <span class="math inline">\(a=1\)</span> this gives <span id="eq-a23"><span class="math display">\[
+N_{1,t+1} = \lambda N_{1,t} = S_0 N_{0,t}
+\tag{5.14}\]</span></span> and hence <span id="eq-a24"><span class="math display">\[
+N_{1,t} = \frac{S_0}{\lambda} N_{0,t}.
+\tag{5.15}\]</span></span> Similarly we can express <span class="math inline">\(N_{2,t}\)</span> in terms of <span class="math inline">\(N_{0,t}\)</span>: <span id="eq-a25"><span class="math display">\[
+N_{2,t} = \frac{S_1}{\lambda} N_{1,t} = \frac{S_1 S_0}{\lambda^2} N_{0,t}.
+\tag{5.16}\]</span></span> We can continue this process to express <span class="math inline">\(N_{a,t}\)</span> in terms of <span class="math inline">\(N_{0,t}\)</span>: <span id="eq-a26"><span class="math display">\[
+N_{a,t} = \frac{S_{a-1}S_{a-2}\cdots S_0}{\lambda^a} N_{0,t}= \frac{l_{a}}{\lambda^a} N_{0,t}
+\tag{5.17}\]</span></span> where <span id="eq-la-discrete"><span class="math display">\[
+l_a=S_{a-1}S_{a-2}\cdots S_0.
+\tag{5.18}\]</span></span> is the probability of surviving from age <span class="math inline">\(0\)</span> to age <span class="math inline">\(a\)</span>.</p>
+<p>Finally, for the newborns we have <span id="eq-a27"><span class="math display">\[
+N_{0,t+1} = \lambda N_{0,t} = \sum_{a=1}^\infty F_{a-1} N_{a-1,t} = \sum_{a=1}^\infty F_{a-1} \frac{l_{a-1}}{\lambda^{a-1}} N_{0,t}.
+\tag{5.19}\]</span></span> Dividing the equation by <span class="math inline">\(\lambda N_{0,t}\)</span> gives <span id="eq-a28"><span class="math display">\[
+1 = \sum_{a=1}^\infty F_{a-1}\frac{l_{a-1}}{\lambda^a}.
+\tag{5.20}\]</span></span> Using that <span class="math inline">\(F_{a-1} = b_{a} S_{a-1}\)</span> and <span class="math inline">\(S_{a-1}l_{a-1}=l_a\)</span> we can rewrite this equation as <span id="eq-a29"><span class="math display">\[
+1 = \sum_{a=1}^\infty b_a \,l_a\,\lambda^{-a} =:\psi(\lambda).
+\tag{5.21}\]</span></span> This is the Euler-Lotka equation for the population growth factor <span class="math inline">\(\lambda\)</span> in the stable age distribution. Once we have solved it to determine <span class="math inline">\(\lambda\)</span>, we can use <a href="#eq-a26" class="quarto-xref">Eq.&nbsp;<span>5.17</span></a> to determine the stable age distribution, <span id="eq-a29b"><span class="math display">\[
+N_{a,t} = \lambda^{t-a}l_{a} N_{0,0}.
+\tag{5.22}\]</span></span> Unfortunately solving the Euler-Lotka equation analytically is normally not feasible. You will however find a solvable example in <a href="#exr-spotted_owl" class="quarto-xref">Exercise&nbsp;<span>5.1</span></a> below.</p>
+</section>
+<section id="condition-for-extinction" class="level3" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="condition-for-extinction"><span class="header-section-number">5.1.4</span> Condition for extinction</h3>
+<p>Luckily we do not need to solve the Euler-Lotka equation in order to determine whether the population grows or goes extinct. We note that <span id="eq-a29c"><span class="math display">\[
+\psi(1)=\sum_{a=1}^\infty b_a \,l_a
+\tag{5.23}\]</span></span> is the expected number of offspring produced by an individual during its lifetime. This quantity is known as the <strong>reproductive number</strong> (or net reproductive rate). If this reproductive number is greater than <span class="math inline">\(1\)</span>, then the population grows exponentially. If it is less than <span class="math inline">\(1\)</span>, then the population goes extinct. The way to see this from the Euler-Lotka equation <a href="#eq-a29" class="quarto-xref">Eq.&nbsp;<span>5.32</span></a> is to note that <span class="math inline">\(\psi(\lambda)\)</span> is a decreasing function of <span class="math inline">\(\lambda\)</span>. This means that there is a unique solution <span class="math inline">\(\lambda\)</span> to the Euler-Lotka equation and</p>
+<ul>
+<li><p>If <span class="math inline">\(\psi(1)&gt;1\)</span>, then <span class="math inline">\(\psi(\lambda)=1\)</span> implies that <span class="math inline">\(\lambda&gt;1\)</span>;</p></li>
+<li><p>If <span class="math inline">\(\psi(1)&lt;1\)</span>, then <span class="math inline">\(\psi(\lambda)=1\)</span> implies that <span class="math inline">\(\lambda&lt;1\)</span>.</p></li>
+</ul>
+<hr>
+<div id="exr-spotted_owl" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.1 (Spotted owl)</strong></span> For the spotted owl the age-dependent reproduction numbers are <span id="eq-a30"><span class="math display">\[
+b_a = \begin{cases}
+0 &amp; \text{if } a &lt; 2, \\
+b &amp; \text{if } a \geq 2
+\end{cases}
+\tag{5.24}\]</span></span> for some constant <span class="math inline">\(b\)</span>. The age-dependent survival probabilities are <span id="eq-a31"><span class="math display">\[
+S_a = \begin{cases}
+1 &amp; \text{if } a = 0, \\
+l &amp; \text{if } a = 1, \\
+p &amp; \text{if } a &gt; 1
+\end{cases}
+\tag{5.25}\]</span></span> for some constants <span class="math inline">\(l\)</span> and <span class="math inline">\(p\)</span>.</p>
+<ol type="1">
+<li><p>Determine the probability that an individual survives from birth up to at least age <span class="math inline">\(a\)</span>.</p></li>
+<li><p>Determine the expected number of offspring produced by a single individual during their lifetime.</p></li>
+<li><p>Give the condition on <span class="math inline">\(b\)</span> for the population to be able to persist.</p></li>
+<li><p>Determine the long-term growth factor of the population.</p></li>
+<li><p>Determine the stable age distribution of the population.</p></li>
+</ol>
+</div>
+<hr>
+</section>
+<section id="solution-of-the-leslie-matrix-equation" class="level3" data-number="5.1.5">
+<h3 data-number="5.1.5" class="anchored" data-anchor-id="solution-of-the-leslie-matrix-equation"><span class="header-section-number">5.1.5</span> Solution of the Leslie matrix equation</h3>
+<p>The Leslie matrix equation <a href="#eq-a20" class="quarto-xref">Eq.&nbsp;<span>5.6</span></a> is a homogeneous linear difference equation with constant coefficients (the Leslie matrix <span class="math inline">\(L\)</span> does not depend on time). You know from earlier modules that when confronted with a homogeneous linear <em>differential</em> equation with constant coefficients you can solve it with an exponential Ansatz. The same works for linear difference equations.</p>
+<p>Solving the Leslie matrix equation will give us another route to understanding the stable age distribution and the condition for extinction or survival of the population.</p>
+<p>We make the Ansatz <span id="eq-a21"><span class="math display">\[
+\mathbf{N}_t = \lambda^t \mathbf{v}
+\tag{5.26}\]</span></span> and substitute it into <a href="#eq-a20" class="quarto-xref">Eq.&nbsp;<span>5.6</span></a>. This gives <span id="eq-a22"><span class="math display">\[
+\lambda^{t+1} \mathbf{v} = L \lambda^t \mathbf{v}.
+\tag{5.27}\]</span></span> Dividing by <span class="math inline">\(\lambda^t\)</span> gives <span id="eq-a23"><span class="math display">\[
+\lambda \mathbf{v} = L \mathbf{v}.
+\tag{5.28}\]</span></span> This means that our Ansatz works if we choose <span class="math inline">\(\lambda\)</span> to be an eigenvalue of the Leslie matrix <span class="math inline">\(L\)</span> and <span class="math inline">\(\mathbf{v}\)</span> to be the corresponding eigenvector.</p>
+<p>In the case where all eigenvalues of the Leslie matrix are distinct<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, the general solution is the linear combination of the solutions for each eigenvalue. <span id="eq-a24"><span class="math display">\[
+\mathbf{N}_t = c_1 \lambda_1^t \mathbf{v}_1 + c_2 \lambda_2^t \mathbf{v}_2 + \cdots + c_m \lambda_m^t \mathbf{v}_m,
+\tag{5.29}\]</span></span> where <span class="math inline">\(\lambda_1,\lambda_2,\ldots,\lambda_m\)</span> are the eigenvalues of the Leslie matrix and <span class="math inline">\(\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_m\)</span> are the corresponding eigenvectors. The constants <span class="math inline">\(c_1,c_2,\ldots,c_m\)</span> are determined by the eigenvector expansion of the initial values <span class="math inline">\(\mathbf{N}_0\)</span>: <span id="eq-a24"><span class="math display">\[
+\mathbf{N}_0 = c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \cdots + c_m \mathbf{v}_m.
+\tag{5.30}\]</span></span></p>
+<p>We can now look at the long-term fate of the population. If the Leslie matrix has a unique dominant eigenvalue <span class="math inline">\(\lambda_*\)</span> (such that the magnitude of <span class="math inline">\(\lambda_*\)</span> is greater than that of all other eigenvalues) with a corresponding eigenvector <span class="math inline">\(\mathbf{v}_*\)</span>, then <span id="eq-a24b"><span class="math display">\[
+\lim_{t\to\infty}\frac{\mathbf{N}_t}{\lambda_*^t} = c_* \mathbf{v}_*,
+\tag{5.31}\]</span></span> where <span class="math inline">\(c_*\)</span> is the coefficient of <span class="math inline">\(\mathbf{v}_*\)</span> in the eigenvector expansion of <span class="math inline">\(\mathbf{N}_0\)</span>. This means that the population converges to a stable age distribution, given by the eigenvector corresponding to the dominant eigenvalue of the Leslie matrix.</p>
+<p>Luckily, there is a theorem about the eigenvalues and eigenvectors of non-negative matrices that we can use to determine whether a Leslie matrix has a unique dominant eigenvalue.</p>
+<div id="def-irreducible" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5.1</strong></span> We call the Leslie matrix <strong>irreducible</strong> if its Leslie graph is strongly connected, which means that there is a directed path from any node to any other node.</p>
+</div>
+<div id="def-primitive" class="theorem definition">
+<p><span class="theorem-title"><strong>Definition 5.2</strong></span> We call the Leslie matrix <strong>primitive</strong> if the greatest common divisor of the lengths of all circuits in the Leslie graph is <span class="math inline">\(1\)</span>.</p>
+</div>
+<div id="thm-leslie" class="theorem">
+<p><span class="theorem-title"><strong>Theorem 5.1</strong></span> If the Leslie matrix is irreducible and primitive, then it has a unique dominant eigenvalue that is real and positive. The corresponding right eigenvector is real and strictly positive.</p>
+</div>
+<p>This is a special case of the Perron-Frobenius theorem, which is a general theorem about non-negative matrices, and is used extensively in the theory of Markov chains. The above theorem is exactly what we need, because it tells us when the Leslie matrix has a unique dominant eigenvalue and a corresponding eigenvector that gives the stable age distribution.</p>
+<hr>
+<p><strong><a href="#exm-leslie1" class="quarto-xref">Example&nbsp;<span>5.1</span></a> continued</strong></p>
+<p>We return to <a href="#exm-leslie1" class="quarto-xref">Example&nbsp;<span>5.1</span></a>. The Leslie graph is shown in <a href="#fig-leslie3" class="quarto-xref">Figure&nbsp;<span>5.3</span></a>.</p>
+<div id="fig-leslie3" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-leslie3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/Age/leslie3.png" class="img-fluid figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-leslie3-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.3: Leslie graph for <a href="#exm-leslie1" class="quarto-xref">Example&nbsp;<span>5.1</span></a>.
+</figcaption>
+</figure>
+</div>
+<p>It is irreducible and primitive, so we expect there to be a unique dominant eigenvalue. Let us verify this. The eigenvalues are the solutions of the characteristic equation <span id="eq-a29"><span class="math display">\[
+\begin{split}
+0&amp;=\det(L-\lambda I)=\begin{vmatrix}
+-\lambda &amp; 1/2 &amp; 1 \\
+1 &amp; -\lambda &amp; 0 \\
+0 &amp; 1/2 &amp; -\lambda
+\end{vmatrix}
+= -\lambda^3 + \frac{1}{2}\lambda+\frac12\\
+&amp;= (1-\lambda)\left(\lambda^2+\lambda+\frac12\right)
+\end{split}
+\tag{5.32}\]</span></span> We can read off that the solutions are <span id="eq-a30"><span class="math display">\[
+\lambda_0 = 1, \quad \lambda_\pm = -\frac{1}{2} \pm \frac{1}{2}i.
+\tag{5.33}\]</span></span> Because the magnitude of the eigenvalues <span class="math inline">\(\lambda_\pm\)</span> are less than <span class="math inline">\(1\)</span>, we have that <span class="math inline">\(\lambda_0\)</span> is the dominant eigenvalue and that <span class="math inline">\(\lim_{t\to\infty}\lambda_\pm^t=0\)</span>. This means that the stable age distribution is given by the eigenvector <span class="math inline">\(\mathbf{v}_0\)</span> corresponding to the eigenvalue <span class="math inline">\(\lambda_0=1\)</span>. And indeed <span id="eq-a30b"><span class="math display">\[
+\begin{pmatrix}
+0 &amp; 1/2 &amp; 1 \\
+1 &amp; 0 &amp; 0 \\
+0 &amp; 1/2 &amp; 0
+\end{pmatrix}
+\begin{pmatrix}
+4 \\
+4 \\
+2
+\end{pmatrix}
+=
+\begin{pmatrix}
+4 \\
+4 \\
+2
+\end{pmatrix}.
+\tag{5.34}\]</span></span> This confirms our numerical result from <a href="#eq-a27" class="quarto-xref">Eq.&nbsp;<span>5.19</span></a>.</p>
+<p>The convergence to this stable age distribution happens regardless of the initial age distribution.</p>
+<hr>
+</section>
+<section id="exercises" class="level3" data-number="5.1.6">
+<h3 data-number="5.1.6" class="anchored" data-anchor-id="exercises"><span class="header-section-number">5.1.6</span> Exercises</h3>
+<div id="exr-leslie" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.2 (* Fibonacci population)</strong></span> Consider a population in which individuals on average produce one offspring when they turn 1 year old and another offspring when they turn 2 years old. After that they die. Assume that there is no mortality before they turn 2 year old.</p>
+<ol type="1">
+<li>Formulate the above information in terms of values for the reproduction numbers <span class="math inline">\(b_a\)</span> and the survival probabilities <span class="math inline">\(S_a\)</span>.</li>
+<li>Write down the Leslie matrix for this population.</li>
+<li>Assume that at <span class="math inline">\(t=0\)</span> we start with 1 individual of age 0. By hand, calculate the numbers of individuals at each age at time <span class="math inline">\(t=1,2,3,4\)</span> and <span class="math inline">\(5\)</span>.</li>
+<li>Using the Leslie matrix, calculate the stable age distribution and the long-term growth factor (the factor by which the total population changes from one year to the next).</li>
+</ol>
+</div>
+<hr>
+<div id="exr-semelparous" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.3 (Semelparous population)</strong></span> Consider a population in which individuals die after having given birth for the first time at age 3. The life history parameters are given by the following table:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th><span class="math inline">\(a\)</span></th>
+<th><span class="math inline">\(b_a\)</span></th>
+<th><span class="math inline">\(S_a\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>0</td>
+<td>1/2</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>0</td>
+<td>1/3</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>6</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li><p>Calculate the fecundities and give the Leslie matrix for this population.</p></li>
+<li><p>Assume that at <span class="math inline">\(t=0\)</span> we start with 10 individual, all of age 0. Use the Leslie matrix to calculate the numbers of individuals of ages <span class="math inline">\(0,1,2\)</span> at times <span class="math inline">\(t=1,2,3\)</span>. What will happen in the long run? Will the population evolve towards a stable age distribution?</p></li>
+<li><p>Draw the graph associated with the Leslie matrix and determine whether the Leslie matrix is irreducible and primitive.</p></li>
+</ol>
+</div>
+<hr>
+<div id="exr-owl" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.4 (Eastern Screech Owl)</strong></span> This exercise is most suitable for you if you are willing to use a computer to find eigenvalues and eigenvectors of matrices.</p>
+<p>The Eastern Screech Owl is a small owl that is found in the eastern United States and Canada. It is a cavity-nesting bird, which means that it nests in holes in trees. It is able to adapt to diverse habitats, including wooded residential neighbourhoods and parks in suburban areas. In suburban areas, these owls find a variety of nesting opportunities, such as tree cavities, nest boxes, and even abandoned buildings, which may be less available in intensively farmed rural areas or dense forests. Additionally, the suburban settings can offer a rich supply of prey, including insects, small mammals, and other small creatures, partly due to the lower prevalence of large predators.</p>
+<p>Below is a life table collected for two different habitats, suburban and rural, in Texas.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Age</th>
+<th>Suburban</th>
+<th></th>
+<th>Rural</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(a\)</span></td>
+<td><span class="math inline">\(l_a\)</span></td>
+<td><span class="math inline">\(b_a\)</span></td>
+<td><span class="math inline">\(l_a\)</span></td>
+<td><span class="math inline">\(b_a\)</span></td>
+</tr>
+<tr class="even">
+<td>—</td>
+<td>————</td>
+<td>———</td>
+<td>————</td>
+<td>———</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>0.49</td>
+<td>0.8</td>
+<td>0.30</td>
+<td>0.8</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>0.18</td>
+<td>1.3</td>
+<td>0.11</td>
+<td>1.1</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>0.10</td>
+<td>1.5</td>
+<td>0.06</td>
+<td>1.6</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>0.06</td>
+<td>1.6</td>
+<td>0.04</td>
+<td>1.0</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>0.04</td>
+<td>1.3</td>
+<td>0.02</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>0.03</td>
+<td>1.3</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>0.02</td>
+<td>1.3</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>0.02</td>
+<td>1.3</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>0.01</td>
+<td>1.3</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>0.01</td>
+<td>1.3</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>For each of the two populations do the following:</p>
+<ol type="1">
+<li>Calculate the reproductive number, i.e., the expected number of offspring produced by a single individual during its lifetime.</li>
+<li>Calculate the Leslie matrix. Note that the table gives the survival probabilities <span class="math inline">\(l_a\)</span> from birth to age <span class="math inline">\(a\)</span> instead of the yearly survival probabilities <span class="math inline">\(S_a\)</span>. The yearly survival probabilities can be calculated from the life table by <span class="math inline">\(S_{a-1} = l_a/l_{a-1}\)</span>.</li>
+<li>Use the Leslie matrix to calculate the stable age distribution and the long-term growth factor (the factor by which the total population changes from one year to the next).</li>
+<li>Calculate the average age in the stable age distribution as well as the average age of parents of newborns.</li>
+</ol>
+</div>
+</section>
+</section>
+<section id="sec-age-continuous" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="sec-age-continuous"><span class="header-section-number">5.2</span> Continuous time model</h2>
+<p>Of course in the real world, time and age are not discrete variables and the population is not structured by age classes. This was only a simplification to make the model more tractable in the case where there is a clear annual cycle of reproduction. If we want to describe a species where individuals are born throughout the year and age continuously, it is more natural to use a continuous-time model.</p>
+<section id="model-description-1" class="level3" data-number="5.2.1">
+<h3 data-number="5.2.1" class="anchored" data-anchor-id="model-description-1"><span class="header-section-number">5.2.1</span> Model description</h3>
+<p>We now describe the population by the density <span class="math inline">\(n(t,a)\)</span> of individuals at age <span class="math inline">\(a\)</span>. The total number <span class="math inline">\(N(t)\)</span> of individuals in the population is then given by the integral of <span class="math inline">\(n(t,a)\)</span> over all ages. More generally, the total number of individuals in the population that are between age <span class="math inline">\(a_1\)</span> and <span class="math inline">\(a_2\)</span> is given by the integral of <span class="math inline">\(n(t,a)\)</span> over the interval <span class="math inline">\([a_1,a_2]\)</span>. This is illustrated in <a href="#fig-density" class="quarto-xref">Figure&nbsp;<span>5.4</span></a>. You are familiar with the concept of density from probability theory, where continuous random variables are described by a probability density rather than a probability. You may also be familiar with the concept from physics, where the density of a material describes how the mass is distributed over space. Here, the density <span class="math inline">\(n(t,a)\)</span> describes how the individuals are distributed over ages.</p>
+<div id="cell-fig-density" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div id="fig-density" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A sketch of a population density. The number of individuals in an age range is given by the area under the curve.">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-density-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="age_structured_files/figure-html/fig-density-output-1.png" alt="A sketch of a population density. The number of individuals in an age range is given by the area under the curve." width="758" height="470" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;5.4: A sketch of a population density. The number of individuals in an age range is given by the area under the curve.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>To derive the PDE for the age-structured population density, we consider how the density changes over an infinitesimal time interval <span class="math inline">\(\delta t\)</span> due to deaths: <span id="eq-a1"><span class="math display">\[
+n(t+\delta t, a+\delta t) = n(t,a) - \mu(a) n(t,a) \delta t.
+\tag{5.35}\]</span></span> Note how we had to take into account that over the time interval <span class="math inline">\(\delta t\)</span> the age of the individuals has increased by <span class="math inline">\(\delta t\)</span>. We now Taylor-expand the left-hand side around <span class="math inline">\(t\)</span> and <span class="math inline">\(a\)</span>: <span id="eq-a2"><span class="math display">\[
+n(t+\delta t, a+\delta t) = n(t,a) + \frac{\partial n}{\partial t} \delta t + \frac{\partial n}{\partial a} \delta t + \mathcal{O}(\delta t^2).
+\tag{5.36}\]</span></span> Cancelling the <span class="math inline">\(n(t,a)\)</span> terms on both sides, dividing by <span class="math inline">\(\delta t\)</span> and taking the limit <span class="math inline">\(\delta t\to 0\)</span> gives us the PDE for the age-structured population density: <span id="eq-a3"><span class="math display">\[
+\frac{\partial n}{\partial t} + \frac{\partial n}{\partial a} = -\mu(a) n.
+\tag{5.37}\]</span></span></p>
+<p>This equation is known as the McKendrick-von Foerster equation. It captures the effect of individuals ageing and dying, but it does not capture how they are born. Individuals are born with age <span class="math inline">\(0\)</span>. These offspring can be produced by parents of any ages, but with an age-dependent rate <span class="math inline">\(b(a)\)</span>. This gives <span id="eq-a4"><span class="math display">\[
+n(t,0) = \int_0^\infty b(a) n(t,a) \, da.
+\tag{5.38}\]</span></span> This is a boundary condition for the PDE. It says that the density of individuals at age <span class="math inline">\(0\)</span> is given by the total rate at which offspring are produced by the individuals of all ages. This is the continuous-time version of <a href="#eq-a17" class="quarto-xref">Eq.&nbsp;<span>5.2</span></a>, but note that now <span class="math inline">\(n(t,0)\)</span> is a density and <span class="math inline">\(b(a)\)</span> is a rate, whereas in the discrete-time model <span class="math inline">\(N_{0,t}\)</span> is a number and <span class="math inline">\(b_a\)</span> is a number.</p>
+</section>
+<section id="stable-age-distribution-1" class="level3" data-number="5.2.2">
+<h3 data-number="5.2.2" class="anchored" data-anchor-id="stable-age-distribution-1"><span class="header-section-number">5.2.2</span> Stable age distribution</h3>
+<p>We will now solve the PDE for the age-structured population density by the method of separation of variables. We will make the Ansatz <span class="math inline">\(n(t,a) = f(t) r(a)\)</span>. This is a solution where the age distribution <span class="math inline">\(r(a)\)</span> stays stable but the total population number varies with time according to <span class="math inline">\(f(t)\)</span>. You have seen this trick for finding solutions of linear, homogeneous PDEs in other modules, for example when you solved the wave equation. Substituting this Ansatz into the PDE gives <span id="eq-a5"><span class="math display">\[
+f'(t) r(a) + f(t) r'(a) = -\mu(a) f(t) r(a).
+\tag{5.39}\]</span></span> Dividing by <span class="math inline">\(f(t) r(a)\)</span> gives <span id="eq-a6"><span class="math display">\[
+\frac{f'(t)}{f(t)} + \frac{r'(a)}{r(a)} = -\mu(a).
+\tag{5.40}\]</span></span> We now collect all terms that depend on <span class="math inline">\(t\)</span> on the left-hand side and all terms that depend on <span class="math inline">\(a\)</span> on the right-hand side: <span id="eq-a7"><span class="math display">\[
+\frac{f'(t)}{f(t)} = - \frac{r'(a)}{r(a)} - \mu(a).
+\tag{5.41}\]</span></span> Because the left-hand side is independent of <span class="math inline">\(a\)</span> and the right-hand side is independent of <span class="math inline">\(t\)</span>, both sides must be equal to a constant. We introduce the separation constant <span class="math inline">\(\gamma\)</span> and write <span id="eq-a8"><span class="math display">\[
+\frac{f'(t)}{f(t)} = \gamma, \quad \frac{r'(a)}{r(a)} = -\gamma - \mu(a).
+\tag{5.42}\]</span></span> These are now linear ODEs and hence easy to solve. The first ODE has the solution <span id="eq-a9"><span class="math display">\[
+f(t) = f(0) e^{\gamma t}
+\tag{5.43}\]</span></span> and the second ODE has the solution <span id="eq-a10"><span class="math display">\[
+r(a) = r(0) \exp\left(-\int_0^a \mu(a') \, da'-\gamma a\right).
+\tag{5.44}\]</span></span> The factor <span id="eq-a15"><span class="math display">\[
+\exp\left(-\int_0^a \mu(a') \, da'\right)=:l(a)
+\tag{5.45}\]</span></span> is the probability that an individual survives up to age <span class="math inline">\(a\)</span>. This is the continuous-time version of <a href="#eq-la-discrete" class="quarto-xref">Eq.&nbsp;<span>5.18</span></a>. So altogether we have the population density <span id="eq-a11"><span class="math display">\[
+n(t,a) = n(0,0) l(a) e^{\gamma (t-a)} ,
+\tag{5.46}\]</span></span> where <span class="math inline">\(n(0,0)=f(0)r(0)\)</span> is the initial density of individuals at age <span class="math inline">\(0\)</span>. This is the continuous-time version of <a href="#eq-a26" class="quarto-xref">Eq.&nbsp;<span>5.17</span></a>.</p>
+<p>So far we don’t yet know the value of the separation constant <span class="math inline">\(\gamma\)</span>. This will be determined by the boundary condition. If we substitute the solution <a href="#eq-a11" class="quarto-xref">Eq.&nbsp;<span>5.46</span></a> into the boundary condition <a href="#eq-a4" class="quarto-xref">Eq.&nbsp;<span>5.38</span></a>, we get <span id="eq-a12"><span class="math display">\[
+n(0,0)e^{\gamma t} = \int_0^\infty b(a) n(0,0)l(a)e^{\gamma (t-a)} \, da.
+\tag{5.47}\]</span></span> We can cancel the common factor <span class="math inline">\(n(0,0)e^{\gamma t}\)</span> on both sides to get the condition <span id="eq-a13"><span class="math display">\[
+1= \int_0^\infty b(a) l(a)e^{-\gamma a} \, da =: \phi(\gamma).
+\tag{5.48}\]</span></span> We have introduced the shorthand notation <span class="math inline">\(\phi(\gamma)\)</span> for the integral on the right-hand side. The condition <a href="#eq-a13" class="quarto-xref">Eq.&nbsp;<span>5.48</span></a> is the continuous-time version of the Euler-Lotka equation <a href="#eq-a29" class="quarto-xref">Eq.&nbsp;<span>5.32</span></a>. It is a transcendental equation for <span class="math inline">\(\gamma\)</span>, so we cannot solve it analytically for <span class="math inline">\(\gamma\)</span>.</p>
+</section>
+<section id="condition-for-extinction-1" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="condition-for-extinction-1"><span class="header-section-number">5.2.3</span> Condition for extinction</h3>
+<p>Luckily we do not need to solve the integral equation <a href="#eq-a13" class="quarto-xref">Eq.&nbsp;<span>5.48</span></a> to determine whether the population grows or goes extinct. We note that <span id="eq-a13b"><span class="math display">\[
+\phi(0)=\int_0^\infty b(a) l(a) \, da
+\tag{5.49}\]</span></span> is the expected number of offspring produced by an individual during its lifetime. This quantity is known as the <strong>reproductive number</strong> (or net reproductive rate). If this reproductive number is greater than <span class="math inline">\(1\)</span>, then the population grows exponentially. If it is less than <span class="math inline">\(1\)</span>, then the population goes extinct. The way to see this from the Euler-Lotka equation is to note that <span class="math inline">\(\phi(\gamma)\)</span> is a decreasing function of <span class="math inline">\(\gamma\)</span>. This means that there is a unique solution <span class="math inline">\(\gamma\)</span> to the Euler-Lotka equation <a href="#eq-a13" class="quarto-xref">Eq.&nbsp;<span>5.48</span></a> and</p>
+<ul>
+<li><p>If <span class="math inline">\(\phi(0) &gt; 1\)</span>, then <span class="math inline">\(\phi(\gamma)=1\)</span> implies that <span class="math inline">\(\gamma &gt; 0\)</span> and the population grows exponentially.</p></li>
+<li><p>If <span class="math inline">\(\phi(0) &lt; 1\)</span>, then <span class="math inline">\(\phi(\gamma)=1\)</span> implies that <span class="math inline">\(\gamma &lt; 0\)</span> and the population goes extinct.</p></li>
+</ul>
+<p>You will notice the close analogy to the discussion of the stable age distribution in the discrete-time model.</p>
+<hr>
+</section>
+<section id="exercises-1" class="level3" data-number="5.2.4">
+<h3 data-number="5.2.4" class="anchored" data-anchor-id="exercises-1"><span class="header-section-number">5.2.4</span> Exercises</h3>
+<div id="exr-age_structured" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.5 (* Age-independent rates)</strong></span> In the continuous-time age-structured population model consider the case where <span class="math inline">\(b(a)=b\)</span> and <span class="math inline">\(\mu(a)=\mu\)</span> are both constant. Repeat all steps of the analysis but simplifying the expressions at each step by using the constant values for birth and death rates.</p>
+<ol type="1">
+<li>Solve the partial differential equation of the age-structured model by making the Ansatz <span class="math inline">\(n(t,a)=f(t)r(a)\)</span> and introducing the separation constant <span class="math inline">\(\gamma\)</span>.</li>
+<li>Use the boundary condition at <span class="math inline">\(a=0\)</span> to determine the value of <span class="math inline">\(\gamma\)</span>.</li>
+<li>Give the condition under which the population goes extinct and compare it to the condition in the exponential model from chapter 1.</li>
+</ol>
+</div>
+<hr>
+<div id="exr-seasonal_mortality" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 5.6 (Seasonal mortality)</strong></span> Consider an age-structured population model in which, in addition to an age-dependent mortality, there is also a seasonal mortality. The population is described by a function <span class="math inline">\(n(t,a)\)</span> giving the density of individuals of age <span class="math inline">\(a\)</span> at time <span class="math inline">\(t\)</span> which satisfies the equations <span id="eq-sma1"><span class="math display">\[
+\partial_t n(t,a)+\partial_a n(t,a)=-(\mu(a)+m(t))\,n(t,a),
+\tag{5.50}\]</span></span> <span id="eq-sma2"><span class="math display">\[
+n(t,0) = \int_0^\infty b(a) n(t,a) da.
+\tag{5.51}\]</span></span> The birth rate <span class="math inline">\(b(a)\)</span> and the mortality rates <span class="math inline">\(\mu(a)\)</span> and <span class="math inline">\(m(t)\)</span> are all positive.</p>
+<ol type="a">
+<li><p>By substituting the Ansatz <span class="math inline">\(n(t,a)=p(t)r(a)\)</span> into equation <a href="#eq-sma1" class="quarto-xref">Eq.&nbsp;<span>5.50</span></a> and separating variables with a separation constant <span class="math inline">\(\gamma\)</span>, derive solutions for <span class="math inline">\(p(t)\)</span> and <span class="math inline">\(r(a)\)</span> and hence for <span class="math inline">\(n(t,a)\)</span>, involving <span class="math inline">\(\gamma\)</span>.</p></li>
+<li><p>By substituting your solution from part (a) into equation <a href="#eq-sma2" class="quarto-xref">Eq.&nbsp;<span>5.51</span></a>, derive an equation for <span class="math inline">\(\gamma\)</span>. Write this in the form <span class="math inline">\(\phi(\gamma)=1\)</span> for some function <span class="math inline">\(\phi\)</span>. Show that this <span class="math inline">\(\phi\)</span> is a monotonic function.</p></li>
+<li><p>Assume that the seasonal mortality rate <span class="math inline">\(m(t)\)</span> is periodic with period <span class="math inline">\(1\)</span> and denote by <span class="math inline">\(F\)</span> the averaged seasonal mortality. By considering the population at the end of each season, show that the population will go extinct if <span class="math inline">\(\gamma &lt;F\)</span>.</p></li>
+<li><p>Explain how you can use a property of the function <span class="math inline">\(\phi\)</span> to eliminate <span class="math inline">\(\gamma\)</span> from the condition for extinction. Thus finally give the condition for extinction in terms of <span class="math inline">\(b(a), \mu(a)\)</span> and <span class="math inline">\(F\)</span>.</p></li>
+</ol>
+</div>
+</section>
+</section>
+<section id="summary" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="summary">Summary</h2>
+<p>In this chapter, we explored how age structure affects population dynamics:</p>
+<ul>
+<li><strong>Discrete-time models</strong> are appropriate when reproduction occurs in distinct breeding seasons. These models use:
+<ul>
+<li>Leslie matrices to represent age-specific survival and reproduction</li>
+<li>Eigenvalue analysis to determine the stable age distribution and growth rate</li>
+<li>The Perron-Frobenius theorem to establish conditions for a unique dominant eigenvalue</li>
+</ul></li>
+<li><strong>Continuous-time models</strong> are suitable when reproduction occurs continuously. These models use:
+<ul>
+<li>The McKendrick-von Foerster partial differential equation</li>
+<li>Separation of variables to find solutions with stable age distributions</li>
+<li>Boundary conditions to represent reproduction</li>
+</ul></li>
+<li><strong>Key insights</strong> from both model types:
+<ul>
+<li>The reproductive number (expected lifetime offspring per individual) determines population persistence</li>
+<li>When the reproductive number exceeds 1, the population grows; when less than 1, it declines</li>
+<li>Populations tend toward a stable age distribution regardless of initial conditions</li>
+<li>The Euler-Lotka equation determines the long-term growth rate</li>
+</ul></li>
+<li><strong>Limitations of these models</strong> include:
+<ul>
+<li>They assume constant vital rates (survival and reproduction) that don’t change over time</li>
+<li>They ignore density dependence, which becomes important as populations grow</li>
+<li>They assume populations are well-mixed with no spatial structure</li>
+<li>In real populations, demographic parameters may vary with factors beyond age</li>
+</ul></li>
+</ul>
+<p>These age-structured models provide a foundation for understanding how demographic processes shape population dynamics, with applications ranging from conservation biology to human demography.</p>
+
+
+</section>
+<section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn1"><p>In the case where there are repeated eigenvalues, the general solution is just a bit more complicated. Luckily in ecology, we are rarely interested in that case, because the probability that a real ecosystem is exactly so that this special case arises is zero.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+          // target, if specified
+          link.setAttribute("target", "_blank");
+          if (link.getAttribute("rel") === null) {
+            link.setAttribute("rel", "noopener");
+          }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./sex_structured.html" class="pagination-link" aria-label="Sex-structured population models">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sex-structured population models</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+<footer class="footer"><div class="nav-footer"><div class="nav-footer-center"><div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/gustavdelius/MathematicalEcologyAndEpidemiology2025/edit/main/age_structured.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></div></div></footer></body></html>

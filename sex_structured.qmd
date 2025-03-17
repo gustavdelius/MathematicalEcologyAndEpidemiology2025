@@ -6,15 +6,36 @@ Up to this point we have completely ignored that there are differences between t
 
 * both a male and a female are needed to produce offspring
 
-So in this chapter instead of just looking at a single function $N(t)$ giving the total population number, we will look at two functions $M(t)$ and $F(t)$ giving the number of males and females respectively. We again describe them by differential equations that capture that the numbers can decrease due to deaths and increase due to births. 
+## Learning Objectives {.unnumbered}
+
+After completing this chapter, you should be able to:
+
+   - Formulate and solve differential equations for sex-structured populations
+   - Analyze how sex-specific birth and death rates affect population dynamics
+   - Calculate long-term sex ratios
+   - Compare different functional forms for the mating function $\phi(F,M)$.
+   - Understand female-limited reproduction and harmonic mean models
+
+
+## Key Ecological Concepts {.unnumbered}
+
+Before diving into the mathematical models, let's clarify some ecological terminology:
+
+- **Sex ratio**: The proportion of males to females in a population
+- **Female-limited reproduction**: When population growth is primarily limited by female numbers
+- **Mating function**: Mathematical representation of how males and females interact to produce offspring
+- **Vital rates**: Birth and death rates that may differ between sexes
+- **Demographic structure**: How a population is divided into different groups (in this case, by sex)
+
+In this chapter, instead of just looking at a single function $N(t)$ giving the total population number, we will look at two functions $M(t)$ and $F(t)$ giving the number of males and females respectively. This division represents the most basic form of demographic structure in a population. We again describe them by differential equations that capture that the numbers can decrease due to deaths and increase due to births. 
 $$
 \begin{split}
 \frac{dF}{dt} &= -\mu_F F + b_F\,\varphi(F,M)\\
 \frac{dM}{dt} &= -\mu_M M + b_M\,\varphi(F,M).
 \end{split}
 $$ {#eq-ss1}
-Here $\mu_F$ and $\mu_M$ are the death rates of females and males respectively. 
-The rate of births now depends both on the number of females and the number of males, because both males and females are needed to produce offspring. We formulate that dependence on the number of females and the number of males as a function $\varphi(F,M)$. The functional dependence of the rate on $F$ and $M$ is the same for births of females and for births of males, but the extra factors $b_F$ and $b_M$ account for the differences between female and male birth rates.
+Here $\mu_F$ and $\mu_M$ are the death rates of females and males respectively, which are examples of sex-specific vital rates. 
+The rate of births now depends both on the number of females and the number of males, because both males and females are needed to produce offspring. We formulate that dependence on the number of females and the number of males as a mating function $\varphi(F,M)$. The functional dependence of the rate on $F$ and $M$ is the same for births of females and for births of males, but the extra factors $b_F$ and $b_M$ account for the differences between female and male birth rates, which are also vital rates that differ between sexes.
 
 ## Symmetric model
 We first consider the simpler situation where birth and mortality rates are the same for males and females:
@@ -310,3 +331,29 @@ is positive.
 improved expressions.
 
 :::
+
+## Summary {.unnumbered}
+
+This chapter introduced several key concepts in sex-structured population dynamics:
+
+1. **Basic Model Structure**
+   - Population divided into males (M) and females (F)
+   - Each sex has its own vital rates
+   - Reproduction requires both sexes, encoded in the mating function $\phi(F,M)$
+
+2. **Symmetric Model**
+   - When birth and death rates are equal for both sexes
+   - Difference between male and female numbers decreases exponentially
+   - Quadratic mating function can lead to population explosion in finite time
+
+3. **Female-Limited Reproduction**
+   - Mating function depends only on female numbers
+   - Applicable when males are abundant relative to females
+   - Leads to predictable long-term sex ratio
+
+4. **Harmonic Mean Model**
+   - Mating function depends on weighted average of male and female numbers
+   - More realistic for populations where both sexes can be limiting
+   - Produces stable long-term sex ratio
+
+In the next chapters, we will explore more complex demographic structures, including age structure and spatial distribution.

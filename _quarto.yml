@@ -38,6 +38,7 @@ book:
     - discrete_time.qmd
     - interacting.qmd
     - sex_structured.qmd
+    - age_structured.qmd
 
 bibliography: references.bib
 

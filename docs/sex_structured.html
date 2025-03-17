@@ -31,6 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./age_structured.html" rel="next">
 <link href="./interacting.html" rel="prev">
 <link href="./virus.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -41,7 +42,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-eee2ee4d5e4f76f365a16d0cec9c0489.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2b37b0a2d7675c40fc14763bc2dd14a3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -181,6 +182,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Sex-structured population models</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./age_structured.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Age-structured population model</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -191,7 +198,9 @@ window.Quarto = {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#symmetric-model" id="toc-symmetric-model" class="nav-link active" data-scroll-target="#symmetric-model"><span class="header-section-number">4.1</span> Symmetric model</a></li>
+  <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
+  <li><a href="#key-ecological-concepts" id="toc-key-ecological-concepts" class="nav-link" data-scroll-target="#key-ecological-concepts">Key Ecological Concepts</a></li>
+  <li><a href="#symmetric-model" id="toc-symmetric-model" class="nav-link" data-scroll-target="#symmetric-model"><span class="header-section-number">4.1</span> Symmetric model</a></li>
   <li><a href="#female-limited-reproduction" id="toc-female-limited-reproduction" class="nav-link" data-scroll-target="#female-limited-reproduction"><span class="header-section-number">4.2</span> Female-limited reproduction</a></li>
   <li><a href="#harmonic-mean-model" id="toc-harmonic-mean-model" class="nav-link" data-scroll-target="#harmonic-mean-model"><span class="header-section-number">4.3</span> Harmonic mean model</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">4.4</span> Exercises</a>
@@ -199,6 +208,7 @@ window.Quarto = {
   <li><a href="#geometric-mean-sex-structured-model" id="toc-geometric-mean-sex-structured-model" class="nav-link" data-scroll-target="#geometric-mean-sex-structured-model">* Geometric mean sex-structured model</a></li>
   <li><a href="#dominance-structure" id="toc-dominance-structure" class="nav-link" data-scroll-target="#dominance-structure">Dominance structure</a></li>
   </ul></li>
+  <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/gustavdelius/MathematicalEcologyAndEpidemiology2025/edit/main/sex_structured.qmd" class="toc-action"><i class="bi bi-github"></i>Edit this page</a></li></ul></div></nav>
     </div>
@@ -229,12 +239,34 @@ window.Quarto = {
 <li><p>birth and death rates depend on the sex</p></li>
 <li><p>both a male and a female are needed to produce offspring</p></li>
 </ul>
-<p>So in this chapter instead of just looking at a single function <span class="math inline">\(N(t)\)</span> giving the total population number, we will look at two functions <span class="math inline">\(M(t)\)</span> and <span class="math inline">\(F(t)\)</span> giving the number of males and females respectively. We again describe them by differential equations that capture that the numbers can decrease due to deaths and increase due to births. <span id="eq-ss1"><span class="math display">\[
+<section id="learning-objectives" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
+<p>After completing this chapter, you should be able to:</p>
+<ul>
+<li>Formulate and solve differential equations for sex-structured populations</li>
+<li>Analyze how sex-specific birth and death rates affect population dynamics</li>
+<li>Calculate long-term sex ratios</li>
+<li>Compare different functional forms for the mating function <span class="math inline">\(\phi(F,M)\)</span>.</li>
+<li>Understand female-limited reproduction and harmonic mean models</li>
+</ul>
+</section>
+<section id="key-ecological-concepts" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="key-ecological-concepts">Key Ecological Concepts</h2>
+<p>Before diving into the mathematical models, let’s clarify some ecological terminology:</p>
+<ul>
+<li><strong>Sex ratio</strong>: The proportion of males to females in a population</li>
+<li><strong>Female-limited reproduction</strong>: When population growth is primarily limited by female numbers</li>
+<li><strong>Mating function</strong>: Mathematical representation of how males and females interact to produce offspring</li>
+<li><strong>Vital rates</strong>: Birth and death rates that may differ between sexes</li>
+<li><strong>Demographic structure</strong>: How a population is divided into different groups (in this case, by sex)</li>
+</ul>
+<p>In this chapter, instead of just looking at a single function <span class="math inline">\(N(t)\)</span> giving the total population number, we will look at two functions <span class="math inline">\(M(t)\)</span> and <span class="math inline">\(F(t)\)</span> giving the number of males and females respectively. This division represents the most basic form of demographic structure in a population. We again describe them by differential equations that capture that the numbers can decrease due to deaths and increase due to births. <span id="eq-ss1"><span class="math display">\[
 \begin{split}
 \frac{dF}{dt} &amp;= -\mu_F F + b_F\,\varphi(F,M)\\
 \frac{dM}{dt} &amp;= -\mu_M M + b_M\,\varphi(F,M).
 \end{split}
-\tag{4.1}\]</span></span> Here <span class="math inline">\(\mu_F\)</span> and <span class="math inline">\(\mu_M\)</span> are the death rates of females and males respectively. The rate of births now depends both on the number of females and the number of males, because both males and females are needed to produce offspring. We formulate that dependence on the number of females and the number of males as a function <span class="math inline">\(\varphi(F,M)\)</span>. The functional dependence of the rate on <span class="math inline">\(F\)</span> and <span class="math inline">\(M\)</span> is the same for births of females and for births of males, but the extra factors <span class="math inline">\(b_F\)</span> and <span class="math inline">\(b_M\)</span> account for the differences between female and male birth rates.</p>
+\tag{4.1}\]</span></span> Here <span class="math inline">\(\mu_F\)</span> and <span class="math inline">\(\mu_M\)</span> are the death rates of females and males respectively, which are examples of sex-specific vital rates. The rate of births now depends both on the number of females and the number of males, because both males and females are needed to produce offspring. We formulate that dependence on the number of females and the number of males as a mating function <span class="math inline">\(\varphi(F,M)\)</span>. The functional dependence of the rate on <span class="math inline">\(F\)</span> and <span class="math inline">\(M\)</span> is the same for births of females and for births of males, but the extra factors <span class="math inline">\(b_F\)</span> and <span class="math inline">\(b_M\)</span> account for the differences between female and male birth rates, which are also vital rates that differ between sexes.</p>
+</section>
 <section id="symmetric-model" class="level2" data-number="4.1">
 <h2 data-number="4.1" class="anchored" data-anchor-id="symmetric-model"><span class="header-section-number">4.1</span> Symmetric model</h2>
 <p>We first consider the simpler situation where birth and mortality rates are the same for males and females: <span id="eq-ss2"><span class="math display">\[
@@ -260,7 +292,7 @@ F(t)=F(0)e^{-\mu t}.
 <div id="fig-ss1" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Quadratically increasing growth rate.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-ss1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="sex_structured_files/figure-html/fig-ss1-output-1.png" class="img-fluid figure-img" alt="Quadratically increasing growth rate.">
+<img src="sex_structured_files/figure-html/fig-ss1-output-1.png" alt="Quadratically increasing growth rate." width="466" height="167" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-ss1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;4.1: Quadratically increasing growth rate.
@@ -393,9 +425,40 @@ Q (0)=Q_0\)</span>.</p></li>
 <li><p>Describe a limitation of the birth terms in the model and suggest improved expressions.</p></li>
 </ol>
 </div>
-
-
 </section>
+</section>
+<section id="summary" class="level2 unnumbered">
+<h2 class="unnumbered anchored" data-anchor-id="summary">Summary</h2>
+<p>This chapter introduced several key concepts in sex-structured population dynamics:</p>
+<ol type="1">
+<li><strong>Basic Model Structure</strong>
+<ul>
+<li>Population divided into males (M) and females (F)</li>
+<li>Each sex has its own vital rates</li>
+<li>Reproduction requires both sexes, encoded in the mating function <span class="math inline">\(\phi(F,M)\)</span></li>
+</ul></li>
+<li><strong>Symmetric Model</strong>
+<ul>
+<li>When birth and death rates are equal for both sexes</li>
+<li>Difference between male and female numbers decreases exponentially</li>
+<li>Quadratic mating function can lead to population explosion in finite time</li>
+</ul></li>
+<li><strong>Female-Limited Reproduction</strong>
+<ul>
+<li>Mating function depends only on female numbers</li>
+<li>Applicable when males are abundant relative to females</li>
+<li>Leads to predictable long-term sex ratio</li>
+</ul></li>
+<li><strong>Harmonic Mean Model</strong>
+<ul>
+<li>Mating function depends on weighted average of male and female numbers</li>
+<li>More realistic for populations where both sexes can be limiting</li>
+<li>Produces stable long-term sex ratio</li>
+</ul></li>
+</ol>
+<p>In the next chapters, we will explore more complex demographic structures, including age structure and spatial distribution.</p>
+
+
 </section>
 
 </main> <!-- /main -->
@@ -828,6 +891,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./age_structured.html" class="pagination-link" aria-label="Age-structured population model">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Age-structured population model</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
