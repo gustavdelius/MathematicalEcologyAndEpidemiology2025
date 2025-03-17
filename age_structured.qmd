@@ -1,5 +1,7 @@
 # Age-structured population model
 
+In the previous chapter we structured the population by a discrete variable, the sex of the individuals. This gave rise to a system of coupled ODEs, one ODE for each class of individuals. In this section we will structure the population by a continuous variable, the age of the individuals. In the continuous-time model this will give rise to a partial differential equation (PDE) for the age-dependent population density. We will discuss that PDE in @sec-age-continuous. But first, in @sec-age-discrete, we will discuss the discrete-time model, where also age is discrete. This will give rise to a system of coupled difference equations, one equation for each age class. 
+
 ## Learning Objectives {.unnumbered}
 
 By the end of this chapter, you should be able to:
@@ -11,9 +13,8 @@ By the end of this chapter, you should be able to:
 - Determine the stable age distribution and long-term growth factor of a population
 - Derive and interpret the Euler-Lotka equation for both discrete and continuous time models
 
-In the previous chapter we structured the population by a discrete variable, the sex of the individuals. This gave rise to a system of coupled ODEs, one ODE for each class of individuals. In this section we will structure the population by a continuous variable, the age of the individuals. In the continuous-time model this will give rise to a partial differential equation (PDE) for the age-dependent population density. We will discuss that PDE in @sec-age-continuous. But first we will discuss the discrete-time model, where the age structure this will give rise to a system of coupled difference equations, one equation for each age class. 
 
-## Discrete time model
+## Discrete time model {#sec-age-discrete}
 
 As we discussed in @sec-discrete, a discrete-time model is the natural choice if reproduction is an annual event, taking place in a short breeding season for example. We will now introduce a discrete-time age-structured population model. We will derive the model and then study the long-term behaviour of the population and its age distribution.
 

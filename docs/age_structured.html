@@ -196,7 +196,7 @@ window.Quarto = {
    
   <ul>
   <li><a href="#learning-objectives" id="toc-learning-objectives" class="nav-link active" data-scroll-target="#learning-objectives">Learning Objectives</a></li>
-  <li><a href="#discrete-time-model" id="toc-discrete-time-model" class="nav-link" data-scroll-target="#discrete-time-model"><span class="header-section-number">5.1</span> Discrete time model</a>
+  <li><a href="#sec-age-discrete" id="toc-sec-age-discrete" class="nav-link" data-scroll-target="#sec-age-discrete"><span class="header-section-number">5.1</span> Discrete time model</a>
   <ul>
   <li><a href="#model-description" id="toc-model-description" class="nav-link" data-scroll-target="#model-description"><span class="header-section-number">5.1.1</span> Model description</a></li>
   <li><a href="#leslie-matrix" id="toc-leslie-matrix" class="nav-link" data-scroll-target="#leslie-matrix"><span class="header-section-number">5.1.2</span> Leslie matrix</a></li>
@@ -238,6 +238,7 @@ window.Quarto = {
 </header>
 
 
+<p>In the previous chapter we structured the population by a discrete variable, the sex of the individuals. This gave rise to a system of coupled ODEs, one ODE for each class of individuals. In this section we will structure the population by a continuous variable, the age of the individuals. In the continuous-time model this will give rise to a partial differential equation (PDE) for the age-dependent population density. We will discuss that PDE in <a href="#sec-age-continuous" class="quarto-xref"><span>Section 5.2</span></a>. But first, in <a href="#sec-age-discrete" class="quarto-xref"><span>Section 5.1</span></a>, we will discuss the discrete-time model, where also age is discrete. This will give rise to a system of coupled difference equations, one equation for each age class.</p>
 <section id="learning-objectives" class="level2 unnumbered">
 <h2 class="unnumbered anchored" data-anchor-id="learning-objectives">Learning Objectives</h2>
 <p>By the end of this chapter, you should be able to:</p>
@@ -249,11 +250,10 @@ window.Quarto = {
 <li>Determine the stable age distribution and long-term growth factor of a population</li>
 <li>Derive and interpret the Euler-Lotka equation for both discrete and continuous time models</li>
 </ul>
-<p>In the previous chapter we structured the population by a discrete variable, the sex of the individuals. This gave rise to a system of coupled ODEs, one ODE for each class of individuals. In this section we will structure the population by a continuous variable, the age of the individuals. In the continuous-time model this will give rise to a partial differential equation (PDE) for the age-dependent population density. We will discuss that PDE in <a href="#sec-age-continuous" class="quarto-xref"><span>Section 5.2</span></a>. But first we will discuss the discrete-time model, where the age structure this will give rise to a system of coupled difference equations, one equation for each age class.</p>
 </section>
-<section id="discrete-time-model" class="level2" data-number="5.1">
-<h2 data-number="5.1" class="anchored" data-anchor-id="discrete-time-model"><span class="header-section-number">5.1</span> Discrete time model</h2>
-<p>As we discussed in <span class="quarto-unresolved-ref">?sec-discrete</span>, a discrete-time model is the natural choice if reproduction is an annual event, taking place in a short breeding season for example. We will now introduce a discrete-time age-structured population model. We will derive the model and then study the long-term behaviour of the population and its age distribution.</p>
+<section id="sec-age-discrete" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="sec-age-discrete"><span class="header-section-number">5.1</span> Discrete time model</h2>
+<p>As we discussed in <a href="discrete_time.html" class="quarto-xref"><span>Chapter 2</span></a>, a discrete-time model is the natural choice if reproduction is an annual event, taking place in a short breeding season for example. We will now introduce a discrete-time age-structured population model. We will derive the model and then study the long-term behaviour of the population and its age distribution.</p>
 <section id="model-description" class="level3" data-number="5.1.1">
 <h3 data-number="5.1.1" class="anchored" data-anchor-id="model-description"><span class="header-section-number">5.1.1</span> Model description</h3>
 <p>Both time and age will be discrete variables. We will take them to be integers counting years. We will describe the population by the numbers <span class="math inline">\(N_{a,t}\)</span> of individuals of age <span class="math inline">\(a\)</span> at time <span class="math inline">\(t\)</span>, with <span class="math inline">\(a\)</span> and <span class="math inline">\(t\)</span> both integers and <span class="math inline">\(a\geq 0\)</span>. The total number <span class="math inline">\(N_t\)</span> of individuals in the population at time <span class="math inline">\(t\)</span> is then given by the sum of <span class="math inline">\(N_{a,t}\)</span> over all ages.</p>
