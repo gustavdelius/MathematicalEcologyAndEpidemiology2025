@@ -41,7 +41,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2b37b0a2d7675c40fc14763bc2dd14a3.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-eee2ee4d5e4f76f365a16d0cec9c0489.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -201,15 +201,15 @@ window.Quarto = {
   <li><a href="#model-description" id="toc-model-description" class="nav-link" data-scroll-target="#model-description"><span class="header-section-number">5.1.1</span> Model description</a></li>
   <li><a href="#leslie-matrix" id="toc-leslie-matrix" class="nav-link" data-scroll-target="#leslie-matrix"><span class="header-section-number">5.1.2</span> Leslie matrix</a></li>
   <li><a href="#stable-age-distribution" id="toc-stable-age-distribution" class="nav-link" data-scroll-target="#stable-age-distribution"><span class="header-section-number">5.1.3</span> Stable age distribution</a></li>
-  <li><a href="#condition-for-extinction" id="toc-condition-for-extinction" class="nav-link" data-scroll-target="#condition-for-extinction"><span class="header-section-number">5.1.4</span> Condition for extinction</a></li>
-  <li><a href="#solution-of-the-leslie-matrix-equation" id="toc-solution-of-the-leslie-matrix-equation" class="nav-link" data-scroll-target="#solution-of-the-leslie-matrix-equation"><span class="header-section-number">5.1.5</span> Solution of the Leslie matrix equation</a></li>
+  <li><a href="#sec-extinction-discrete" id="toc-sec-extinction-discrete" class="nav-link" data-scroll-target="#sec-extinction-discrete"><span class="header-section-number">5.1.4</span> Condition for extinction</a></li>
+  <li><a href="#solving-the-leslie-equation" id="toc-solving-the-leslie-equation" class="nav-link" data-scroll-target="#solving-the-leslie-equation"><span class="header-section-number">5.1.5</span> Solving the Leslie equation</a></li>
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">5.1.6</span> Exercises</a></li>
   </ul></li>
   <li><a href="#sec-age-continuous" id="toc-sec-age-continuous" class="nav-link" data-scroll-target="#sec-age-continuous"><span class="header-section-number">5.2</span> Continuous time model</a>
   <ul>
   <li><a href="#model-description-1" id="toc-model-description-1" class="nav-link" data-scroll-target="#model-description-1"><span class="header-section-number">5.2.1</span> Model description</a></li>
   <li><a href="#stable-age-distribution-1" id="toc-stable-age-distribution-1" class="nav-link" data-scroll-target="#stable-age-distribution-1"><span class="header-section-number">5.2.2</span> Stable age distribution</a></li>
-  <li><a href="#condition-for-extinction-1" id="toc-condition-for-extinction-1" class="nav-link" data-scroll-target="#condition-for-extinction-1"><span class="header-section-number">5.2.3</span> Condition for extinction</a></li>
+  <li><a href="#sec-extinction-continuous" id="toc-sec-extinction-continuous" class="nav-link" data-scroll-target="#sec-extinction-continuous"><span class="header-section-number">5.2.3</span> Condition for extinction</a></li>
   <li><a href="#exercises-1" id="toc-exercises-1" class="nav-link" data-scroll-target="#exercises-1"><span class="header-section-number">5.2.4</span> Exercises</a></li>
   </ul></li>
   <li><a href="#summary" id="toc-summary" class="nav-link" data-scroll-target="#summary">Summary</a></li>
@@ -493,10 +493,10 @@ Figure&nbsp;5.2: Leslie graph when the last age class contains all individuals w
 </section>
 <section id="stable-age-distribution" class="level3" data-number="5.1.3">
 <h3 data-number="5.1.3" class="anchored" data-anchor-id="stable-age-distribution"><span class="header-section-number">5.1.3</span> Stable age distribution</h3>
-<p>The phenomenon that we observed in <a href="#exm-leslie1" class="quarto-xref">Example&nbsp;<span>5.1</span></a> that the age distribution settles down to a stable age distribution as time goes on is a general phenomenon. To understand it we will now look for a solution of the form <span id="eq-ab19"><span class="math display">\[
-N_{a,t} = \lambda^t r_a
-\tag{5.13}\]</span></span> This is a solution in which the age distribution <span class="math inline">\(r_a\)</span> remains stable from one year to the next, but the total population grows or shrinks by a factor <span class="math inline">\(\lambda\)</span> each year. It was untypical that in <a href="#exm-leslie1" class="quarto-xref">Example&nbsp;<span>5.1</span></a> we had <span class="math inline">\(\lambda=1\)</span> so that the population neither grew nor shrank.</p>
-<p>The Ansatz <a href="#eq-ab19" class="quarto-xref">Eq.&nbsp;<span>5.13</span></a> means in particular that, for this solution, <span class="math inline">\(N_{a,t+1} = \lambda N_{a,t}\)</span> for all ages <span class="math inline">\(a\)</span>. For <span class="math inline">\(a=1\)</span> this gives <span id="eq-a23"><span class="math display">\[
+<p>The phenomenon that we observed in <a href="#exm-leslie1" class="quarto-xref">Example&nbsp;<span>5.1</span></a> that the age distribution settles down to a stable age distribution as time goes on is a general phenomenon. To understand it we will now look for a solution such that <span id="eq-ab19"><span class="math display">\[
+N_{a,t+1} = \lambda N_{a,t}
+\tag{5.13}\]</span></span> This is a solution in which the age distribution remains stable from one year to the next, but the total population grows or shrinks by a factor <span class="math inline">\(\lambda\)</span> each year. It was untypical that in <a href="#exm-leslie1" class="quarto-xref">Example&nbsp;<span>5.1</span></a> we had <span class="math inline">\(\lambda=1\)</span> so that the population neither grew nor shrank.</p>
+<p>For <span class="math inline">\(a=1\)</span> <a href="#eq-ab19" class="quarto-xref">Eq.&nbsp;<span>5.13</span></a> gives <span id="eq-a23"><span class="math display">\[
 N_{1,t+1} = \lambda N_{1,t} = S_0 N_{0,t}
 \tag{5.14}\]</span></span> and hence <span id="eq-a24"><span class="math display">\[
 N_{1,t} = \frac{S_0}{\lambda} N_{0,t}.
@@ -505,26 +505,24 @@ N_{2,t} = \frac{S_1}{\lambda} N_{1,t} = \frac{S_1 S_0}{\lambda^2} N_{0,t}.
 \tag{5.16}\]</span></span> We can continue this process to express <span class="math inline">\(N_{a,t}\)</span> in terms of <span class="math inline">\(N_{0,t}\)</span>: <span id="eq-a26"><span class="math display">\[
 N_{a,t} = \frac{S_{a-1}S_{a-2}\cdots S_0}{\lambda^a} N_{0,t}= \frac{l_{a}}{\lambda^a} N_{0,t}
 \tag{5.17}\]</span></span> where <span id="eq-la-discrete"><span class="math display">\[
-l_a=S_{a-1}S_{a-2}\cdots S_0.
+l_a:=S_{a-1}S_{a-2}\cdots S_0.
 \tag{5.18}\]</span></span> is the probability of surviving from age <span class="math inline">\(0\)</span> to age <span class="math inline">\(a\)</span>.</p>
-<p>Finally, for the newborns we have <span id="eq-a27"><span class="math display">\[
-N_{0,t+1} = \lambda N_{0,t} = \sum_{a=1}^\infty F_{a-1} N_{a-1,t} = \sum_{a=1}^\infty F_{a-1} \frac{l_{a-1}}{\lambda^{a-1}} N_{0,t}.
-\tag{5.19}\]</span></span> Dividing the equation by <span class="math inline">\(\lambda N_{0,t}\)</span> gives <span id="eq-a28"><span class="math display">\[
-1 = \sum_{a=1}^\infty F_{a-1}\frac{l_{a-1}}{\lambda^a}.
-\tag{5.20}\]</span></span> Using that <span class="math inline">\(F_{a-1} = b_{a} S_{a-1}\)</span> and <span class="math inline">\(S_{a-1}l_{a-1}=l_a\)</span> we can rewrite this equation as <span id="eq-a29"><span class="math display">\[
+<p>Substituting <a href="#eq-a26" class="quarto-xref">Eq.&nbsp;<span>5.17</span></a> into <a href="#eq-a17" class="quarto-xref">Eq.&nbsp;<span>5.2</span></a> for the newborns gives <span id="eq-a27"><span class="math display">\[
+N_{0,t} = \sum_{a=1}^\infty b_{a} N_{a,t} = \sum_{a=1}^\infty b_{a} \frac{l_{a}}{\lambda^{a}} N_{0,t}.
+\tag{5.19}\]</span></span> Dividing the equation by <span class="math inline">\(N_{0,t}\)</span> gives <span id="eq-a29"><span class="math display">\[
 1 = \sum_{a=1}^\infty b_a \,l_a\,\lambda^{-a} =:\psi(\lambda).
-\tag{5.21}\]</span></span> This is the Euler-Lotka equation for the population growth factor <span class="math inline">\(\lambda\)</span> in the stable age distribution. Once we have solved it to determine <span class="math inline">\(\lambda\)</span>, we can use <a href="#eq-a26" class="quarto-xref">Eq.&nbsp;<span>5.17</span></a> to determine the stable age distribution, <span id="eq-a29b"><span class="math display">\[
+\tag{5.20}\]</span></span> This is the Euler-Lotka equation for the population growth factor <span class="math inline">\(\lambda\)</span> in the stable age distribution. Once we have solved it to determine <span class="math inline">\(\lambda\)</span>, we can use <a href="#eq-ab19" class="quarto-xref">Eq.&nbsp;<span>5.13</span></a> to determine the stable age distribution, <span id="eq-a29b"><span class="math display">\[
 N_{a,t} = \lambda^{t-a}l_{a} N_{0,0}.
-\tag{5.22}\]</span></span> Unfortunately solving the Euler-Lotka equation analytically is normally not feasible. You will however find a solvable example in <a href="#exr-spotted_owl" class="quarto-xref">Exercise&nbsp;<span>5.1</span></a> below.</p>
+\tag{5.21}\]</span></span> Unfortunately solving the Euler-Lotka equation analytically is normally not feasible. You will however find a solvable example in <a href="#exr-spotted_owl" class="quarto-xref">Exercise&nbsp;<span>5.1</span></a> below.</p>
 </section>
-<section id="condition-for-extinction" class="level3" data-number="5.1.4">
-<h3 data-number="5.1.4" class="anchored" data-anchor-id="condition-for-extinction"><span class="header-section-number">5.1.4</span> Condition for extinction</h3>
+<section id="sec-extinction-discrete" class="level3" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="sec-extinction-discrete"><span class="header-section-number">5.1.4</span> Condition for extinction</h3>
 <p>Luckily we do not need to solve the Euler-Lotka equation in order to determine whether the population grows or goes extinct. We note that <span id="eq-a29c"><span class="math display">\[
-\psi(1)=\sum_{a=1}^\infty b_a \,l_a
-\tag{5.23}\]</span></span> is the expected number of offspring produced by an individual during its lifetime. This quantity is known as the <strong>reproductive number</strong> (or net reproductive rate). If this reproductive number is greater than <span class="math inline">\(1\)</span>, then the population grows exponentially. If it is less than <span class="math inline">\(1\)</span>, then the population goes extinct. The way to see this from the Euler-Lotka equation <a href="#eq-a29" class="quarto-xref">Eq.&nbsp;<span>5.32</span></a> is to note that <span class="math inline">\(\psi(\lambda)\)</span> is a decreasing function of <span class="math inline">\(\lambda\)</span>. This means that there is a unique solution <span class="math inline">\(\lambda\)</span> to the Euler-Lotka equation and</p>
+\psi(1)=\sum_{a=1}^\infty b_a \,l_a=:R
+\tag{5.22}\]</span></span> is the expected number of offspring produced by an individual during its lifetime. This quantity is known as the <strong>reproductive number</strong>. If this reproductive number is greater than <span class="math inline">\(1\)</span>, then the population grows exponentially. If it is less than <span class="math inline">\(1\)</span>, then the population goes extinct. The way to see this from the Euler-Lotka equation <a href="#eq-a29" class="quarto-xref">Eq.&nbsp;<span>5.31</span></a> is to note that <span class="math inline">\(\psi(\lambda)\)</span> is a decreasing function of <span class="math inline">\(\lambda\)</span>. This means that there is a unique solution <span class="math inline">\(\lambda\)</span> to the Euler-Lotka equation and</p>
 <ul>
-<li><p>If <span class="math inline">\(\psi(1)&gt;1\)</span>, then <span class="math inline">\(\psi(\lambda)=1\)</span> implies that <span class="math inline">\(\lambda&gt;1\)</span>;</p></li>
-<li><p>If <span class="math inline">\(\psi(1)&lt;1\)</span>, then <span class="math inline">\(\psi(\lambda)=1\)</span> implies that <span class="math inline">\(\lambda&lt;1\)</span>.</p></li>
+<li><p>If <span class="math inline">\(R&gt;1\)</span> then <span class="math inline">\(\lambda&gt;1\)</span> and population grows exponentially;</p></li>
+<li><p>If <span class="math inline">\(R&lt;1\)</span> then <span class="math inline">\(\lambda&lt;1\)</span> and population goes extinct.</p></li>
 </ul>
 <hr>
 <div id="exr-spotted_owl" class="theorem exercise">
@@ -533,13 +531,13 @@ b_a = \begin{cases}
 0 &amp; \text{if } a &lt; 2, \\
 b &amp; \text{if } a \geq 2
 \end{cases}
-\tag{5.24}\]</span></span> for some constant <span class="math inline">\(b\)</span>. The age-dependent survival probabilities are <span id="eq-a31"><span class="math display">\[
+\tag{5.23}\]</span></span> for some constant <span class="math inline">\(b\)</span>. The age-dependent survival probabilities are <span id="eq-a31"><span class="math display">\[
 S_a = \begin{cases}
 1 &amp; \text{if } a = 0, \\
 l &amp; \text{if } a = 1, \\
 p &amp; \text{if } a &gt; 1
 \end{cases}
-\tag{5.25}\]</span></span> for some constants <span class="math inline">\(l\)</span> and <span class="math inline">\(p\)</span>.</p>
+\tag{5.24}\]</span></span> for some constants <span class="math inline">\(l\)</span> and <span class="math inline">\(p\)</span>.</p>
 <ol type="1">
 <li><p>Determine the probability that an individual survives from birth up to at least age <span class="math inline">\(a\)</span>.</p></li>
 <li><p>Determine the expected number of offspring produced by a single individual during their lifetime.</p></li>
@@ -550,25 +548,27 @@ p &amp; \text{if } a &gt; 1
 </div>
 <hr>
 </section>
-<section id="solution-of-the-leslie-matrix-equation" class="level3" data-number="5.1.5">
-<h3 data-number="5.1.5" class="anchored" data-anchor-id="solution-of-the-leslie-matrix-equation"><span class="header-section-number">5.1.5</span> Solution of the Leslie matrix equation</h3>
+<section id="solving-the-leslie-equation" class="level3" data-number="5.1.5">
+<h3 data-number="5.1.5" class="anchored" data-anchor-id="solving-the-leslie-equation"><span class="header-section-number">5.1.5</span> Solving the Leslie equation</h3>
 <p>The Leslie matrix equation <a href="#eq-a20" class="quarto-xref">Eq.&nbsp;<span>5.6</span></a> is a homogeneous linear difference equation with constant coefficients (the Leslie matrix <span class="math inline">\(L\)</span> does not depend on time). You know from earlier modules that when confronted with a homogeneous linear <em>differential</em> equation with constant coefficients you can solve it with an exponential Ansatz. The same works for linear difference equations.</p>
 <p>Solving the Leslie matrix equation will give us another route to understanding the stable age distribution and the condition for extinction or survival of the population.</p>
 <p>We make the Ansatz <span id="eq-a21"><span class="math display">\[
 \mathbf{N}_t = \lambda^t \mathbf{v}
-\tag{5.26}\]</span></span> and substitute it into <a href="#eq-a20" class="quarto-xref">Eq.&nbsp;<span>5.6</span></a>. This gives <span id="eq-a22"><span class="math display">\[
+\tag{5.25}\]</span></span> and substitute it into <a href="#eq-a20" class="quarto-xref">Eq.&nbsp;<span>5.6</span></a>. This gives <span id="eq-a22"><span class="math display">\[
 \lambda^{t+1} \mathbf{v} = L \lambda^t \mathbf{v}.
-\tag{5.27}\]</span></span> Dividing by <span class="math inline">\(\lambda^t\)</span> gives <span id="eq-a23"><span class="math display">\[
+\tag{5.26}\]</span></span> Dividing by <span class="math inline">\(\lambda^t\)</span> gives <span id="eq-a23"><span class="math display">\[
 \lambda \mathbf{v} = L \mathbf{v}.
-\tag{5.28}\]</span></span> This means that our Ansatz works if we choose <span class="math inline">\(\lambda\)</span> to be an eigenvalue of the Leslie matrix <span class="math inline">\(L\)</span> and <span class="math inline">\(\mathbf{v}\)</span> to be the corresponding eigenvector.</p>
+\tag{5.27}\]</span></span> This means that our Ansatz works if we choose <span class="math inline">\(\lambda\)</span> to be an eigenvalue of the Leslie matrix <span class="math inline">\(L\)</span> and <span class="math inline">\(\mathbf{v}\)</span> to be the corresponding eigenvector.</p>
 <p>In the case where all eigenvalues of the Leslie matrix are distinct<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, the general solution is the linear combination of the solutions for each eigenvalue. <span id="eq-a24"><span class="math display">\[
-\mathbf{N}_t = c_1 \lambda_1^t \mathbf{v}_1 + c_2 \lambda_2^t \mathbf{v}_2 + \cdots + c_m \lambda_m^t \mathbf{v}_m,
-\tag{5.29}\]</span></span> where <span class="math inline">\(\lambda_1,\lambda_2,\ldots,\lambda_m\)</span> are the eigenvalues of the Leslie matrix and <span class="math inline">\(\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_m\)</span> are the corresponding eigenvectors. The constants <span class="math inline">\(c_1,c_2,\ldots,c_m\)</span> are determined by the eigenvector expansion of the initial values <span class="math inline">\(\mathbf{N}_0\)</span>: <span id="eq-a24"><span class="math display">\[
-\mathbf{N}_0 = c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \cdots + c_m \mathbf{v}_m.
-\tag{5.30}\]</span></span></p>
-<p>We can now look at the long-term fate of the population. If the Leslie matrix has a unique dominant eigenvalue <span class="math inline">\(\lambda_*\)</span> (such that the magnitude of <span class="math inline">\(\lambda_*\)</span> is greater than that of all other eigenvalues) with a corresponding eigenvector <span class="math inline">\(\mathbf{v}_*\)</span>, then <span id="eq-a24b"><span class="math display">\[
-\lim_{t\to\infty}\frac{\mathbf{N}_t}{\lambda_*^t} = c_* \mathbf{v}_*,
-\tag{5.31}\]</span></span> where <span class="math inline">\(c_*\)</span> is the coefficient of <span class="math inline">\(\mathbf{v}_*\)</span> in the eigenvector expansion of <span class="math inline">\(\mathbf{N}_0\)</span>. This means that the population converges to a stable age distribution, given by the eigenvector corresponding to the dominant eigenvalue of the Leslie matrix.</p>
+\mathbf{N}_t = c_1 \lambda_1^t \mathbf{v}_1 + c_2 \lambda_2^t \mathbf{v}_2 + \cdots + c_n \lambda_n^t \mathbf{v}_n,
+\tag{5.28}\]</span></span> where <span class="math inline">\(\lambda_1,\lambda_2,\ldots,\lambda_n\)</span> are the distinct eigenvalues of the Leslie matrix and <span class="math inline">\(\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n\)</span> are the corresponding eigenvectors. The constants <span class="math inline">\(c_1,c_2,\ldots,c_n\)</span> are determined by the eigenvector expansion of the initial values <span class="math inline">\(\mathbf{N}_0\)</span>: <span id="eq-a24"><span class="math display">\[
+\mathbf{N}_0 = c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \cdots + c_n \mathbf{v}_n.
+\tag{5.29}\]</span></span></p>
+<p>We can now look at the long-term fate of the population. If the Leslie matrix has a unique dominant eigenvalue which we will denote <span class="math inline">\(\lambda_1\)</span> then by definition <span class="math display">\[
+|\lambda_1| &gt; |\lambda_2| \geq |\lambda_3| \geq \cdots \geq |\lambda_n|.
+\]</span> Then <span id="eq-a24b"><span class="math display">\[
+\lim_{t\to\infty}\frac{\mathbf{N}_t}{\lambda_1^t} = c_1 \mathbf{v}_1.
+\tag{5.30}\]</span></span> This means that the population converges to a stable age distribution, given by the eigenvector corresponding to the dominant eigenvalue of the Leslie matrix.</p>
 <p>Luckily, there is a theorem about the eigenvalues and eigenvectors of non-negative matrices that we can use to determine whether a Leslie matrix has a unique dominant eigenvalue.</p>
 <div id="def-irreducible" class="theorem definition">
 <p><span class="theorem-title"><strong>Definition 5.1</strong></span> We call the Leslie matrix <strong>irreducible</strong> if its Leslie graph is strongly connected, which means that there is a directed path from any node to any other node.</p>
@@ -603,9 +603,9 @@ Figure&nbsp;5.3: Leslie graph for <a href="#exm-leslie1" class="quarto-xref">Exa
 = -\lambda^3 + \frac{1}{2}\lambda+\frac12\\
 &amp;= (1-\lambda)\left(\lambda^2+\lambda+\frac12\right)
 \end{split}
-\tag{5.32}\]</span></span> We can read off that the solutions are <span id="eq-a30"><span class="math display">\[
-\lambda_0 = 1, \quad \lambda_\pm = -\frac{1}{2} \pm \frac{1}{2}i.
-\tag{5.33}\]</span></span> Because the magnitude of the eigenvalues <span class="math inline">\(\lambda_\pm\)</span> are less than <span class="math inline">\(1\)</span>, we have that <span class="math inline">\(\lambda_0\)</span> is the dominant eigenvalue and that <span class="math inline">\(\lim_{t\to\infty}\lambda_\pm^t=0\)</span>. This means that the stable age distribution is given by the eigenvector <span class="math inline">\(\mathbf{v}_0\)</span> corresponding to the eigenvalue <span class="math inline">\(\lambda_0=1\)</span>. And indeed <span id="eq-a30b"><span class="math display">\[
+\tag{5.31}\]</span></span> We can read off that the solutions are <span id="eq-a30"><span class="math display">\[
+\lambda_1 = 1, \quad \lambda_\pm = -\frac{1}{2} \pm \frac{1}{2}i.
+\tag{5.32}\]</span></span> Because the magnitude of the eigenvalues <span class="math inline">\(\lambda_\pm\)</span> are less than <span class="math inline">\(1\)</span>, we have that <span class="math inline">\(\lambda_1\)</span> is the dominant eigenvalue and that <span class="math inline">\(\lim_{t\to\infty}\lambda_\pm^t=0\)</span>. This means that the stable age distribution is given by the eigenvector <span class="math inline">\(\mathbf{v}_1\)</span> corresponding to the eigenvalue <span class="math inline">\(\lambda_1=1\)</span>. And indeed <span id="eq-a30b"><span class="math display">\[
 \begin{pmatrix}
 0 &amp; 1/2 &amp; 1 \\
 1 &amp; 0 &amp; 0 \\
@@ -622,7 +622,7 @@ Figure&nbsp;5.3: Leslie graph for <a href="#exm-leslie1" class="quarto-xref">Exa
 4 \\
 2
 \end{pmatrix}.
-\tag{5.34}\]</span></span> This confirms our numerical result from <a href="#eq-a27" class="quarto-xref">Eq.&nbsp;<span>5.19</span></a>.</p>
+\tag{5.33}\]</span></span> This confirms our numerical result from <a href="#eq-a27" class="quarto-xref">Eq.&nbsp;<span>5.19</span></a>.</p>
 <p>The convergence to this stable age distribution happens regardless of the initial age distribution.</p>
 <hr>
 </section>
@@ -800,7 +800,7 @@ Figure&nbsp;5.3: Leslie graph for <a href="#exm-leslie1" class="quarto-xref">Exa
 <div id="fig-density" class="quarto-float quarto-figure quarto-figure-center anchored" alt="A sketch of a population density. The number of individuals in an age range is given by the area under the curve.">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-density-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="age_structured_files/figure-html/fig-density-output-1.png" alt="A sketch of a population density. The number of individuals in an age range is given by the area under the curve." width="758" height="470" class="figure-img">
+<img src="age_structured_files/figure-html/fig-density-output-1.png" class="img-fluid figure-img" alt="A sketch of a population density. The number of individuals in an age range is given by the area under the curve.">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-density-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figure&nbsp;5.4: A sketch of a population density. The number of individuals in an age range is given by the area under the curve.
@@ -811,50 +811,50 @@ Figure&nbsp;5.4: A sketch of a population density. The number of individuals in 
 </div>
 <p>To derive the PDE for the age-structured population density, we consider how the density changes over an infinitesimal time interval <span class="math inline">\(\delta t\)</span> due to deaths: <span id="eq-a1"><span class="math display">\[
 n(t+\delta t, a+\delta t) = n(t,a) - \mu(a) n(t,a) \delta t.
-\tag{5.35}\]</span></span> Note how we had to take into account that over the time interval <span class="math inline">\(\delta t\)</span> the age of the individuals has increased by <span class="math inline">\(\delta t\)</span>. We now Taylor-expand the left-hand side around <span class="math inline">\(t\)</span> and <span class="math inline">\(a\)</span>: <span id="eq-a2"><span class="math display">\[
+\tag{5.34}\]</span></span> Note how we had to take into account that over the time interval <span class="math inline">\(\delta t\)</span> the age of the individuals has increased by <span class="math inline">\(\delta t\)</span>. We now Taylor-expand the left-hand side around <span class="math inline">\(t\)</span> and <span class="math inline">\(a\)</span>: <span id="eq-a2"><span class="math display">\[
 n(t+\delta t, a+\delta t) = n(t,a) + \frac{\partial n}{\partial t} \delta t + \frac{\partial n}{\partial a} \delta t + \mathcal{O}(\delta t^2).
-\tag{5.36}\]</span></span> Cancelling the <span class="math inline">\(n(t,a)\)</span> terms on both sides, dividing by <span class="math inline">\(\delta t\)</span> and taking the limit <span class="math inline">\(\delta t\to 0\)</span> gives us the PDE for the age-structured population density: <span id="eq-a3"><span class="math display">\[
+\tag{5.35}\]</span></span> Cancelling the <span class="math inline">\(n(t,a)\)</span> terms on both sides, dividing by <span class="math inline">\(\delta t\)</span> and taking the limit <span class="math inline">\(\delta t\to 0\)</span> gives us the PDE for the age-structured population density: <span id="eq-a3"><span class="math display">\[
 \frac{\partial n}{\partial t} + \frac{\partial n}{\partial a} = -\mu(a) n.
-\tag{5.37}\]</span></span></p>
+\tag{5.36}\]</span></span></p>
 <p>This equation is known as the McKendrick-von Foerster equation. It captures the effect of individuals ageing and dying, but it does not capture how they are born. Individuals are born with age <span class="math inline">\(0\)</span>. These offspring can be produced by parents of any ages, but with an age-dependent rate <span class="math inline">\(b(a)\)</span>. This gives <span id="eq-a4"><span class="math display">\[
 n(t,0) = \int_0^\infty b(a) n(t,a) \, da.
-\tag{5.38}\]</span></span> This is a boundary condition for the PDE. It says that the density of individuals at age <span class="math inline">\(0\)</span> is given by the total rate at which offspring are produced by the individuals of all ages. This is the continuous-time version of <a href="#eq-a17" class="quarto-xref">Eq.&nbsp;<span>5.2</span></a>, but note that now <span class="math inline">\(n(t,0)\)</span> is a density and <span class="math inline">\(b(a)\)</span> is a rate, whereas in the discrete-time model <span class="math inline">\(N_{0,t}\)</span> is a number and <span class="math inline">\(b_a\)</span> is a number.</p>
+\tag{5.37}\]</span></span> This is a boundary condition for the PDE. It says that the density of individuals at age <span class="math inline">\(0\)</span> is given by the total rate at which offspring are produced by the individuals of all ages. This is the continuous-time version of <a href="#eq-a17" class="quarto-xref">Eq.&nbsp;<span>5.2</span></a>, but note that now <span class="math inline">\(n(t,0)\)</span> is a density and <span class="math inline">\(b(a)\)</span> is a rate, whereas in the discrete-time model <span class="math inline">\(N_{0,t}\)</span> is a number and <span class="math inline">\(b_a\)</span> is a number.</p>
 </section>
 <section id="stable-age-distribution-1" class="level3" data-number="5.2.2">
 <h3 data-number="5.2.2" class="anchored" data-anchor-id="stable-age-distribution-1"><span class="header-section-number">5.2.2</span> Stable age distribution</h3>
 <p>We will now solve the PDE for the age-structured population density by the method of separation of variables. We will make the Ansatz <span class="math inline">\(n(t,a) = f(t) r(a)\)</span>. This is a solution where the age distribution <span class="math inline">\(r(a)\)</span> stays stable but the total population number varies with time according to <span class="math inline">\(f(t)\)</span>. You have seen this trick for finding solutions of linear, homogeneous PDEs in other modules, for example when you solved the wave equation. Substituting this Ansatz into the PDE gives <span id="eq-a5"><span class="math display">\[
 f'(t) r(a) + f(t) r'(a) = -\mu(a) f(t) r(a).
-\tag{5.39}\]</span></span> Dividing by <span class="math inline">\(f(t) r(a)\)</span> gives <span id="eq-a6"><span class="math display">\[
+\tag{5.38}\]</span></span> Dividing by <span class="math inline">\(f(t) r(a)\)</span> gives <span id="eq-a6"><span class="math display">\[
 \frac{f'(t)}{f(t)} + \frac{r'(a)}{r(a)} = -\mu(a).
-\tag{5.40}\]</span></span> We now collect all terms that depend on <span class="math inline">\(t\)</span> on the left-hand side and all terms that depend on <span class="math inline">\(a\)</span> on the right-hand side: <span id="eq-a7"><span class="math display">\[
+\tag{5.39}\]</span></span> We now collect all terms that depend on <span class="math inline">\(t\)</span> on the left-hand side and all terms that depend on <span class="math inline">\(a\)</span> on the right-hand side: <span id="eq-a7"><span class="math display">\[
 \frac{f'(t)}{f(t)} = - \frac{r'(a)}{r(a)} - \mu(a).
-\tag{5.41}\]</span></span> Because the left-hand side is independent of <span class="math inline">\(a\)</span> and the right-hand side is independent of <span class="math inline">\(t\)</span>, both sides must be equal to a constant. We introduce the separation constant <span class="math inline">\(\gamma\)</span> and write <span id="eq-a8"><span class="math display">\[
+\tag{5.40}\]</span></span> Because the left-hand side is independent of <span class="math inline">\(a\)</span> and the right-hand side is independent of <span class="math inline">\(t\)</span>, both sides must be equal to a constant. We introduce the separation constant <span class="math inline">\(\gamma\)</span> and write <span id="eq-a8"><span class="math display">\[
 \frac{f'(t)}{f(t)} = \gamma, \quad \frac{r'(a)}{r(a)} = -\gamma - \mu(a).
-\tag{5.42}\]</span></span> These are now linear ODEs and hence easy to solve. The first ODE has the solution <span id="eq-a9"><span class="math display">\[
+\tag{5.41}\]</span></span> These are now linear ODEs and hence easy to solve. The first ODE has the solution <span id="eq-a9"><span class="math display">\[
 f(t) = f(0) e^{\gamma t}
-\tag{5.43}\]</span></span> and the second ODE has the solution <span id="eq-a10"><span class="math display">\[
+\tag{5.42}\]</span></span> and the second ODE has the solution <span id="eq-a10"><span class="math display">\[
 r(a) = r(0) \exp\left(-\int_0^a \mu(a') \, da'-\gamma a\right).
-\tag{5.44}\]</span></span> The factor <span id="eq-a15"><span class="math display">\[
+\tag{5.43}\]</span></span> The factor <span id="eq-a15"><span class="math display">\[
 \exp\left(-\int_0^a \mu(a') \, da'\right)=:l(a)
-\tag{5.45}\]</span></span> is the probability that an individual survives up to age <span class="math inline">\(a\)</span>. This is the continuous-time version of <a href="#eq-la-discrete" class="quarto-xref">Eq.&nbsp;<span>5.18</span></a>. So altogether we have the population density <span id="eq-a11"><span class="math display">\[
+\tag{5.44}\]</span></span> is the probability that an individual survives up to age <span class="math inline">\(a\)</span>. This is the continuous-time version of <a href="#eq-la-discrete" class="quarto-xref">Eq.&nbsp;<span>5.18</span></a>. So altogether we have the population density <span id="eq-a11"><span class="math display">\[
 n(t,a) = n(0,0) l(a) e^{\gamma (t-a)} ,
-\tag{5.46}\]</span></span> where <span class="math inline">\(n(0,0)=f(0)r(0)\)</span> is the initial density of individuals at age <span class="math inline">\(0\)</span>. This is the continuous-time version of <a href="#eq-a26" class="quarto-xref">Eq.&nbsp;<span>5.17</span></a>.</p>
-<p>So far we don’t yet know the value of the separation constant <span class="math inline">\(\gamma\)</span>. This will be determined by the boundary condition. If we substitute the solution <a href="#eq-a11" class="quarto-xref">Eq.&nbsp;<span>5.46</span></a> into the boundary condition <a href="#eq-a4" class="quarto-xref">Eq.&nbsp;<span>5.38</span></a>, we get <span id="eq-a12"><span class="math display">\[
+\tag{5.45}\]</span></span> where <span class="math inline">\(n(0,0)=f(0)r(0)\)</span> is the initial density of individuals at age <span class="math inline">\(0\)</span>. This is the continuous-time version of <a href="#eq-a26" class="quarto-xref">Eq.&nbsp;<span>5.17</span></a>.</p>
+<p>So far we don’t yet know the value of the separation constant <span class="math inline">\(\gamma\)</span>. This will be determined by the boundary condition. If we substitute the solution <a href="#eq-a11" class="quarto-xref">Eq.&nbsp;<span>5.45</span></a> into the boundary condition <a href="#eq-a4" class="quarto-xref">Eq.&nbsp;<span>5.37</span></a>, we get <span id="eq-a12"><span class="math display">\[
 n(0,0)e^{\gamma t} = \int_0^\infty b(a) n(0,0)l(a)e^{\gamma (t-a)} \, da.
-\tag{5.47}\]</span></span> We can cancel the common factor <span class="math inline">\(n(0,0)e^{\gamma t}\)</span> on both sides to get the condition <span id="eq-a13"><span class="math display">\[
+\tag{5.46}\]</span></span> We can cancel the common factor <span class="math inline">\(n(0,0)e^{\gamma t}\)</span> on both sides to get the condition <span id="eq-a13"><span class="math display">\[
 1= \int_0^\infty b(a) l(a)e^{-\gamma a} \, da =: \phi(\gamma).
-\tag{5.48}\]</span></span> We have introduced the shorthand notation <span class="math inline">\(\phi(\gamma)\)</span> for the integral on the right-hand side. The condition <a href="#eq-a13" class="quarto-xref">Eq.&nbsp;<span>5.48</span></a> is the continuous-time version of the Euler-Lotka equation <a href="#eq-a29" class="quarto-xref">Eq.&nbsp;<span>5.32</span></a>. It is a transcendental equation for <span class="math inline">\(\gamma\)</span>, so we cannot solve it analytically for <span class="math inline">\(\gamma\)</span>.</p>
+\tag{5.47}\]</span></span> We have introduced the shorthand notation <span class="math inline">\(\phi(\gamma)\)</span> for the integral on the right-hand side. The condition <a href="#eq-a13" class="quarto-xref">Eq.&nbsp;<span>5.47</span></a> is the continuous-time version of the Euler-Lotka equation <a href="#eq-a29" class="quarto-xref">Eq.&nbsp;<span>5.31</span></a>. It is a transcendental equation for <span class="math inline">\(\gamma\)</span>, so we cannot solve it analytically for <span class="math inline">\(\gamma\)</span>.</p>
 </section>
-<section id="condition-for-extinction-1" class="level3" data-number="5.2.3">
-<h3 data-number="5.2.3" class="anchored" data-anchor-id="condition-for-extinction-1"><span class="header-section-number">5.2.3</span> Condition for extinction</h3>
-<p>Luckily we do not need to solve the integral equation <a href="#eq-a13" class="quarto-xref">Eq.&nbsp;<span>5.48</span></a> to determine whether the population grows or goes extinct. We note that <span id="eq-a13b"><span class="math display">\[
-\phi(0)=\int_0^\infty b(a) l(a) \, da
-\tag{5.49}\]</span></span> is the expected number of offspring produced by an individual during its lifetime. This quantity is known as the <strong>reproductive number</strong> (or net reproductive rate). If this reproductive number is greater than <span class="math inline">\(1\)</span>, then the population grows exponentially. If it is less than <span class="math inline">\(1\)</span>, then the population goes extinct. The way to see this from the Euler-Lotka equation is to note that <span class="math inline">\(\phi(\gamma)\)</span> is a decreasing function of <span class="math inline">\(\gamma\)</span>. This means that there is a unique solution <span class="math inline">\(\gamma\)</span> to the Euler-Lotka equation <a href="#eq-a13" class="quarto-xref">Eq.&nbsp;<span>5.48</span></a> and</p>
+<section id="sec-extinction-continuous" class="level3" data-number="5.2.3">
+<h3 data-number="5.2.3" class="anchored" data-anchor-id="sec-extinction-continuous"><span class="header-section-number">5.2.3</span> Condition for extinction</h3>
+<p>Luckily we do not need to solve the integral equation <a href="#eq-a13" class="quarto-xref">Eq.&nbsp;<span>5.47</span></a> to determine whether the population grows or goes extinct. We note that <span id="eq-a13b"><span class="math display">\[
+\phi(0)=\int_0^\infty b(a) l(a) \, da=:R
+\tag{5.48}\]</span></span> is the expected number of offspring produced by an individual during its lifetime. This quantity is known as the <strong>reproductive number</strong>. If this reproductive number is greater than <span class="math inline">\(1\)</span>, then the population grows exponentially. If it is less than <span class="math inline">\(1\)</span>, then the population goes extinct. The way to see this from the Euler-Lotka equation is to note that <span class="math inline">\(\phi(\gamma)\)</span> is a decreasing function of <span class="math inline">\(\gamma\)</span>. This means that there is a unique solution <span class="math inline">\(\gamma\)</span> to the Euler-Lotka equation <a href="#eq-a13" class="quarto-xref">Eq.&nbsp;<span>5.47</span></a> and</p>
 <ul>
-<li><p>If <span class="math inline">\(\phi(0) &gt; 1\)</span>, then <span class="math inline">\(\phi(\gamma)=1\)</span> implies that <span class="math inline">\(\gamma &gt; 0\)</span> and the population grows exponentially.</p></li>
-<li><p>If <span class="math inline">\(\phi(0) &lt; 1\)</span>, then <span class="math inline">\(\phi(\gamma)=1\)</span> implies that <span class="math inline">\(\gamma &lt; 0\)</span> and the population goes extinct.</p></li>
+<li><p>If <span class="math inline">\(R &gt; 1\)</span>, then <span class="math inline">\(\phi(\gamma)=1\)</span> implies that <span class="math inline">\(\gamma &gt; 0\)</span> and the population grows exponentially.</p></li>
+<li><p>If <span class="math inline">\(R &lt; 1\)</span>, then <span class="math inline">\(\phi(\gamma)=1\)</span> implies that <span class="math inline">\(\gamma &lt; 0\)</span> and the population goes extinct.</p></li>
 </ul>
-<p>You will notice the close analogy to the discussion of the stable age distribution in the discrete-time model.</p>
+<p>You will notice the close analogy to the discussion of extinction in the discrete-time model in #sec-extinction-discrete.</p>
 <hr>
 </section>
 <section id="exercises-1" class="level3" data-number="5.2.4">
@@ -871,12 +871,12 @@ n(0,0)e^{\gamma t} = \int_0^\infty b(a) n(0,0)l(a)e^{\gamma (t-a)} \, da.
 <div id="exr-seasonal_mortality" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 5.6 (Seasonal mortality)</strong></span> Consider an age-structured population model in which, in addition to an age-dependent mortality, there is also a seasonal mortality. The population is described by a function <span class="math inline">\(n(t,a)\)</span> giving the density of individuals of age <span class="math inline">\(a\)</span> at time <span class="math inline">\(t\)</span> which satisfies the equations <span id="eq-sma1"><span class="math display">\[
 \partial_t n(t,a)+\partial_a n(t,a)=-(\mu(a)+m(t))\,n(t,a),
-\tag{5.50}\]</span></span> <span id="eq-sma2"><span class="math display">\[
+\tag{5.49}\]</span></span> <span id="eq-sma2"><span class="math display">\[
 n(t,0) = \int_0^\infty b(a) n(t,a) da.
-\tag{5.51}\]</span></span> The birth rate <span class="math inline">\(b(a)\)</span> and the mortality rates <span class="math inline">\(\mu(a)\)</span> and <span class="math inline">\(m(t)\)</span> are all positive.</p>
+\tag{5.50}\]</span></span> The birth rate <span class="math inline">\(b(a)\)</span> and the mortality rates <span class="math inline">\(\mu(a)\)</span> and <span class="math inline">\(m(t)\)</span> are all positive.</p>
 <ol type="a">
-<li><p>By substituting the Ansatz <span class="math inline">\(n(t,a)=p(t)r(a)\)</span> into equation <a href="#eq-sma1" class="quarto-xref">Eq.&nbsp;<span>5.50</span></a> and separating variables with a separation constant <span class="math inline">\(\gamma\)</span>, derive solutions for <span class="math inline">\(p(t)\)</span> and <span class="math inline">\(r(a)\)</span> and hence for <span class="math inline">\(n(t,a)\)</span>, involving <span class="math inline">\(\gamma\)</span>.</p></li>
-<li><p>By substituting your solution from part (a) into equation <a href="#eq-sma2" class="quarto-xref">Eq.&nbsp;<span>5.51</span></a>, derive an equation for <span class="math inline">\(\gamma\)</span>. Write this in the form <span class="math inline">\(\phi(\gamma)=1\)</span> for some function <span class="math inline">\(\phi\)</span>. Show that this <span class="math inline">\(\phi\)</span> is a monotonic function.</p></li>
+<li><p>By substituting the Ansatz <span class="math inline">\(n(t,a)=p(t)r(a)\)</span> into equation <a href="#eq-sma1" class="quarto-xref">Eq.&nbsp;<span>5.49</span></a> and separating variables with a separation constant <span class="math inline">\(\gamma\)</span>, derive solutions for <span class="math inline">\(p(t)\)</span> and <span class="math inline">\(r(a)\)</span> and hence for <span class="math inline">\(n(t,a)\)</span>, involving <span class="math inline">\(\gamma\)</span>.</p></li>
+<li><p>By substituting your solution from part (a) into equation <a href="#eq-sma2" class="quarto-xref">Eq.&nbsp;<span>5.50</span></a>, derive an equation for <span class="math inline">\(\gamma\)</span>. Write this in the form <span class="math inline">\(\phi(\gamma)=1\)</span> for some function <span class="math inline">\(\phi\)</span>. Show that this <span class="math inline">\(\phi\)</span> is a monotonic function.</p></li>
 <li><p>Assume that the seasonal mortality rate <span class="math inline">\(m(t)\)</span> is periodic with period <span class="math inline">\(1\)</span> and denote by <span class="math inline">\(F\)</span> the averaged seasonal mortality. By considering the population at the end of each season, show that the population will go extinct if <span class="math inline">\(\gamma &lt;F\)</span>.</p></li>
 <li><p>Explain how you can use a property of the function <span class="math inline">\(\phi\)</span> to eliminate <span class="math inline">\(\gamma\)</span> from the condition for extinction. Thus finally give the condition for extinction in terms of <span class="math inline">\(b(a), \mu(a)\)</span> and <span class="math inline">\(F\)</span>.</p></li>
 </ol>

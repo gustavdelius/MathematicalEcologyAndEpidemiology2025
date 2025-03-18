@@ -247,13 +247,13 @@ We can represent this Leslie matrix with the graph in @fig-leslie2 .
 
 ### Stable age distribution
 
-The phenomenon that we observed in @exm-leslie1 that the age distribution settles down to a stable age distribution as time goes on is a general phenomenon. To understand it we will now look for a solution of the form
+The phenomenon that we observed in @exm-leslie1 that the age distribution settles down to a stable age distribution as time goes on is a general phenomenon. To understand it we will now look for a solution such that
 $$
-N_{a,t} = \lambda^t r_a
+N_{a,t+1} = \lambda N_{a,t}
 $$ {#eq-ab19}
-This is a solution in which the age distribution $r_a$ remains stable from one year to the next, but the total population grows or shrinks by a factor $\lambda$ each year. It was untypical that in @exm-leslie1 we had $\lambda=1$ so that the population neither grew nor shrank.
+This is a solution in which the age distribution remains stable from one year to the next, but the total population grows or shrinks by a factor $\lambda$ each year. It was untypical that in @exm-leslie1 we had $\lambda=1$ so that the population neither grew nor shrank.
 
-The Ansatz @eq-ab19 means in particular that, for this solution, $N_{a,t+1} = \lambda N_{a,t}$ for all ages $a$. For $a=1$ this gives
+For $a=1$ @eq-ab19 gives
 $$
 N_{1,t+1} = \lambda N_{1,t} = S_0 N_{0,t}
 $$ {#eq-a23}
@@ -271,41 +271,37 @@ N_{a,t} = \frac{S_{a-1}S_{a-2}\cdots S_0}{\lambda^a} N_{0,t}= \frac{l_{a}}{\lamb
 $$ {#eq-a26}
 where
 $$
-l_a=S_{a-1}S_{a-2}\cdots S_0.
+l_a:=S_{a-1}S_{a-2}\cdots S_0.
 $$ {#eq-la-discrete}
 is the probability of surviving from age $0$ to age $a$.
 
-Finally, for the newborns we have
+Substituting @eq-a26 into @eq-a17 for the newborns gives
 $$
-N_{0,t+1} = \lambda N_{0,t} = \sum_{a=1}^\infty F_{a-1} N_{a-1,t} = \sum_{a=1}^\infty F_{a-1} \frac{l_{a-1}}{\lambda^{a-1}} N_{0,t}.
+N_{0,t} = \sum_{a=1}^\infty b_{a} N_{a,t} = \sum_{a=1}^\infty b_{a} \frac{l_{a}}{\lambda^{a}} N_{0,t}.
 $$ {#eq-a27}
-Dividing the equation by $\lambda N_{0,t}$ gives
-$$
-1 = \sum_{a=1}^\infty F_{a-1}\frac{l_{a-1}}{\lambda^a}.
-$$ {#eq-a28}
-Using that $F_{a-1} = b_{a} S_{a-1}$ and $S_{a-1}l_{a-1}=l_a$ we can rewrite this equation as
+Dividing the equation by $N_{0,t}$ gives
 $$
 1 = \sum_{a=1}^\infty b_a \,l_a\,\lambda^{-a} =:\psi(\lambda).
 $$ {#eq-a29}
-This is the Euler-Lotka equation for the population growth factor $\lambda$ in the stable age distribution. Once we have solved it to determine $\lambda$, we can use @eq-a26 to determine the stable age distribution,
+This is the Euler-Lotka equation for the population growth factor $\lambda$ in the stable age distribution. Once we have solved it to determine $\lambda$, we can use @eq-ab19 to determine the stable age distribution,
 $$
 N_{a,t} = \lambda^{t-a}l_{a} N_{0,0}.
 $$ {#eq-a29b}
 Unfortunately solving the Euler-Lotka equation analytically is normally not feasible. You will however find a solvable example in @exr-spotted_owl below.
 
-### Condition for extinction
+### Condition for extinction {#sec-extinction-discrete}
 
 Luckily we do not need to solve the Euler-Lotka equation in order to determine whether the population grows or goes extinct.
 We note that
 $$
-\psi(1)=\sum_{a=1}^\infty b_a \,l_a
+\psi(1)=\sum_{a=1}^\infty b_a \,l_a=:R
 $$ {#eq-a29c}
-is the expected number of offspring produced by an individual during its lifetime. This quantity is known as the **reproductive number** (or net reproductive rate). If this reproductive number is greater than $1$, then the population grows exponentially. If it is less than $1$, then the population goes extinct.
+is the expected number of offspring produced by an individual during its lifetime. This quantity is known as the **reproductive number**. If this reproductive number is greater than $1$, then the population grows exponentially. If it is less than $1$, then the population goes extinct.
 The way to see this from the Euler-Lotka equation @eq-a29 is to note that $\psi(\lambda)$ is a decreasing function of $\lambda$. This means that there is a unique solution $\lambda$ to the Euler-Lotka equation and 
 
-* If $\psi(1)>1$, then $\psi(\lambda)=1$ implies that $\lambda>1$;
+* If $R>1$ then $\lambda>1$ and population grows exponentially;
 
-* If $\psi(1)<1$, then $\psi(\lambda)=1$ implies that $\lambda<1$.
+* If $R<1$ then $\lambda<1$ and population goes extinct.
 
 -----------------------------------------------------------------------------
 
@@ -342,7 +338,7 @@ for some constants $l$ and $p$.
 
 ----------------------------------------------------------------------------
 
-### Solution of the Leslie matrix equation
+### Solving the Leslie equation
 
 The Leslie matrix equation @eq-a20 is a homogeneous linear difference equation with constant coefficients (the Leslie matrix $L$ does not depend on time). You know from earlier modules that when confronted with a homogeneous linear _differential_ equation with constant coefficients you can solve it with an exponential Ansatz. The same works for linear difference equations.
 
@@ -364,18 +360,22 @@ This means that our Ansatz works if we choose $\lambda$ to be an eigenvalue of t
 
 In the case where all eigenvalues of the Leslie matrix are distinct^[In the case where there are repeated eigenvalues, the general solution is just a bit more complicated. Luckily in ecology, we are rarely interested in that case, because the probability that a real ecosystem is exactly so that this special case arises is zero.], the general solution is the linear combination of the solutions for each eigenvalue.
 $$
-\mathbf{N}_t = c_1 \lambda_1^t \mathbf{v}_1 + c_2 \lambda_2^t \mathbf{v}_2 + \cdots + c_m \lambda_m^t \mathbf{v}_m,
+\mathbf{N}_t = c_1 \lambda_1^t \mathbf{v}_1 + c_2 \lambda_2^t \mathbf{v}_2 + \cdots + c_n \lambda_n^t \mathbf{v}_n,
 $$ {#eq-a24}
-where $\lambda_1,\lambda_2,\ldots,\lambda_m$ are the eigenvalues of the Leslie matrix and $\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_m$ are the corresponding eigenvectors. The constants $c_1,c_2,\ldots,c_m$ are determined by the eigenvector expansion of the initial values $\mathbf{N}_0$:
+where $\lambda_1,\lambda_2,\ldots,\lambda_n$ are the distinct eigenvalues of the Leslie matrix and $\mathbf{v}_1,\mathbf{v}_2,\ldots,\mathbf{v}_n$ are the corresponding eigenvectors. The constants $c_1,c_2,\ldots,c_n$ are determined by the eigenvector expansion of the initial values $\mathbf{N}_0$:
 $$
-\mathbf{N}_0 = c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \cdots + c_m \mathbf{v}_m.
+\mathbf{N}_0 = c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \cdots + c_n \mathbf{v}_n.
 $$ {#eq-a24}
 
-We can now look at the long-term fate of the population. If the Leslie matrix has a unique dominant eigenvalue $\lambda_*$ (such that the magnitude of $\lambda_*$ is greater than that of all other eigenvalues) with a corresponding eigenvector $\mathbf{v}_*$, then 
+We can now look at the long-term fate of the population. If the Leslie matrix has a unique dominant eigenvalue which we will denote $\lambda_1$ then by definition
 $$
-\lim_{t\to\infty}\frac{\mathbf{N}_t}{\lambda_*^t} = c_* \mathbf{v}_*,
+|\lambda_1| > |\lambda_2| \geq |\lambda_3| \geq \cdots \geq |\lambda_n|.
+$$
+Then 
+$$
+\lim_{t\to\infty}\frac{\mathbf{N}_t}{\lambda_1^t} = c_1 \mathbf{v}_1.
 $$ {#eq-a24b}
-where $c_*$ is the coefficient of $\mathbf{v}_*$ in the eigenvector expansion of $\mathbf{N}_0$. This means that the population converges to a stable age distribution, given by the eigenvector corresponding to the dominant eigenvalue of the Leslie matrix.
+This means that the population converges to a stable age distribution, given by the eigenvector corresponding to the dominant eigenvalue of the Leslie matrix.
 
 Luckily, there is a theorem about the eigenvalues and eigenvectors of non-negative matrices that we can use to determine whether a Leslie matrix has a unique dominant eigenvalue. 
 
@@ -416,10 +416,10 @@ $$
 $$ {#eq-a29}
 We can read off that the solutions are
 $$
-\lambda_0 = 1, \quad \lambda_\pm = -\frac{1}{2} \pm \frac{1}{2}i.
+\lambda_1 = 1, \quad \lambda_\pm = -\frac{1}{2} \pm \frac{1}{2}i.
 $$ {#eq-a30}
 Because the magnitude of the eigenvalues $\lambda_\pm$ are less than $1$, we have that
-$\lambda_0$ is the dominant eigenvalue and that $\lim_{t\to\infty}\lambda_\pm^t=0$. This means that the stable age distribution is given by the eigenvector $\mathbf{v}_0$ corresponding to the eigenvalue $\lambda_0=1$. And indeed
+$\lambda_1$ is the dominant eigenvalue and that $\lim_{t\to\infty}\lambda_\pm^t=0$. This means that the stable age distribution is given by the eigenvector $\mathbf{v}_1$ corresponding to the eigenvalue $\lambda_1=1$. And indeed
 $$
 \begin{pmatrix}
 0 & 1/2 & 1 \\
@@ -623,20 +623,20 @@ $$
 $$ {#eq-a13}
 We have introduced the shorthand notation $\phi(\gamma)$ for the integral on the right-hand side. The condition @eq-a13 is the continuous-time version of the Euler-Lotka equation @eq-a29. It is a transcendental equation for $\gamma$, so we cannot solve it analytically for $\gamma$. 
 
-### Condition for extinction
+### Condition for extinction {#sec-extinction-continuous}
 
 Luckily we do not need to solve the integral equation @eq-a13 to determine whether the population grows or goes extinct. We note that
 $$
-\phi(0)=\int_0^\infty b(a) l(a) \, da
+\phi(0)=\int_0^\infty b(a) l(a) \, da=:R
 $$ {#eq-a13b}
-is the expected number of offspring produced by an individual during its lifetime. This quantity is known as the **reproductive number** (or net reproductive rate). If this reproductive number is greater than $1$, then the population grows exponentially. If it is less than $1$, then the population goes extinct.
+is the expected number of offspring produced by an individual during its lifetime. This quantity is known as the **reproductive number**. If this reproductive number is greater than $1$, then the population grows exponentially. If it is less than $1$, then the population goes extinct.
 The way to see this from the Euler-Lotka equation is to note that $\phi(\gamma)$ is a decreasing function of $\gamma$. This means that there is a unique solution $\gamma$ to the Euler-Lotka equation @eq-a13 and
 
-* If $\phi(0) > 1$, then $\phi(\gamma)=1$ implies that $\gamma > 0$ and the population grows exponentially.
+* If $R > 1$, then $\phi(\gamma)=1$ implies that $\gamma > 0$ and the population grows exponentially.
 
-* If $\phi(0) < 1$, then $\phi(\gamma)=1$ implies that $\gamma < 0$ and the population goes extinct.
+* If $R < 1$, then $\phi(\gamma)=1$ implies that $\gamma < 0$ and the population goes extinct.
 
-You will notice the close analogy to the discussion of the stable age distribution in the discrete-time model.
+You will notice the close analogy to the discussion of extinction in the discrete-time model in #sec-extinction-discrete.
 
 ----------------------------------------------------------------------
 
