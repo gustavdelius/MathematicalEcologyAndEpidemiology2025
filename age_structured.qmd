@@ -453,7 +453,8 @@ Consider a population in which individuals on average produce one offspring when
 1. Formulate the above information in terms of values for the reproduction numbers $b_a$ and the survival probabilities $S_a$.
 1. Write down the Leslie matrix for this population.
 2. Assume that at $t=0$ we start with 1 individual of age 0. By hand, calculate the numbers of individuals at each age at time $t=1,2,3,4$ and $5$. 
-3. Using the Leslie matrix, calculate the stable age distribution and the long-term growth factor (the factor by which the total population changes from one year to the next).
+3. Draw the directed graph associated with this Leslie matrix. Is the Leslie matrix irreducible? Is it primitive? What does this tell you about the long-term behaviour of the population?
+4. Using the Leslie matrix, calculate the long-term growth factor (the factor by which the total population changes from one year to the next) and the stable age distribution.
 
 :::
 
@@ -646,6 +647,7 @@ You will notice the close analogy to the discussion of extinction in the discret
 #### * Age-independent rates
 In the continuous-time age-structured population model consider the case where $b(a)=b$
 and $\mu(a)=\mu$ are both constant. Repeat all steps of the analysis but simplifying the expressions at each step by using the constant values for birth and death rates.
+Try to do this without looking at your notes from the lecture.
 
 1. Solve the partial differential
 equation of the age-structured model by making the Ansatz $n(t,a)=f(t)r(a)$ and introducing the separation constant $\gamma$.

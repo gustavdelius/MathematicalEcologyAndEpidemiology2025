@@ -1,0 +1,230 @@
+---
+title: Solutions for assignment 3
+subtitle: Mathematical Ecology
+format:
+  pdf:
+    papersize: a4
+    geometry: margin=2.54cm
+---
+
+#### Interacting populations
+**Exercise 3.1:**
+Consider a model for the interaction of two species with populations $N_1$ and $N_2$ described by the system of ODEs
+$$ \frac{dN_1}{dt} = r_1 N_1 \left( 1 - \frac{N_1}{K_1} - b_{12}\frac{ N_2}{K_1} \right), $$
+$$  \frac{N_2}{dt} = r_2 N_2 \left( 1  - b_{21}\frac{ N_1}{K_2} \right), $$
+where all the parameters are positive.
+
+a)  What type of interaction exists between $N_1$ and $N_2$? 
+
+b) Non-dimensionalise the system by introducing $u=N_1/K_1$ and $v=N_2/K_2$ as well as a 
+non-dimensional time variable. What are the resulting non-dimensional parameters? Give the
+ODEs for $u$ and $v$ in terms of these parameters.
+
+c) Determine the steady states in the non-dimensionalised system.  Investigate their stability. At what values of the parameters do bifurcations take place?
+
+d)  Determine the nullclines and use these to make rough phase-plane sketches (You will need two sketches).
+
+e)  Describe under what ecological circumstances $N_2$ becomes extinct. Do the same for $N_1$. Show that the principle of competitive exclusion holds irrespective of the size of the parameters.
+
+**Solution:**
+
+a) Because for both species the growth rate is decreased by the presence of the other species, there is a competition interaction between them.
+
+b) We non-dimensionalise by introducing $u=N_1/K_1$, $v=N_2/K_2$, $\tau=r_1 t$. This gives
+$$\begin{split}\frac{du}{d\tau}&=u\left(1-u-b_{12}\frac{K_2}{K_1}v\right),\\
+\frac{dv}{d\tau}&=\frac{r_2}{r_1}v\left(1-b_{21}\frac{K_1}{K_2}u\right).
+\end{split}$$
+So we also introduce $R=r_2/r_1$ and $A=b_{12}K_2/K_1$ and $B=b_{21}K_1/K_2$ to simplify further to
+$$\begin{split}\frac{du}{d\tau}&=u\left(1-u-Av\right),\\
+\frac{dv}{d\tau}&=R v\left(1-Bu\right).
+\end{split}$$
+Note that this is by no means the only sensible way to non-dimensionalise this system. We could also for example
+introduce $\tilde{v}=N_2b_{12}/K_1$ which would remove one more parameter.
+
+c) The steady states are 
+$$(0,0),~~ (1,0),~~\left(\frac{1}{B},\frac{B-1}{AB}\right).$$
+The Jacobian matrix is
+$$A(u,v)=\begin{pmatrix}
+1-2u-Av&-Au \\-RBv&R(1-Bu)
+\end{pmatrix}
+$$
+So
+$$A(0,0)=\begin{pmatrix}1&0\\0&R\end{pmatrix}$$
+which means that $(0,0)$ is unstable.
+$$A(1,0)=\begin{pmatrix}-1&-A\\0&R(1-B)\end{pmatrix}$$
+Thus $(1,0)$ is a saddle if $B<1$ and a stable node if $B>1$.
+Finally,
+$$A\left(\frac{1}{B},\frac{B-1}{AB}\right)=\begin{pmatrix}-\dfrac{1}{B}&-\dfrac{A}{B}\\R\dfrac{1-B}{A}&0\end{pmatrix}$$
+Note that in simplifying the entries in the matrix it is useful to reuse some of the relations you found when determining the steady state. I used that
+for example to simplify the top left entry. The determinant is $R(1-B)/B$ and thus is negative if $B>1$. So the coexistence fixed point is
+a saddle. If  $B<1$ the fixed point is not at positive population numbers, so not realistic, but it would be stable as
+the trace is negative.
+
+![Phase portraits for the competition model in Exercise 3.](figures/Solutions/q10.png){#fig-q10}
+
+d) The $du/d\tau=0$ nullclines are $u=0$ and $v=(1-u)/A$. They are indicated in orange in @fig-q10.
+The $dv/d\tau=0$ nullclines are $v=0$ and $u=1/B$. They are indicated in yellow in @fig-q10. The arrows on
+the nullclines indicate the direction of flow. Some rough trajectories are drawn in in light blue.
+
+e) In the case of $B<1$ species 1 goes extinct and species 2 grows beyond all bounds. In case $B>1$ whether species 1 or
+species 2 goes extinct depends on the initial conditions. Species 2 will go extinct if the initial condition lies below the separatrix through the saddle in the second sketch in @fig-q10.
+In all cases, one of the species will exclude the other, so
+the principle of competitive exclusion holds. To exclude the possibility that both species grow beyond all bounds one
+just has to observe that $dN_1/dt$ will go negative for sufficiently large $N_2$.
+
+
+#### Geometric mean sex-structured model
+**Exercise 4.1:**
+Consider the sex-structured population model
+$$
+\frac{dF}{dt}=-\mu_F F+b_F\phi(F,M), ~~~\frac{dM}{dt}=-\mu_M M+b_M\phi(F,M),
+$$
+where $F(t)$ denotes the number of females and $M(t)$ the number of males and $\mu_F,\mu_M,b_F,b_M$ are positive constants. Make the choice
+$$
+\phi(F,N)=\sqrt{FM}.
+$$
+Determine the asymptotic sex ratio 
+$$
+s=\lim_{t\to\infty}\frac{M(t)}{F(t)}.
+$$
+What is the numerical value of s when $\mu_F=2,\mu_M=1,b_F=1/2,b_M=3/2$ per year?
+
+**Solution:**
+
+To find the asymptotic sex ratio $s=M/F$ we need to solve the fixed-point equation
+$$\begin{split}
+0&=\frac{ds}{dt}=\frac{d}{dt}\frac{M}{F}=\frac{1}{F^2}\left(\frac{dM}{dt}F-\frac{dF}{dt}M\right)\\
+&=\frac{1}{F^2}\left(-\mu_M M+b_M\sqrt{FM})F-(-\mu_F F+b_F\sqrt{FM})M\right).
+\end{split}$$
+Multiplying by $F/M$ gives
+$$
+(-\mu_M M+b_M\sqrt{FM})\frac{1}{M}-(-\mu_F F+b_F\sqrt{FM})\frac{1}{F}=0.
+$$
+This simplifies to
+$$
+-\mu_M+b_M\sqrt{\frac{F}{M}}+\mu_F-b_F\sqrt{\frac{M}{F}}=0.
+$$
+If we introduce $r=\sqrt{s}=\sqrt{M/F}$ and multiply the above equation by $-r$ we get the quadratic
+equation
+$$b_F r^2-(\mu_F-\mu_M)r-b_M=0.$$
+The positive solution is
+$$
+r=\frac{\mu_F-\mu_M+\sqrt{(\mu_F-\mu_M)^2+4b_Mb_F}}{2b_F}.
+$$
+Therefore the asymptotic sex ratio is
+$$
+s=\left(\frac{\mu_F-\mu_M+\sqrt{(\mu_F-\mu_M)^2+4b_Mb_F}}{2b_F}\right)^2.
+$$
+For the given numerical values we get
+$$
+s=\left(\frac{2-1+\sqrt{1+3}}{1}\right)^2=\left(1+\sqrt{4}\right)^2=3^2=9.
+$$
+
+
+#### Fibonacci population
+**Exercise 5.2:**
+Consider a population in which individuals on average produce one offspring when they turn 1 year old and another offspring when they turn 2 years old. After that they die. Assume that there is no mortality before they turn 2 year old.
+
+1. Formulate the above information in terms of values for the reproduction numbers $b_a$ and the survival probabilities $S_a$.
+1. Write down the Leslie matrix for this population.
+2. Assume that at $t=0$ we start with 1 individual of age 0. By hand, calculate the numbers of individuals at each age at time $t=1,2,3,4$ and $5$. 
+3. Draw the directed graph associated with this Leslie matrix. Is the Leslie matrix irreducible? Is it primitive? What does this tell you about the long-term behaviour of the population?
+4. Using the Leslie matrix, calculate the long-term growth factor (the factor by which the total population changes from one year to the next) and the stable age distribution.
+
+**Solution:**
+
+1. The nonzero reproduction numbers are $b_1=1$ and $b_2=1$. The nonzero survival probabilities are $S_0=1$ and $S_1=1$.
+
+2. The non-zero fecundities are $F_0=b_1S_0=1$ and $F_1=b_2S_1=1$. The Leslie matrix is
+$$
+L=\begin{pmatrix}
+F_0&F_1\\
+S_0&0
+\end{pmatrix}
+=\begin{pmatrix}
+1&1\\
+1&0
+\end{pmatrix}.
+$$
+
+3. The Leslie matrix multiplies the population vector at time $t$ to give the population vector at time $t+1$. 
+$$
+\mathbf{N}_{t+1}=\begin{pmatrix}N_{0}\\N_{1}\end{pmatrix}_{t+1}=L\mathbf{N}_t
+=\begin{pmatrix}1&1\\1&0\end{pmatrix}\begin{pmatrix}N_0\\N_1\end{pmatrix}_t.
+$$
+This gives
+$$
+\begin{split}
+\mathbf{N}_1&=L\mathbf{N}_0=\begin{pmatrix}1&1\\1&0\end{pmatrix}\begin{pmatrix}1\\0\end{pmatrix}=\begin{pmatrix}1\\1\end{pmatrix},\\
+\mathbf{N}_2&=L\mathbf{N}_1=\begin{pmatrix}1&1\\1&0\end{pmatrix}\begin{pmatrix}1\\1\end{pmatrix}=\begin{pmatrix}2\\1\end{pmatrix},\\
+\mathbf{N}_3&=L\mathbf{N}_2=\begin{pmatrix}1&1\\1&0\end{pmatrix}\begin{pmatrix}2\\1\end{pmatrix}=\begin{pmatrix}3\\2\end{pmatrix},\\
+\mathbf{N}_4&=L\mathbf{N}_3=\begin{pmatrix}1&1\\1&0\end{pmatrix}\begin{pmatrix}3\\2\end{pmatrix}=\begin{pmatrix}5\\3\end{pmatrix},\\
+\mathbf{N}_5&=L\mathbf{N}_4=\begin{pmatrix}1&1\\1&0\end{pmatrix}\begin{pmatrix}5\\3\end{pmatrix}=\begin{pmatrix}8\\5\end{pmatrix}.
+\end{split}
+$$
+
+To get the population at age 2 we use $N_{2,t+1}=S_2N_{1,t}$. With $S_2=1$ this gives
+$$
+\begin{split}
+N_{2,1}&=N_{1,0}=0,~~
+N_{2,2}=N_{1,1}=1,~~
+N_{2,3}=N_{1,2}=1,\\
+N_{2,4}&=N_{1,3}=2,~~
+N_{2,5}=N_{1,4}=3.
+\end{split}
+$$
+
+4. The directed graph associated with the Leslie matrix is shown in @fig-lesliegraph. The Leslie matrix is irreducible as there is a directed path from any age class to any other age class. The Leslie matrix is primitive as there are cycles of length 2 and of length 1, so the greatest common divisor of the cycle lengths is 1. This means that the age-distribution of the population will converge to a stable age distribution as $t\to\infty$.
+
+![Leslie graph for the Fibonacci population.](figures/Solutions/leslie.png){#fig-lesliegraph width=40%}
+
+5. The stable age distribution is the eigenvector of the Leslie matrix corresponding to the dominant eigenvalue, i.e., the eigenvalue with the largest magnitude. We know that there is a unique such eigenvalue because the Leslie matrix is irreducible and primitive. 
+We determine the eigenvalues of the Leslie matrix by solving
+$$
+0=\det(L-\lambda I)= \det\begin{pmatrix}1-\lambda&1\\1&-\lambda\end{pmatrix}=\lambda^2-\lambda-1.
+$$
+Solving this quadratic equation tells us that the eigenvalues are $\lambda_{\pm}=(1\pm\sqrt{5})/2$. The dominant eigenvalue is $\lambda_+=(1+\sqrt{5})/2=\phi$, which we recognise as the golden ratio.
+
+    In the stable age distribution we have $n_1^*=\phi n_0^*$ and $n_2^*=\phi n_1^*=\phi^2 n_0^*$. 
+
+
+
+
+#### Age-independent rates
+**Exercise 5.5:**
+In the continuous-time age-structured population model consider the case where $b(a)=b$
+and $\mu(a)=\mu$ are both constant. Repeat all steps of the analysis but simplifying the expressions at each step by using the constant values for birth and death rates. 
+
+1. Solve the partial differential
+equation of the age-structured model by making the Ansatz $n(t,a)=f(t)r(a)$ and introducing the separation constant $\gamma$.
+2. Use the boundary condition at $a=0$ to obtain an equation for $\gamma$.
+3. Give the condition under which the population goes extinct and compare it to the condition in the exponential model from chapter 1.
+
+**Solution:**
+
+1. If we substitute the Ansatz $n(t,a)=f(t)r(a)$ into
+the PDE
+$$ \frac{\partial n}{\partial t} +\frac{\partial n}{\partial a} = -\mu(a)n,
+$$
+and divide by $f(t)r(a)$ we get
+$$ \frac{f'(t)}{f(t)}+ \frac{r'(a)}{r(a)} = -\mu. $$
+Separating variables and introducing the separation constant $\gamma$ gives
+$$ \frac{f'(t)}{f(t)} = \gamma, \quad \frac{r'(a)}{r(a)} = -\gamma - \mu. $$
+So 
+$$f(t)=f(0)e^{\gamma t}~~\text{ and }~~ r(a) = r(0) e^{-(\mu + \gamma )a}.$$
+and thus
+$$n(t,a)=n(0,0)e^{\gamma t}e^{-(\mu+\gamma)a}.$$
+
+2. Substituting this into the boundary condition
+$$n(t,0)=\int_0^\infty b\,n(t,a)da$$
+and dividing both sides by $n(0,0)e^{\gamma t}$ gives
+$$
+1= \int_0^{\infty} b\, e^{-(\mu+\gamma)a}da=-\frac{b}{\mu+\gamma}\left[e^{-(\mu+\gamma)a}\right]^\infty_0=\frac{b}{\mu+\gamma}.
+$$
+and hence
+$$
+\gamma = b-\mu.
+$$
+3. As the time dependence of $n(t,a)$ is given by $e^{\gamma t}$, the population will go extinct if $\gamma<0$, i.e, if the death rate $\mu$ is greater than the birth rate $b$. This is the same condition as in the exponential growth model.
+
+

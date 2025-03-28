@@ -634,7 +634,8 @@ Figure&nbsp;5.3: Leslie graph for <a href="#exm-leslie1" class="quarto-xref">Exa
 <li>Formulate the above information in terms of values for the reproduction numbers <span class="math inline">\(b_a\)</span> and the survival probabilities <span class="math inline">\(S_a\)</span>.</li>
 <li>Write down the Leslie matrix for this population.</li>
 <li>Assume that at <span class="math inline">\(t=0\)</span> we start with 1 individual of age 0. By hand, calculate the numbers of individuals at each age at time <span class="math inline">\(t=1,2,3,4\)</span> and <span class="math inline">\(5\)</span>.</li>
-<li>Using the Leslie matrix, calculate the stable age distribution and the long-term growth factor (the factor by which the total population changes from one year to the next).</li>
+<li>Draw the directed graph associated with this Leslie matrix. Is the Leslie matrix irreducible? Is it primitive? What does this tell you about the long-term behaviour of the population?</li>
+<li>Using the Leslie matrix, calculate the long-term growth factor (the factor by which the total population changes from one year to the next) and the stable age distribution.</li>
 </ol>
 </div>
 <hr>
@@ -860,7 +861,7 @@ n(0,0)e^{\gamma t} = \int_0^\infty b(a) n(0,0)l(a)e^{\gamma (t-a)} \, da.
 <section id="exercises-1" class="level3" data-number="5.2.4">
 <h3 data-number="5.2.4" class="anchored" data-anchor-id="exercises-1"><span class="header-section-number">5.2.4</span> Exercises</h3>
 <div id="exr-age_structured" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 5.5 (* Age-independent rates)</strong></span> In the continuous-time age-structured population model consider the case where <span class="math inline">\(b(a)=b\)</span> and <span class="math inline">\(\mu(a)=\mu\)</span> are both constant. Repeat all steps of the analysis but simplifying the expressions at each step by using the constant values for birth and death rates.</p>
+<p><span class="theorem-title"><strong>Exercise 5.5 (* Age-independent rates)</strong></span> In the continuous-time age-structured population model consider the case where <span class="math inline">\(b(a)=b\)</span> and <span class="math inline">\(\mu(a)=\mu\)</span> are both constant. Repeat all steps of the analysis but simplifying the expressions at each step by using the constant values for birth and death rates. Try to do this without looking at your notes from the lecture.</p>
 <ol type="1">
 <li>Solve the partial differential equation of the age-structured model by making the Ansatz <span class="math inline">\(n(t,a)=f(t)r(a)\)</span> and introducing the separation constant <span class="math inline">\(\gamma\)</span>.</li>
 <li>Use the boundary condition at <span class="math inline">\(a=0\)</span> to determine the value of <span class="math inline">\(\gamma\)</span>.</li>
