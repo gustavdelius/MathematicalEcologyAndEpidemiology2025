@@ -221,7 +221,7 @@ $$
 c\geq 2\sqrt{1-r}.
 $$ {#eq-wavespeed6}
 
-<!---
+
 ## Turing instabilities
 
 We now come to a very intriguing question: how can the complicated spatial patterns arise that one can observe in nature. One might have thought that to explain complicated patterns one would need complicated models that encode all that complexity. However, it turns out that patterns can arise from very simple, translation-invariant models. The key idea is that the spatially uniform steady state in a translation-invariant model can be unstable to small perturbations, which then grow and form spatial patterns. This is called a Turing instability.
@@ -371,7 +371,9 @@ The condition in @eq-schnakcond tells us that $d$ is outside the interval $(d_-,
 $$
 d=\frac{D_2}{D_1}>b^2(3+\sqrt{8}).
 $$ {#eq-schnakcond2}
+This means that the inhibitor must diffuse at least $b^2(3+\sqrt{8})$ times faster than the activator in order for a Turing instability to occur.
 
+<!---
 ### Finite domain
 
 We now restrict space to a finite interval $[0,L]$ and impose no-flux boundary conditions at the boundaries:
@@ -621,7 +623,7 @@ very small, determine a lower limit on the wave speed $c$.
 
 :::
 
-<!---
+
 ----------------------------------------------------------------------
 
 #### Derive Turing instability
@@ -671,6 +673,7 @@ diffusion. You may use any results derived in the lectures.
 
 :::
 
+<!---
 ----------------------------------------------------------------------
 
 #### Slime mould with boundary
