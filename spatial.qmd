@@ -476,7 +476,7 @@ We can also rewrite the condition for the aggregation as
 $$
 h>\frac{qD_n}{\chi n^*}.
 $$ {#eq-slimeinstab3}
-So aggregation only happens if the rate of production of the attractant is larger enough.
+So aggregation only happens if the rate of production of the attractant is large enough.
 
 --->
 
@@ -497,11 +497,11 @@ No-flux boundary conditions are applied at $x=L$.  On the left bank at $x=0$ the
 
 3. By considering a solution of the form $F(x,t) = e^{\lambda t} \left( A \cos kx + B \sin kx \right)$ show that 
 $$
-\lambda = \lambda_n =: r-k_n^2D,
+\lambda = \lambda_n = r-k_n^2D,
 $$ {#eq-fishlambda}
 where
 $$
-k = k_n =: \frac{(2n+1)\pi }{2L}, ~~~ n = 0,~1,~2,...
+k = k_n = \frac{(2n+1)\pi }{2L}, ~~~ n = 0,~1,~2,...
 $$ 
 
 4. Hence, determine the condition on $L$ for the fish population not to collapse.
@@ -655,7 +655,7 @@ should all hold simultaneously.
 
 ----------------------------------------------------------------------
 
-#### Conditions for Turing instability
+#### * Conditions for Turing instability
 ::: {#exr-spatial6}
 
 Consider the reaction-diffusion model
