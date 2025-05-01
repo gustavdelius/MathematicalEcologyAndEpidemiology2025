@@ -31,6 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./solutions.html" rel="next">
 <link href="./epidemics.html" rel="prev">
 <link href="./virus.png" rel="icon" type="image/png">
 <script src="site_libs/quarto-html/quarto.js"></script>
@@ -195,6 +196,12 @@ window.Quarto = {
   <div class="sidebar-item-container"> 
   <a href="./spatial.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Spatially-structured populations</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Solutions</span></span></a>
   </div>
 </li>
     </ul>
@@ -422,7 +429,10 @@ u(x,t)=u^*+\xi(x,t),~~~v(x,t)=v^*+\eta(x,t)
 A(k)=\begin{pmatrix}a_{11}-D_1k^2&amp;a_{12}\\a_{21}&amp;a_{22}-D_2k^2\end{pmatrix}.
 \tag{7.47}\]</span></span> This looks very similar to what we get when we do the stability analysis of a non-spatial model, except that now we have a whole family of matrices <span class="math inline">\(A(k)\)</span>, one for each <span class="math inline">\(k\)</span>. The condition for the spatially homogeneous steady state to be stable is that all the eigenvalues <span class="math inline">\(\sigma_k\)</span> of all the matrices <span class="math inline">\(A(k)\)</span> are negative. The spatially homogeneous steady state to be unstable is that there is at least one <span class="math inline">\(k\)</span> for which the real part of <span class="math inline">\(\sigma_k\)</span> is positive.</p>
 <p>As we know from studying the stability of non-spatial models of two interacting species, an easy way to determine the stability is to look at the signs of the trace and the determinant of the matrix <span class="math inline">\(A(k)\)</span>. For the trace we find <span id="eq-turingperttr"><span class="math display">\[
-\text{tr}(A(k))=a_{11}-k^2D_1+a_{22}-k^2D_2=\text{tr}(A(0))-k^2(D_1+D_2).
+\begin{split}
+\text{tr}(A(k))&amp;=a_{11}-k^2D_1+a_{22}-k^2D_2\\
+&amp;=\text{tr}(A(0))-k^2(D_1+D_2).
+\end{split}
 \tag{7.48}\]</span></span> We are interested in the case where the steady state is stable in the absence of diffusion and is destabilised by the diffusion. Stability in the absence of diffusion requires <span class="math inline">\(\text{tr}(A(0))&lt;0\)</span>. We see that in that case also <span class="math inline">\(\text{tr}(A(k))&lt;0\)</span> for all <span class="math inline">\(k\)</span> because the <span class="math inline">\(k\)</span>-dependent term <span class="math inline">\(-k^2(D_1+D_2)\)</span> is negative. So the trace is not yet giving us a hint that there might be an instability. So next we look at the determinant.</p>
 <p>For the determinant we find <span id="eq-turingpert8"><span class="math display">\[\begin{split}
 \det(A(k))&amp;=(a_{11}-D_1k^2)(a_{22}-D_2k^2)-a_{12}a_{21}\\
@@ -1158,6 +1168,9 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./solutions.html" class="pagination-link" aria-label="Solutions">
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Solutions</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

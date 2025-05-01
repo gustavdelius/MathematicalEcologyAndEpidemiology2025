@@ -232,6 +232,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Spatially-structured populations</span></span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Solutions</span></span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -261,7 +267,7 @@ window.Quarto = {
   <li><a href="#exercises" id="toc-exercises" class="nav-link" data-scroll-target="#exercises"><span class="header-section-number">6.7</span> Exercises</a>
   <ul>
   <li><a href="#sec-sir1" id="toc-sec-sir1" class="nav-link" data-scroll-target="#sec-sir1">* SIR with vaccination and loss of immunity</a></li>
-  <li><a href="#sir-with-initial-immunity" id="toc-sir-with-initial-immunity" class="nav-link" data-scroll-target="#sir-with-initial-immunity">SIR with initial immunity</a></li>
+  <li><a href="#sec-sir-r" id="toc-sec-sir-r" class="nav-link" data-scroll-target="#sec-sir-r">o SIR with initial immunity</a></li>
   <li><a href="#sec-sir2" id="toc-sec-sir2" class="nav-link" data-scroll-target="#sec-sir2">SIR with recrudescence</a></li>
   <li><a href="#sec-sir3" id="toc-sec-sir3" class="nav-link" data-scroll-target="#sec-sir3">SIR model with reinfections</a></li>
   <li><a href="#sec-sir4" id="toc-sec-sir4" class="nav-link" data-scroll-target="#sec-sir4">Sex-structured SIR model</a></li>
@@ -824,9 +830,7 @@ A(I^*,R^*)=\begin{pmatrix}
 <section id="sec-sir1" class="level4">
 <h4 class="anchored" data-anchor-id="sec-sir1">* SIR with vaccination and loss of immunity</h4>
 <div id="exr-sir1" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 6.1</strong></span> &nbsp;</p>
-<!--- From sheet 4 --->
-<p>In the lectures we studied the SIR model with vaccination rate <span class="math inline">\(\nu\)</span> and the SIR model with loss of immunity at a rate <span class="math inline">\(\mu\)</span>. Now consider the SIR model with both vaccination and loss of immunity. For simplicity assume that the minimum immunity time is <span class="math inline">\(T=0\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 6.1</strong></span> In the lectures we studied the SIR model with vaccination rate <span class="math inline">\(\nu\)</span> and the SIR model with loss of immunity at a rate <span class="math inline">\(\mu\)</span>. Now consider the SIR model with both vaccination and loss of immunity.</p>
 <ol type="1">
 <li><p>Write down the differential equations for the numbers of susceptibles <span class="math inline">\(S\)</span>, infecteds <span class="math inline">\(I\)</span> and recovereds <span class="math inline">\(R\)</span>.</p></li>
 <li><p>Find the disease-free steady state.</p></li>
@@ -839,17 +843,17 @@ A(I^*,R^*)=\begin{pmatrix}
 </div>
 <hr>
 </section>
-<section id="sir-with-initial-immunity" class="level4">
-<h4 class="anchored" data-anchor-id="sir-with-initial-immunity">SIR with initial immunity</h4>
-<div id="sec-sir-r">
-<p>In <a href="#sec-unfold" class="quarto-xref"><span>Section 6.3</span></a> we studied the dynamic of an epidemic under the assumption that initially there are no individuals that are already removed from the epidemic because we assumed that <span class="math inline">\(R(0)=0\)</span>. That means that there were no individuals that are immune to the disease. This assumption was not necessary. In this exercise you should generalise all derivations in <a href="#sec-unfold" class="quarto-xref"><span>Section 6.3</span></a> to the case where <span class="math inline">\(R(0)&gt;0\)</span>.</p>
+<section id="sec-sir-r" class="level4">
+<h4 class="anchored" data-anchor-id="sec-sir-r">o SIR with initial immunity</h4>
+<div id="exr-sir-r" class="theorem exercise">
+<p><span class="theorem-title"><strong>Exercise 6.2</strong></span> In <a href="#sec-unfold" class="quarto-xref"><span>Section 6.3</span></a> we studied the dynamic of an epidemic under the assumption that initially there are no individuals that are already removed from the epidemic because we assumed that <span class="math inline">\(R(0)=0\)</span>. That means that there were no individuals that are immune to the disease. This assumption was not necessary. In this exercise you should generalise all derivations in <a href="#sec-unfold" class="quarto-xref"><span>Section 6.3</span></a> to the case where <span class="math inline">\(R(0)&gt;0\)</span>.</p>
 </div>
 <hr>
 </section>
 <section id="sec-sir2" class="level4">
 <h4 class="anchored" data-anchor-id="sec-sir2">SIR with recrudescence</h4>
 <div id="exr-sir2" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 6.2</strong></span> Imagine a disease that, even after an individual has recovered from it, stays in the body in a dormant state and can be reactivated. Model this as a modification of the SIR model where recovereds can become infected again at a per-capita rate <span class="math inline">\(\delta\)</span>.</p>
+<p><span class="theorem-title"><strong>Exercise 6.3</strong></span> Imagine a disease that, even after an individual has recovered from it, stays in the body in a dormant state and can be reactivated. Model this as a modification of the SIR model where recovereds can become infected again at a per-capita rate <span class="math inline">\(\delta\)</span>.</p>
 <ol type="1">
 <li><p>Determine the number of infecteds in the endemic state.</p></li>
 <li><p>Is the endemic state stable for all positive values of the parameters?</p></li>
@@ -860,16 +864,14 @@ A(I^*,R^*)=\begin{pmatrix}
 <section id="sec-sir3" class="level4">
 <h4 class="anchored" data-anchor-id="sec-sir3">SIR model with reinfections</h4>
 <div id="exr-sir3" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 6.3</strong></span> In <a href="#sec-loi" class="quarto-xref"><span>Section 6.6</span></a> we studied the SIR model where recovered individuals lose their immunity at a per-capita rate <span class="math inline">\(\mu\)</span> so that they can then become infected again at a per-capita rate <span class="math inline">\(\beta I/N\)</span>. The question was raised whether the same effect could be achieved by direct reinfections, i.e., a flow from the <span class="math inline">\(R\)</span> compartment directly into the <span class="math inline">\(I\)</span> compartment at a per-capita rate <span class="math inline">\(\mu\beta I/N\)</span>. Settle this question by determining the number of infecteds in the steady state for the SIR model with direct reinfections and compare it to the corresponding result from <a href="#eq-Istar" class="quarto-xref">Eq.&nbsp;<span>6.33</span></a>.</p>
+<p><span class="theorem-title"><strong>Exercise 6.4</strong></span> In <a href="#sec-loi" class="quarto-xref"><span>Section 6.6</span></a> we studied the SIR model where recovered individuals lose their immunity at a per-capita rate <span class="math inline">\(\mu\)</span> so that they can then become infected again at a per-capita rate <span class="math inline">\(\beta I/N\)</span>. The question was raised whether the same effect could be achieved by direct reinfections, i.e., a flow from the <span class="math inline">\(R\)</span> compartment directly into the <span class="math inline">\(I\)</span> compartment at a per-capita rate <span class="math inline">\(\mu\beta I/N\)</span>. Settle this question by determining the number of infecteds in the steady state for the SIR model with direct reinfections and compare it to the corresponding result from <a href="#eq-Istar" class="quarto-xref">Eq.&nbsp;<span>6.33</span></a>.</p>
 </div>
 <hr>
 </section>
 <section id="sec-sir4" class="level4">
 <h4 class="anchored" data-anchor-id="sec-sir4">Sex-structured SIR model</h4>
 <div id="exr-sir4" class="theorem exercise">
-<p><span class="theorem-title"><strong>Exercise 6.4</strong></span> &nbsp;</p>
-<!--- From sheet 4 --->
-<p>In a mathematical model for a certain venereal disease the male population is divided into susceptibles <span class="math inline">\(S\)</span>, infectives <span class="math inline">\(I\)</span> and removeds <span class="math inline">\(R\)</span>. The female population is similarly divided; the three groups being denoted <span class="math inline">\(S'\)</span>, <span class="math inline">\(I'\)</span> and <span class="math inline">\(R'\)</span> (note that we use the prime to distinguish between male and female, not to indicate differentiation). The equations are <span id="eq-exSIR"><span class="math display">\[\begin{split}
+<p><span class="theorem-title"><strong>Exercise 6.5</strong></span> In a mathematical model for a certain venereal disease the male population is divided into susceptibles <span class="math inline">\(S\)</span>, infectives <span class="math inline">\(I\)</span> and removeds <span class="math inline">\(R\)</span>. The female population is similarly divided; the three groups being denoted <span class="math inline">\(S'\)</span>, <span class="math inline">\(I'\)</span> and <span class="math inline">\(R'\)</span> (note that we use the prime to distinguish between male and female, not to indicate differentiation). The equations are <span id="eq-exSIR"><span class="math display">\[\begin{split}
 \frac{dS}{dt}&amp;=-rSI',\hspace{.2in}\frac{dI}{dt}=rSI'-aI,\hspace{.2in}
 \frac{dR}{dt}=aI,\\
 \frac{dS'}{dt}&amp;=-r'S'I,\hspace{.2in}\frac{dI'}{dt}=r'S'I-a'I',\hspace{.2in}

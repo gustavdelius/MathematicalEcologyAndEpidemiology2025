@@ -41,6 +41,7 @@ book:
     - age_structured.qmd
     - epidemics.qmd
     - spatial.qmd
+    - solutions.qmd
 
 bibliography: references.bib
 
