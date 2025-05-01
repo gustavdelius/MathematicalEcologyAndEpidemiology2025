@@ -621,7 +621,7 @@ and derive the system of ODEs describing the functions $A$ and $B$.
 e) If $A(\infty)=1$, what are $A(-\infty), B(\infty)$ and $B(-\infty)$? Make a sketch of $A(z)$
 and $B(z)$ and indicate the direction of travel with an arrow. 
 
-f) By linearising about the trailing edge of the wave where $B$ is
+f) By linearising about the leading edge of the wave where $B$ is
 very small, determine a lower limit on the wave speed $c$.
 
 :::
