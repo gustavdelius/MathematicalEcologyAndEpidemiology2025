@@ -282,7 +282,10 @@ The spatially homogeneous steady state to be unstable is that there is at least 
 
 As we know from studying the stability of non-spatial models of two interacting species, an easy way to determine the stability is to look at the signs of the trace and the determinant of the matrix $A(k)$. For the trace we find
 $$
-\text{tr}(A(k))=a_{11}-k^2D_1+a_{22}-k^2D_2=\text{tr}(A(0))-k^2(D_1+D_2).
+\begin{split}
+\text{tr}(A(k))&=a_{11}-k^2D_1+a_{22}-k^2D_2\\
+&=\text{tr}(A(0))-k^2(D_1+D_2).
+\end{split}
 $$ {#eq-turingperttr}
 We are interested in the case where the steady state is stable in the absence of diffusion and is destabilised by the diffusion. Stability in the absence of diffusion requires $\text{tr}(A(0))<0$. We see that in that case also $\text{tr}(A(k))<0$ for all $k$ because the $k$-dependent term $-k^2(D_1+D_2)$ is negative. So the trace is not yet giving us a hint that there might be an instability. So next we look at the determinant.
 

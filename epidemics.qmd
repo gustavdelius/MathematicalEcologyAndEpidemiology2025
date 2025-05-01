@@ -614,10 +614,9 @@ We see that the trace is negative and the determinant is positive, meaning that 
 
 #### * SIR with vaccination and loss of immunity {#sec-sir1}
 ::: {#exr-sir1}
-<!--- From sheet 4 --->
 In the lectures we studied the SIR model with vaccination rate $\nu$ and the SIR
 model with loss of immunity at a rate $\mu$. Now consider the SIR model with both vaccination
-and loss of immunity. For simplicity assume that the minimum immunity time is $T=0$.
+and loss of immunity.
 
 1. Write down the differential equations for the numbers of susceptibles $S$,
 infecteds $I$ and recovereds $R$.
@@ -642,8 +641,8 @@ You will want to compare your results to the results from the lecture and make s
 
 ----------------------------------------------------
 
-#### SIR with initial immunity
-:::{#sec-sir-r}
+#### o SIR with initial immunity {#sec-sir-r}
+:::{#exr-sir-r}
 In @sec-unfold we studied the dynamic of an epidemic under the assumption that
 initially there are no individuals that are already removed from the epidemic
 because we assumed that $R(0)=0$. That means that there were no individuals that
@@ -675,7 +674,6 @@ In @sec-loi we studied the SIR model where recovered individuals lose their immu
 
 #### Sex-structured SIR model {#sec-sir4}
 ::: {#exr-sir4}
-<!--- From sheet 4 --->
 In a mathematical model for a certain venereal disease the
 male population is divided into susceptibles $S$, infectives $I$ and
 removeds $R$. The female population is similarly divided; the three
