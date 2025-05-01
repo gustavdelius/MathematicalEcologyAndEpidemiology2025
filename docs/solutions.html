@@ -676,18 +676,18 @@ d=\frac{D_2}{D_1}.
 -cA'&amp;=bA(1-A)-AB+A''\\
 -cB'&amp;=AB-mB+dB''.
 \end{split} \tag{8.83}\]</span></span></p></li>
-<li><p>If <span class="math inline">\(A(\infty)=1\)</span> (which corresponds to <span class="math inline">\(S=K\)</span>) then that means that at <span class="math inline">\(x=\infty\)</span> the system is in the disease-free state and thus <span class="math inline">\(B(\infty)=0\)</span>. At <span class="math inline">\(x=-\infty\)</span> the system must thus be in the endemic state, so <span class="math inline">\(A(-\infty)=u^*=m\)</span> and <span class="math inline">\(B(-\infty)=v^*=b(1-m)\)</span>. So the key to this question was the observation that the travelling wave will always have to interpolate between two steady states.</p></li>
-<li><p>At the leading edge where <span class="math inline">\(B\)</span> is very small, <span class="math inline">\(A\)</span> is very close to <span class="math inline">\(1\)</span>, so <span class="math inline">\(A=1-\epsilon\)</span> for a small <span class="math inline">\(\epsilon&gt;0\)</span>. The equations <a href="#eq-AB" class="quarto-xref">Eq.&nbsp;<span>8.83</span></a> can thus be approximated by the linear equations <span id="eq-ABl"><span class="math display">\[
+<li><p>If <span class="math inline">\(A(\infty)=1\)</span> (which corresponds to <span class="math inline">\(S=K\)</span>) then that means that at <span class="math inline">\(x=\infty\)</span> the system is in the disease-free state and thus <span class="math inline">\(B(\infty)=0\)</span>. At <span class="math inline">\(x=-\infty\)</span> the system must thus be in the endemic state, so <span class="math inline">\(A(-\infty)=u^*=m\)</span> and <span class="math inline">\(B(-\infty)=v^*=b(1-m)\)</span>. So the key to this question was the observation that the travelling wave will always have to interpolate between two steady states. Furthermore, it is the stable steady state that will invade the unsteady stable state. In this case, this means that the stable endemic state on the left invades the unstable disease-free state on the right, so we have a right-moving wave.</p></li>
+<li><p>At the trailing edge where <span class="math inline">\(B\)</span> is very small, <span class="math inline">\(A\)</span> is very close to <span class="math inline">\(1\)</span>, so <span class="math inline">\(A=1-\epsilon\)</span> for a small <span class="math inline">\(\epsilon&gt;0\)</span>. The equations <a href="#eq-AB" class="quarto-xref">Eq.&nbsp;<span>8.83</span></a> can thus be approximated by the linear equations <span id="eq-ABl"><span class="math display">\[
 c\epsilon'=b\epsilon-B-\epsilon'',~~~-cB'=B-mB+dB''.
-\tag{8.84}\]</span></span> We obtained this by dropping all terms involving <span class="math inline">\(\epsilon^2\)</span> or <span class="math inline">\(\epsilon B\)</span> because they are negligible when <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(B\)</span> are both small.</p>
-<p>We concentrate on the second equation, which we solve with the Ansatz <span class="math inline">\(B(x)=\exp(\lambda x)\)</span>. Substituting this Ansatz into the equation gives the characteristic equation for <span class="math inline">\(\lambda\)</span>: <span id="eq-spatial3lambda"><span class="math display">\[
+\tag{8.84}\]</span></span> We obtained this by dropping all terms involving <span class="math inline">\(\epsilon^2\)</span> or <span class="math inline">\(\epsilon B\)</span> because they are negligible when <span class="math inline">\(\epsilon\)</span> and <span class="math inline">\(B\)</span> are both small.</p></li>
+</ol>
+<p>We concentrate on the second equation, which we solve with the Ansatz <span class="math inline">\(B(x)=\exp(\lambda x)\)</span>, where we need <span class="math inline">\(\lambda\)</span> to be real and negative to match the shape of <span class="math inline">\(B\)</span> at the trailing edge. Substituting this Ansatz into the equation gives the characteristic equation for <span class="math inline">\(\lambda\)</span>: <span id="eq-spatial3lambda"><span class="math display">\[
 d\lambda^2+c\lambda+1-m=0,
 \tag{8.85}\]</span></span> and thus <span id="eq-spatial3lambda2"><span class="math display">\[
 \lambda=\frac{-c\pm\sqrt{c^2-4d(1-m)}}{2d}.
-\tag{8.86}\]</span></span> We do not want the solution to oscillate, so we want <span class="math inline">\(\lambda\)</span> to be real, hence <span id="eq-spatial3c"><span class="math display">\[
+\tag{8.86}\]</span></span> Because we know that <span class="math inline">\(\lambda\)</span> is real and negative, we need deduce that <span class="math inline">\(c\)</span> is positive and <span id="eq-spatial3c"><span class="math display">\[
 c\geq 2\sqrt{d(1-m)}.
-\tag{8.87}\]</span></span></p></li>
-</ol>
+\tag{8.87}\]</span></span> That <span class="math inline">\(c\)</span> is positive confirms our earlier deduction that the wave should be a right-moving wave.</p>
 </section>
 <section id="derive-turing-instability" class="level3 unnumbered">
 <h3 class="unnumbered anchored" data-anchor-id="derive-turing-instability">Derive Turing instability</h3>

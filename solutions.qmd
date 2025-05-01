@@ -628,9 +628,9 @@ the disease-free state and thus $B(\infty)=0$. At $x=-\infty$ the
 system must thus be in the endemic state, so $A(-\infty)=u^*=m$
 and $B(-\infty)=v^*=b(1-m)$.
 So the key to this question was the observation that the travelling wave will
-always have to interpolate between two steady states.
+always have to interpolate between two steady states. Furthermore, it is the stable steady state that will invade the unsteady stable state. In this case, this means that the stable endemic state on the left invades the unstable disease-free state on the right, so we have a right-moving wave.
 
-f. At the leading edge where $B$ is very small, $A$ is very close to $1$,
+f. At the trailing edge where $B$ is very small, $A$ is very close to $1$,
 so $A=1-\epsilon$ for a small $\epsilon>0$.
 The equations @eq-AB can thus be approximated by the linear
 equations
@@ -640,7 +640,7 @@ $$ {#eq-ABl}
 We obtained this by dropping all terms involving $\epsilon^2$ or $\epsilon B$ because
 they are negligible when $\epsilon$ and $B$ are both small.
 
-    We concentrate on the second equation, which we  solve with the Ansatz $B(x)=\exp(\lambda x)$.
+We concentrate on the second equation, which we  solve with the Ansatz $B(x)=\exp(\lambda x)$, where we need $\lambda$ to be real and negative to match the shape of $B$ at the trailing edge.
 Substituting this Ansatz into the equation gives the characteristic equation for $\lambda$:
 $$
 d\lambda^2+c\lambda+1-m=0,
@@ -649,12 +649,11 @@ and thus
 $$
 \lambda=\frac{-c\pm\sqrt{c^2-4d(1-m)}}{2d}.
 $$ {#eq-spatial3lambda2}
-We do not want the solution to oscillate, so we want $\lambda$ to
-be real, hence
+Because we know that $\lambda$ is real and negative, we need deduce that $c$ is positive and
 $$
 c\geq 2\sqrt{d(1-m)}.
 $$ {#eq-spatial3c}
-
+That $c$ is positive confirms our earlier deduction that the wave should be a right-moving wave.
 
 
 ### Derive Turing instability {.unnumbered}
