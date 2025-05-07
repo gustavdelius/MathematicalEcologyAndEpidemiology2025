@@ -315,7 +315,7 @@ $$\begin{split}
 a)\qquad&a_{11}+a_{22}<0,\\
 b)\qquad&a_{11}a_{22}-a_{12}a_{21}>0,\\
 c)\qquad&D_1a_{22}+D_2a_{11}>0,\\
-d)\qquad&(a_{11}+a_{22})^2>4(a_{11}a_{22}-a_{12}a_{21}).
+d)\qquad&(D_1a_{22}+D_2a_{11})^2>4D_1D_2(a_{11}a_{22}-a_{12}a_{21}).
 \end{split}$$ {#eq-turingconditions}
 Conditions a) and b) are the conditions for the spatially homogeneous steady state to be stable in the absence of diffusion. Condition c) and d) are the condition for the spatially homogeneous steady state to be unstable in the presence of diffusion.
 
@@ -362,7 +362,7 @@ $$ {#eq-schnakjac2}
 We see that the sign structure of this matrix is one of those in @eq-turingjac that can give rise to a Turing instability. Species $u$ is the activator and species $v$ is the inhibitor.
 
 Now let us check each of the conditions a) to d) from @eq-turingconditions. Condition a) becomes $1-b^2<0$ and hence $b^2>1$. Condition b) becomes $-b^2+2b^2>0$ which is automatically satisfied. Condition c) becomes $D_2-b^2D_1>0$ which implies $D_1b^2<D_2$, which means that the ratio $d=D_2/D_1>b^2$. Condition d) becomes $(D_2-b^2D_1)^2>4D_1D_2b^2$. Multiplying out the square and bringing everything to one side gives
-$b^4D_1^2-6D_1D_2+D_2^2>0$. We can rewrite this in terms of the ratio $d=D_2/D_1$ as
+$b^4D_1^2-6D_1D_2b^2+D_2^2>0$. We can rewrite this in terms of the ratio $d=D_2/D_1$ as
 $$
 b^4-6db^2+d^2>0.
 $$ {#eq-schnakcond}
