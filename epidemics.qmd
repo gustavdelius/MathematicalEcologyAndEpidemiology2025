@@ -546,7 +546,7 @@ $$
 R^* = \frac{\gamma}{\mu}I^* = \frac{\gamma N}{\mu}\frac{1-\frac{\gamma}{\beta}}{1+\frac{\gamma}{\mu}}=
 N\frac{1-\frac{\gamma}{\beta}}{1+\frac{\mu}{\gamma}}.
 $$ {#eq-Rstar2}
-$(S^*,I^*,R^*) is the endemic steady state of the SIR model with loss of immunity.
+$(S^*,I^*,R^*)$ is the endemic steady state of the SIR model with loss of immunity.
 
 We now want to determine whether this endemic state is stable or not. We will do this by linearising the equations @eq-SIRL around the endemic steady state. We will then determine the eigenvalues of the Jacobian matrix at the endemic steady state. If all eigenvalues have negative real parts, the endemic steady state is stable. If at least one eigenvalue has a positive real part, the endemic steady state is unstable.
 
