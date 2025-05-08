@@ -1,0 +1,385 @@
+---
+title: Solutions for assignment 5
+subtitle: Mathematical Ecology
+format:
+  pdf:
+    papersize: a4
+    geometry: margin=2.54cm
+---
+
+#### SIR with vaccination and loss of immunity
+**Exercise 6.1:**
+In the lectures we studied the SIR model with vaccination rate $\nu$ and the SIR
+model with loss of immunity at a rate $\mu$. Now consider the SIR model with both vaccination
+and loss of immunity.
+
+1. Write down the differential equations for the numbers of susceptibles $S$,
+infecteds $I$ and recovereds $R$.
+
+2. Find the disease-free steady state.
+
+3. Find the endemic steady state and give the condition on the parameters 
+needed for its existence.
+
+4. Now view this model as a two-dimensional model for the variables $I$ and $R$.
+Determine the Jacobian matrix $A$ for this model.
+
+5. Evaluate $A$ at the disease-free steady state and use this to classify
+this fixed point.
+
+6. Evaluate $A$ at the endemic steady state and use this to classify
+this fixed point.
+
+You will want to compare your results to the results from the lecture and make sure that they make sense.
+
+**Solution**
+
+1. The vaccination at per-capita rate $\nu$ moves individuals from the susceptible to the recovered component
+at the rate $\nu S$. This adds a term $-\nu S$ to the equation for $dS/dt$ and a term $\nu S$
+to the equation for $dR/dt$. The  loss of immunity at per-capita rate $\mu$ moves individuals
+from the recovered component back to the susceptible component at a rate $\mu R$, so
+add a term $\mu R$ to the  equation for $dS/dt$ and a term $-\mu R$
+to the equation for $dR/dt$. This gives the equations
+$$\begin{split}
+\frac{dS}{dt}&=-\beta S I/N - \nu S +\mu R,\\
+\frac{dI}{dt}&=\beta S I/N - \gamma I,\\
+\frac{dR}{dt}&=\gamma I + \nu S - \mu R.
+\end{split}$$ {#eq-SIRvaccinationloss}
+
+2. The disease-free steady state is the fixed point with $I^*=0$. We then need
+$\nu S^* = \mu R^*$
+in order for all time derivatives to vanish. We now use that $R=N-S-I$ and thus $R^*=N-S^*$.
+This implies 
+$$
+S^*=\frac{\mu}{\nu+\mu}N ~~~\text{ and }~~~ R^*=\frac{\nu}{\nu+\mu}N.
+$$ {#eq-diseasefree}
+
+3. At the endemic steady state, $I^*>0$. The expression for $dI/dt$ is still the same as in the
+standard SIR model and it vanishes at $S=S^*=\gamma N/\beta$. Next we consider
+$$\begin{split}
+0=\frac{dS}{dt}(S^*,I^*,R^*)=&=-\beta S^* I^*/N - \nu S^* +\mu R^*\\
+&=-\gamma I^*-\nu\frac\gamma\beta N+\mu\left(N-I^*-\frac\gamma\beta N\right)\\
+&=-(\gamma+\mu)I^*+\left(\mu-(\nu+\mu)\frac\gamma\beta\right) N
+\end{split}$$ {#eq-endemic}
+which implies
+$$
+I^*=\left(\frac{\mu}{\gamma+\mu}-\frac{\nu+\mu}{\gamma+\mu}\frac\gamma\beta\right)N = N\frac{\gamma}{\beta}\frac{\beta-\gamma+\nu}{\beta+\gamma}.
+$$  {#eq-Istar}
+Finally,
+$$
+R^*=N-I^*-\frac\gamma\beta N
+=\left(\frac{\gamma}{\gamma+\mu}-\frac{\gamma-\nu}{\gamma+\mu}\frac\gamma\beta\right)N.
+$$  {#eq-Rstar}
+The endemic state only exists if all components have positive values.
+The requirement that $S^*>0$ is automatically satsified because $\gamma > 0$ and $\beta>0$.
+From the requirement that $I^*>0$ we get that
+$$
+1>\frac{\nu+\mu}{\mu}\frac\gamma\beta.
+$$  {#eq-endemiccondition}
+From the requirement that $R^*>0$ we get that
+$$
+1>\frac{\gamma-\nu}{\beta}.
+$$  {#eq-endemiccondition2}
+
+4. We now reduce the SIR model
+to a set of only two equations by using that $N=S+I+R$ is constant. There is a choice which
+variable we want to eliminate. We choose to eliminate $S=N-I-R$. Substituting this into the
+equations for $dI/dt$ and $dR/dt$ gives
+$$\begin{split}
+\frac{dI}{dt}&=\beta (N-I-R) I/N - \gamma I=f(I,R),\\
+\frac{dR}{dt}&=(\gamma - \nu) I -(\mu+ \nu) R +\nu N=g(I,R).
+\end{split}$$ {#eq-SIRvaccinationloss2}
+The Jacobian matrix is
+$$
+A(I,R)=\begin{pmatrix}\frac{\partial f}{\partial I}&\frac{\partial f}{\partial R}\\
+\frac{\partial g}{\partial I}&\frac{\partial g}{\partial R}\end{pmatrix}
+=\begin{pmatrix}\beta(N-2I-R)/N-\gamma&-\beta I/N\\
+\gamma-\nu&-(\mu+\nu)
+\end{pmatrix}.
+$$ {#eq-Jacobian}
+
+5. At the disease-free state
+$$
+A\left(0,\frac{\nu}{\nu+\mu}N\right)=\begin{pmatrix}
+\frac{\beta\mu}{\nu+\mu}-\gamma&0\\
+\gamma-\nu&-(\mu+\nu)\end{pmatrix}
+$$ {#eq-Jacobian-diseasefree}
+Both eigenvalues are negative and thus the fixed point is stable if
+$$
+1<\frac\gamma\beta\frac{\nu+\mu}{\mu}.
+$$ {#eq-diseasefreecriterion}
+Otherwise the disease-free state is a saddle.
+
+6. At the endemic state
+$$
+A\left(I^*,R^*\right)=\begin{pmatrix}
+-\beta I^*/N&-\beta I^*/N\\
+\gamma-\nu&-(\mu+\nu)\end{pmatrix}
+$$ {#eq-Jacobian-endemic}
+where we have used that $(N-I^*-R^*)\beta/N-\gamma=0$, which follows from $dS/dt=0$.
+This Jacobian matrix has
+$$
+\text{Tr}(A) = -\beta I^*/N-(\mu+\nu)<0
+$$ {#eq-trace}
+and
+$$
+\det(A)=\beta I^*/N(\mu+\gamma) > 0.
+$$ {#eq-determinant}
+Hence the endemic state is always stable, when it exists.
+
+In the lectures we dealt with the cases $\mu=0$ (no reinfections) and $\nu=0$ (no vaccination).
+In the case $\mu=0$ there should be no endemic state, and indeed our condition
+$$
+1>\frac{\nu+\mu}{\mu}\frac\gamma\beta
+$$ {#eq-endemiccondition}
+tells us that the required population goes to infinity as $\mu$ goes to zero.
+In the case $\nu=0$ our expression for the endemic state agrees with the one from
+the lectures:
+$$
+\begin{split}(S^*,I^*,R^*)&=\left(\frac\gamma\beta N,
+\left(\frac{\mu}{\gamma+\mu}-\frac{\nu+\mu}{\gamma+\mu}\frac\gamma\beta\right)N,
+\left(\frac{\gamma}{\gamma+\mu}-\frac{\gamma-\nu}{\gamma+\mu}\frac\gamma\beta\right)N\right)\\
+&\underset{\nu= 0}{=}
+\left(\frac\gamma\beta N,
+\frac{\mu}{\gamma+\mu}\left(1-\frac\gamma\beta\right)N,
+\frac{\gamma}{\gamma+\mu}\left(1-\frac\gamma\beta\right)N
+\right)
+\end{split}
+$$ {#eq-endemicstar}
+
+
+### Fishing model with diffusion
+**Exercise 7.1:**
+
+A population of fish $F(x,t)$ in a river of width $L$ with banks at $x=0$ and $x=L$ can be modelled by the partial differential equation
+$$
+\frac{\partial F}{\partial t} = rF\left( 1-\frac{F}{K} \right) + D\frac{\partial^2 F}{\partial x^2},
+$$ {#eq-fish}
+where $r$, $K$ and $D$ are positive constants.
+No-flux boundary conditions are applied at $x=L$.  On the left bank at $x=0$ the shore-based fishermen catch all of the fish, so that $u(0,t)=0$ for all times.  We wish to find the minimum width of the river to ensure the fish population does not collapse.
+
+1. First determine the spatially uniform steady states and indicate their stability.
+
+2. Linearise the system for small $F$.
+
+3. By considering a solution of the form $F(x,t) = e^{\lambda t} \left( A \cos kx + B \sin kx \right)$ show that 
+$$
+\lambda = \lambda_n = r-k_n^2D,
+$$ {#eq-fishlambda}
+where
+$$
+k = k_n = \frac{(2n+1)\pi }{2L}, ~~~ n = 0,~1,~2,...
+$$ {#eq-fishk}
+
+4. Hence, determine the condition on $L$ for the fish population not to collapse.
+
+\pagebreak
+**Solution**
+
+1. The spatially uniform steady states are $F^*=0$ and $K$. Stability can be determined graphically or from the gradient at the steady state, with the result that $F^*=0$ is unstable and $F^*=K$ is stable.
+
+2. If $F$ is small then $\frac{\partial F}{\partial t} \approx rF + D\frac{\partial^2 F}{\partial x^2}$.
+
+3. Try $F(x,t) = e^{\lambda t}\left( A \cos k x + B\sin k x \right)$ such that
+$$
+\frac{\partial F}{\partial x} = k e^{\lambda t}\left( -A \sin k x + B\cos k x \right).
+$$ {#eq-solfishapprox}
+The boundary conditions are $F(0,t) = 0 = \frac{\partial F}{\partial x}(L,t)$.  The boundary condition at $x=0$ implies that $A=0$.  The second implies that 
+$$
+\cos kL = 0\implies k = \frac{(2n+1)\pi }{2L} =: k_n, ~~~ n = 0,~1,~2,....
+$$ {#eq-solfishk}
+Substituting this solution into the PDE gives
+$$
+\lambda = \lambda_n  =: r-k_n^2D.
+$$ {#eq-solfishlambda}
+
+4. A full solution is a superposition of the above solutions.  For the fish population not to collapse we need at least one $\lambda_n>0$ for some $n$.  The largest $\lambda_n$ is for the smallest $k_n$, which occurs when $n=0$, giving the requirement that $\lambda_0 = r-D\left( \frac{\pi}{2L}\right)^2>0$.  Hence, we need
+$$
+L^2>\frac{D\pi^2}{4r}.
+$$ {#eq-solfishL}
+
+
+#### Travelling wave in a reaction-diffusion system
+**Exercise 7.3:**
+Consider the system
+$$
+\begin{split}
+\frac{\partial u}{\partial t}&=-u^2v \\
+\frac{\partial v}{\partial t}&=u^2v-\rho
+v+\frac{\partial^2v}{\partial x^2}
+\end{split}
+$$ {#eq-travellingwave}
+where $\rho$ is a positive constant. 
+
+1. Convert this system into travelling wave form
+by making the
+Ansatz that $u(x,t)=U(z)$ and $v(x,t)=V(z)$ with $z=x-ct$, and show in particular that
+$$
+-c\frac{dV}{dz}=c\frac{dU}{dz}-\frac{\rho
+  c}{U^2}\frac{dU}{dz}+\frac{d^2V}{dz^2}.
+$$ {#eq-travellingwave2}
+
+2. Consider a solution of the travelling wave equations
+such that $U(\infty)=1$, $U(-\infty)=a$, $V(\pm\infty)=0$ for some $a<1$.
+By integrating the above equation from $-\infty$ to
+$\infty$ and imposing the boundary conditions, determine 
+ the value of $a$.
+
+3. Determine a lower bound on the
+wave velocity $c$ by linearising around the leading edge of the
+wave.
+
+\pagebreak
+**Solution**
+
+1. Put $u(x,t) = U(z(x,t))$ and $v(x,t) = V(z(x,t))$, where $z(x,t)=x-ct$. The chain rule
+then gives
+$$
+\begin{split}
+\frac{\partial u}{\partial t}&=-c\frac{dU}{dz}\frac{\partial z}{\partial t}=-c\frac{dU}{dz}, \\
+\frac{\partial v}{\partial t}&=-c\frac{dV}{dz}\frac{\partial z}{\partial t}=-c\frac{dV}{dz},\\
+\frac{\partial v}{\partial x}&=\frac{dV}{dz}\frac{\partial z}{\partial x}=\frac{dV}{dz},\\
+\frac{\partial^2 v}{\partial x^2}&=\frac{d^2V}{dz^2}\frac{\partial z}{\partial x}=\frac{d^2V}{dz^2}.
+\end{split}
+$$ {#eq-chainrule}
+(Once you have seen this, it should be obvious what the result of the chain rule is and you do not need to write the above out in such detail.)
+Substituting this into @eq-travellingwave and denoting the derivatives by primes gives
+$$
+-cU' = -U^2V, ~~~\mbox{and}~~~-cV' = U^2V - \rho V + V''.
+$$ {#eq-travellingwave3}
+The first equation in the forms $U^2V=cU'$ and $V=cU'/U^2=-c(1/U)'$ can be used
+to write the second equation as
+$$
+-cV' =cU'  - \rho c  \left(\frac{1}{U}\right)' + V''.
+$$ {#eq-travellingwave2}
+2. Integration yields
+$$
+-cV = cU + \rho c  \frac{1}{U} + V' + A,
+$$ {#eq-travellingwave4}
+where $A$ is a constant.
+The boundary conditions are $U(\infty) =1$, $V(\pm \infty)=0$,  and $U(-\infty)=a$, where we need to determine the constant $0\leq a<1$.  (Note $U'(\pm \infty) =0= V'(\pm \infty)$.)
+At $z=\infty$: $-c = \rho c + 0 + A$, which implies 
+$$
+A=-c(1+\rho).
+$$ {#eq-travellingwave5}
+At $z=-\infty$: $-ca = \rho c \frac{1}{a} + 0 + -c(1+\rho)$, which implies that
+$$
+a^2 -(1+\rho)a + \rho = (a-1)(a-\rho) = 0.
+$$  {#eq-travellingwave6}
+and hence $a=1$ or $a=\rho$. The solution $a=1$ corresponds to a constant solution. We are only interested in the travelling wave solution, so we must have $a=\rho$.
+Because $a<1$, we must have $\rho = a<1$ for there to exist a travelling wave with a constant shape.  
+
+3. Near the leading edge we have $U=1-\epsilon$ with $\epsilon<<1$ and $V<<1$. Hence the $U^2V$ term in the equation $-cV' = U^2V - \rho V + V''$ is negligible. Hence at the leading edge the solution is described by the linear equation
+$$
+-cV' = V - \rho V + V''.
+$$ {#eq-travellingwave6}
+This is solved by the Ansatz $V(z)=e^{\lambda z}$ if
+$$
+\lambda^2 + c \lambda + (1-\rho) = 0.
+$$ {#eq-travellingwave7}
+This has the solutions
+$$
+\lambda = \frac{-c\pm \sqrt{c^2 - 4(1 - \rho)}}{2}.
+$$ {#eq-travellingwave8}
+These solutions are real, corresponding to realistic travelling wave solutions, only if 
+$$
+c\geq 2\sqrt{1-\rho}.
+$$ {#eq-travellingwave9}
+
+#### Conditions for Turing instability
+**Exercise 7.6:**
+Consider the reaction-diffusion model
+$$\begin{split}
+\frac{\partial c_1}{\partial t}&=\delta -kc_1 - c_1c_2^2 + D_1\frac{\partial^2c_1}{\partial
+  x^2} \\
+\frac{\partial c_2}{\partial t}&=kc_1+c_1c_2^2 - c_2 + D_2\frac{\partial^2c_2}{\partial
+  x^2},
+\end{split}$$ {#eq-Turing}
+where $\delta, k, D_1$ and $D_2$ are positive parameters.
+
+Show that a spatially uniform steady state solution $(c_1^*,c_2^*)$ exists
+for this model and  give the conditions for this steady state to be driven unstable by
+diffusion. You may use any results derived in the lectures.
+
+**Solution**
+
+We first find the spatially uniform (homogeneous) steady states by setting
+ $\frac{\partial c_1}{\partial t}=0$ and $\frac{\partial c_2}{\partial t}=0$. 
+These steady-state conditons have the solution
+$(c_1^*,~c_2^*)=(\frac{\delta}{\delta^2+k},\delta)$.
+So there is only one steady state.
+
+Next we determine the Jacobian matrix of the system at the steady state.  We find
+$$
+A(c_1^*,c_2^*)=\begin{pmatrix}
+a_{11}&a_{12}\\a_{21}&a_{22}\end{pmatrix}
+=\begin{pmatrix}
+-{c_2^*}^2-k & -2c_1^*c_2^* \\ {c_2^*}^2+k & 2c_1^*c_2^*-1
+\end{pmatrix}
+=\begin{pmatrix}
+-(\delta^2+k) & -2\frac{\delta^2}{\delta^2+k} \\ \delta^2+k & \frac{\delta^2-k}{\delta^2+k}
+\end{pmatrix}
+$$ {#eq-Jacobian}
+
+We can read off from this already that species $1$ is an inhibitor because $a_{11}<0$. Hence we know that a Turing instability is only possible if species $2$ is an activator. This gives the condition
+$$
+a_{22} = \frac{\delta^2-k}{\delta^2+k}>0 \implies \delta^2>k.
+$$ {#eq-Turing7}
+
+We can now check the four conditions for the existence of a Turing instability that we derived in the lectures. First there are the two conditions that guarantee that the steady state is stable in the absence of diffusion. These are:
+$$
+\begin{split}
+a)\qquad & \text{Tr}(A) = -(\delta^2+k)+\frac{\delta^2-k}{\delta^2+k}< 0 \\
+b)\qquad & \det(A)  = -\delta^2+k+2\delta^2=\delta^2+k> 0
+\end{split}
+$$ {#eq-stable}
+Condition b) is automatically satisfied. We can rewrite condition a) as
+$$
+a)\qquad\implies (\delta^2+k)^2 > \delta^2 - k.
+$$ {#eq-Turing5}
+This can clearly be satisfied if $\delta$ or $k$ is sufficiently big. Because the terms in the inequality are at most quadratic in both $k$ and in $\delta^2$, we could use the quadratic formula to give explicit bounds on $k$ in terms of $\delta^2$ or on $\delta^2$ in terms of $k$. However, let's not bother to do that because it is just boring algebra.
+
+Then there are the two conditions involving the diffusion coefficients. The first is
+$$
+c)\qquad a_{11}D_2+ a_{22}D_1
+=-(\delta^2+k)D_2+\frac{\delta^2-k}{\delta^2+k}D_1> 0
+$$ {#eq-Turing3}
+which becomes
+$$
+c)\qquad d=\frac{D_1}{D_2}>\frac{(\delta^2+k)^2}{\delta^2-k}.
+$$ {#eq-Turing4}
+Combined with @eq-Turing5 this shows that the inhibitor must diffuse faster than the activator, as expected.
+
+The final condition is
+$$
+d)\qquad\left( a_{11}D_2+ a_{22}D_1 \right)^2 >4D_1D_2(a_{11}a_{22}-a_{12}a_{21})
+$$ {#eq-Turing1}
+which becomes
+$$
+d)\qquad\left( -(\delta^2+k)D_2 +\frac{\delta^2-k}{\delta^2+k} D_1  \right)^2 > 4D_1D_2(\delta^2+k).
+$$ {#eq-Turing2}
+Dividing both sides by $D_2^2$ gives
+$$
+d)\qquad\implies\left( -(\delta^2+k) +\frac{\delta^2-k}{\delta^2+k} d  \right)^2 > 4d^2(\delta^2+k).
+$$ {#eq-Turing6}
+Multiplying out the square, bringing everything to one side and collecting the
+coefficients gives
+$$
+-ad^2-bd+ c>0
+$$
+with
+$$
+\begin{split}
+a&=4(\delta^2+k)-\left(\frac{\delta^2-k}{\delta^2+k}\right)^2>0,\\
+b&=2(\delta^2-k)^2>0,\\
+c&=(\delta^2+k)^2>0.
+\end{split}
+$$
+The left-hand side is an upside-down parabola. Its roots are
+$$
+d_\pm=\frac{-b\pm\sqrt{b^2+4ac}}{2a}
+$$
+
+
+This is a quadratic inequality in $d$, so we could again use the quadratic formula to derive explicit bounds on $d$ in terms of $\delta^2$ and $k$. However, we will not do this because it is boring algebra. Instead we will just note that because the left-hand side has a quadratic term in $d$ with a positive coefficient whereas the right-hand side is linear in $d$, this condition can always be satisfied for  a sufficiently large value of $d$, so there can be a Turing instability.
+
