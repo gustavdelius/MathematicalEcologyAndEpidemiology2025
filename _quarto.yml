@@ -32,6 +32,9 @@ book:
       - icon: mortarboard-fill
         href: https://maths.york.ac.uk/moodle/course/view.php?id=2726
         text: Moodle quizzes
+      - icon: file-pdf
+        href: Mathematical-Ecology-and-Epidemiology.pdf
+        text: "Download PDF"
   chapters:
     - index.qmd
     - continuous_time.qmd
