@@ -174,7 +174,7 @@ $$\begin{split}
 -cU'&=-UV,\\
 -cV'&=UV-rV+V''.
 \end{split}$$ {#eq-sirnondim5}
-Next let us think about the boundary conditions. We expect that ahead of the wave all the individuals are still susceptible and there are no infecteds yet. So to the far right at $z=infty$ we have $u(\infty)=1$ (corresponding to S=N) and $v(\infty)=0$. Behind the wave the epidemic will have run its course and so $u(-\infty)=S_\infty/N=:a$ and $v(-\infty)=0$. In other words, the travelling wave interpolates between the state before an epidemic (at $z=\infty$) and the state after an epidemic (at $z=-\infty$). We also have that the solution becomes flat as $z\to\pm\infty$, so in particular $V'(\pm\infty)=0$.
+Next let us think about the boundary conditions. We expect that ahead of the wave all the individuals are still susceptible and there are no infecteds yet. So to the far right at $z=\infty$ we have $u(\infty)=1$ (corresponding to $S=N$) and $v(\infty)=0$. Behind the wave the epidemic will have run its course and so $u(-\infty)=S_\infty/N=:a$ and $v(-\infty)=0$. In other words, the travelling wave interpolates between the state before an epidemic (at $z=\infty$) and the state after an epidemic (at $z=-\infty$). We also have that the solution becomes flat as $z\to\pm\infty$, so in particular $V'(\pm\infty)=0$.
 
 We now massage the equations a bit to get them into a form that we can integrate more easily. From the first equation we see that $UV=cU'$ and also that $V=cU'/U=c(\log U)'$. We plug this into the second equation and get
 $$
