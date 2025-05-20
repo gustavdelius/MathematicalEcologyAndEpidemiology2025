@@ -233,7 +233,7 @@ window.Quarto = {
   </ul></li>
   <li><a href="#discrete-time-harvesting-model" id="toc-discrete-time-harvesting-model" class="nav-link" data-scroll-target="#discrete-time-harvesting-model"><span class="header-section-number">2.6</span> Discrete-time harvesting model</a></li>
   <li><a href="#sec-period-doubling" id="toc-sec-period-doubling" class="nav-link" data-scroll-target="#sec-period-doubling"><span class="header-section-number">2.7</span> Period-doubling route to chaos</a></li>
-  <li><a href="#transcritical-and-pitchfork-bifurcations" id="toc-transcritical-and-pitchfork-bifurcations" class="nav-link" data-scroll-target="#transcritical-and-pitchfork-bifurcations"><span class="header-section-number">2.8</span> Transcritical and pitchfork bifurcations</a>
+  <li><a href="#bifurcations" id="toc-bifurcations" class="nav-link" data-scroll-target="#bifurcations"><span class="header-section-number">2.8</span> Bifurcations</a>
   <ul>
   <li><a href="#saddle-node-bifurcation" id="toc-saddle-node-bifurcation" class="nav-link" data-scroll-target="#saddle-node-bifurcation"><span class="header-section-number">2.8.1</span> Saddle-node bifurcation</a></li>
   <li><a href="#transcritical-bifurcation" id="toc-transcritical-bifurcation" class="nav-link" data-scroll-target="#transcritical-bifurcation"><span class="header-section-number">2.8.2</span> Transcritical bifurcation</a></li>
@@ -29873,18 +29873,18 @@ N_{t+1} = \frac{R N_t}{1 + \frac{R-1}{K}N_t}.
 </section>
 <section id="discrete-time-harvesting-model" class="level2" data-number="2.6">
 <h2 data-number="2.6" class="anchored" data-anchor-id="discrete-time-harvesting-model"><span class="header-section-number">2.6</span> Discrete-time harvesting model</h2>
-<p>We will now look at an example of a discrete-time model with harvesting and apply the techniques we have learned. The model has the standard discrete-time model form <span class="math inline">\(N_{t+1}=f(N_t)\)</span>, where <span class="math inline">\(f\)</span> in our example is <span class="math display">\[
+<p>We will now look at an example of a discrete-time model with harvesting and apply the techniques we have learned. The model has the standard discrete-time model form <span class="math inline">\(N_{t+1}=f(N_t)\)</span>, where <span class="math inline">\(f\)</span> in our example is <span id="eq-discrete-harvesting"><span class="math display">\[
 f(N) = \frac{b N^2}{1+N^2}-EN.
-\]</span> The constant <span class="math inline">\(b&gt;2\)</span> determines the growth rate of the population and the harvesting rate is determined by the harvesting effort <span class="math inline">\(E\)</span>.</p>
-<p>We start by studying the model without harvesting, so we set <span class="math inline">\(E=0\)</span> for now. As usual, we start by looking at the steady states of the model. The fixed points are the solutions to the equation <span class="math display">\[
+\tag{2.21}\]</span></span> The constant <span class="math inline">\(b&gt;2\)</span> determines the growth rate of the population and the harvesting rate is determined by the harvesting effort <span class="math inline">\(E\)</span>.</p>
+<p>We start by studying the model without harvesting, so we set <span class="math inline">\(E=0\)</span> for now. As usual, we start by looking at the steady states of the model. The fixed points are the solutions to the equation <span id="eq-discrete-harvesting_fixed_points"><span class="math display">\[
 N^* = \frac{b\,{N^*}^2}{1+{N^*}^2}.
-\]</span> There is the obvious solution <span class="math inline">\(N^*=0\)</span>. We can then find the non-zero solutions by dividing both sides by <span class="math inline">\(N^*\)</span> and multiply them by <span class="math inline">\(1+{N^*}^2\)</span> to get the equation <span class="math display">\[
+\tag{2.22}\]</span></span> There is the obvious solution <span class="math inline">\(N^*=0\)</span>. We can then find the non-zero solutions by dividing both sides by <span class="math inline">\(N^*\)</span> and multiply them by <span class="math inline">\(1+{N^*}^2\)</span> to get the equation <span id="eq-discrete-harvesting_fixed_points_nonzero"><span class="math display">\[
 1+{N^*}^2 = bN^*.
-\]</span> This is a quadratic equation for <span class="math inline">\(N^*\)</span>, which we could rewrite in the more conventional form <span class="math display">\[
+\tag{2.23}\]</span></span> This is a quadratic equation for <span class="math inline">\(N^*\)</span>, which we could rewrite in the more conventional form <span id="eq-discrete-harvesting_fixed_points_nonzero_quadratic"><span class="math display">\[
 {N^*}^2 - bN^* + 1 = 0.
-\]</span> The solutions to this equation are <span class="math display">\[
+\tag{2.24}\]</span></span> The solutions to this equation are <span id="eq-discrete-harvesting_fixed_points_nonzero_quadratic_solution"><span class="math display">\[
 N^*_\pm = \frac{b\pm\sqrt{b^2-4}}{2}.
-\]</span> The solutions are real if <span class="math inline">\(b^2-4\geq 0\)</span>, i.e.&nbsp;if <span class="math inline">\(b\geq 2\)</span>, which we have stipulated earlier. Both solutions are positive.</p>
+\tag{2.25}\]</span></span> The solutions are real if <span class="math inline">\(b^2-4\geq 0\)</span>, i.e.&nbsp;if <span class="math inline">\(b\geq 2\)</span>, which we have stipulated earlier. Both solutions are positive.</p>
 <p>We now have enough information to draw a good sketch to understand the dynamics of the model. We can draw the function <span class="math inline">\(f(N)\)</span> and the line <span class="math inline">\(N_{t+1}=N_t\)</span>. It may not be immediately obvious what the sketch of <span class="math inline">\(f(N)=bN^2/(1+N^2)\)</span> looks like. We’ll reason ourselves through this in steps:</p>
 <ul>
 <li><p>First let us consider what happens near <span class="math inline">\(N=0\)</span>. There the function is approximately <span class="math inline">\(f(N)\approx bN^2\)</span>. This is a parabola that opens upwards. The function is zero at <span class="math inline">\(N=0\)</span> and increases quadratically with <span class="math inline">\(N\)</span>.</p></li>
@@ -29924,13 +29924,13 @@ Figure&nbsp;2.6: Graph of the function <span class="math inline">\(f(N)=\frac{bN
 </div>
 </div>
 <p>We see that as the harvesting effort <span class="math inline">\(E\)</span> increases, the two fixed points move closer together. At a critical value <span class="math inline">\(E_c\)</span> the two fixed points merge and disappear. The population number will then go extinct for all initial population numbers.</p>
-<p>Let us find the critical value <span class="math inline">\(E_c\)</span>. For that we first determine the location of the fixed points in the presence of harvesting. So we solve the equation <span class="math display">\[
+<p>Let us find the critical value <span class="math inline">\(E_c\)</span>. For that we first determine the location of the fixed points in the presence of harvesting. So we solve the equation <span id="eq-discrete-harvesting_fixed_points_harvesting"><span class="math display">\[
 N^* = \frac{b\,{N^*}^2}{1+{N^*}^2}-EN^*.
-\]</span> Again this has a solution <span class="math inline">\(N^*=0\)</span>. We can then find the non-zero solutions by dividing both sides by <span class="math inline">\(N^*\)</span> and multiply them by <span class="math inline">\(1+{N^*}^2\)</span> to get the equation <span class="math display">\[
+\tag{2.26}\]</span></span> Again this has a solution <span class="math inline">\(N^*=0\)</span>. We can then find the non-zero solutions by dividing both sides by <span class="math inline">\(N^*\)</span> and multiply them by <span class="math inline">\(1+{N^*}^2\)</span> to get the equation <span id="eq-discrete-harvesting_fixed_points_harvesting_nonzero"><span class="math display">\[
 (1+E){N^*}^2-bN^*+1+E = 0.
-\]</span> This is solved by <span class="math display">\[
+\tag{2.27}\]</span></span> This is solved by <span id="eq-discrete-harvesting_fixed_points_harvesting_nonzero_solution"><span class="math display">\[
 N^*_\pm = \frac{\frac{b}{1+E}\pm\sqrt{\left(\frac{b}{1+E}\right)^2-4}}{2}.
-\]</span></p>
+\tag{2.28}\]</span></span></p>
 <p>We see that these solutions are real only if <span class="math inline">\(\left(\frac{b}{1+E}\right)^2-4\geq 0\)</span>, i.e., if <span class="math inline">\(E&lt; \frac{b-2}{2}\)</span>. Thus the critical effort is <span class="math inline">\(E_c=\frac{b-2}{2}\)</span>. Fishing above this level will lead to extinction of the population. But even fishing just near this level is risky because the population number will be very close to the minimum viable population and a small disturbance could lead to extinction.</p>
 <div id="cell-fig-discrete-harvesting-function-bifurcation" class="cell" data-execution_count="7">
 <div class="cell-output cell-output-display">
@@ -29950,9 +29950,9 @@ Figure&nbsp;2.7: Bifurcation diagram for the discrete-time harvesting model.
 <section id="sec-period-doubling" class="level2" data-number="2.7">
 <h2 data-number="2.7" class="anchored" data-anchor-id="sec-period-doubling"><span class="header-section-number">2.7</span> Period-doubling route to chaos</h2>
 <p>Take another look at <a href="#fig-cobweb-stable" class="quarto-xref">Figure&nbsp;<span>2.1</span></a> and <a href="#fig-cobweb-unstable" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>. Just a little change in the function <span class="math inline">\(f(N)\)</span> changed the nature of the fixed point. Such a change can be the consequence of a small change in a model parameter, for example the intrinsic growth rate.</p>
-<p>We will use the logistic map to illustrate the period-doubling route to chaos, although the phenomenon is more general. The logistic map is a simple discrete-time model for population growth that exhibits a period-doubling route to chaos. It is defined as <span class="math display">\[
+<p>We will use the logistic map to illustrate the period-doubling route to chaos, although the phenomenon is more general. The logistic map is a simple discrete-time model for population growth that exhibits a period-doubling route to chaos. It is defined as <span id="eq-logistic-map"><span class="math display">\[
 X_{t+1} = R\,X_t\,(1-X_t) =: f(X_t).
-\]</span> It is the same as the Verhulst model <a href="#eq-verhulst" class="quarto-xref">Eq.&nbsp;<span>2.6</span></a>, just written in terms of <span class="math inline">\(X_t = N_t/\tilde{K}\)</span>. <a href="#fig-period-doubling-bifurcation" class="quarto-xref">Figure&nbsp;<span>2.8</span></a> shows the graph of <span class="math inline">\(f(X)\)</span> of the Verhulst model at three different values of the intrinsic growth factor <span class="math inline">\(R\)</span>. For <span class="math inline">\(R=2.8\)</span> the slope of <span class="math inline">\(f\)</span> at the fixed point is less steep than <span class="math inline">\(-1\)</span> and thus the fixed point is stable, as in <a href="#fig-cobweb-stable" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>. For <span class="math inline">\(R=3.2\)</span> the slope of <span class="math inline">\(f\)</span> at the fixed point is steeper than <span class="math inline">\(-1\)</span> and thus the fixed point is unstable and the population number starts to oscillate, as in <a href="#fig-cobweb-unstable" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>. At <span class="math inline">\(R=3\)</span> the system switches from one behaviour to the other. That is the bifurcation point.</p>
+\tag{2.29}\]</span></span> It is the same as the Verhulst model <a href="#eq-verhulst" class="quarto-xref">Eq.&nbsp;<span>2.6</span></a>, just written in terms of <span class="math inline">\(X_t = N_t/\tilde{K}\)</span>. <a href="#fig-period-doubling-bifurcation" class="quarto-xref">Figure&nbsp;<span>2.8</span></a> shows the graph of <span class="math inline">\(f(X)\)</span> of the Verhulst model at three different values of the intrinsic growth factor <span class="math inline">\(R\)</span>. For <span class="math inline">\(R=2.8\)</span> the slope of <span class="math inline">\(f\)</span> at the fixed point is less steep than <span class="math inline">\(-1\)</span> and thus the fixed point is stable, as in <a href="#fig-cobweb-stable" class="quarto-xref">Figure&nbsp;<span>2.1</span></a>. For <span class="math inline">\(R=3.2\)</span> the slope of <span class="math inline">\(f\)</span> at the fixed point is steeper than <span class="math inline">\(-1\)</span> and thus the fixed point is unstable and the population number starts to oscillate, as in <a href="#fig-cobweb-unstable" class="quarto-xref">Figure&nbsp;<span>2.2</span></a>. At <span class="math inline">\(R=3\)</span> the system switches from one behaviour to the other. That is the bifurcation point.</p>
 <div id="cell-fig-period-doubling-bifurcation" class="cell" data-execution_count="8">
 <div class="cell-output cell-output-display">
 <div id="fig-period-doubling-bifurcation" class="quarto-float quarto-figure quarto-figure-center anchored" alt="Graph illustrating a period-doubling bifurcation where a stable fixed point loses stability and a stable period-2 orbit emerges.">
@@ -29999,8 +29999,8 @@ Figure&nbsp;2.10: Bifurcation diagram for the period-doubling bifurcation.
 </div>
 <p>In the chaotic regime the system displays highly sensitive dependence on initial conditions, where small differences in the starting population can result in vastly different outcomes over time. The period-doubling route to chaos, as seen in the logistic map, is a classic example of how simple nonlinear equations can produce complex and unpredictable behavior. How important chaos is for ecological systems is a subject of ongoing debate.</p>
 </section>
-<section id="transcritical-and-pitchfork-bifurcations" class="level2" data-number="2.8">
-<h2 data-number="2.8" class="anchored" data-anchor-id="transcritical-and-pitchfork-bifurcations"><span class="header-section-number">2.8</span> Transcritical and pitchfork bifurcations</h2>
+<section id="bifurcations" class="level2" data-number="2.8">
+<h2 data-number="2.8" class="anchored" data-anchor-id="bifurcations"><span class="header-section-number">2.8</span> Bifurcations</h2>
 <p>As mentioned before, a bifurcation is a change in the existence and stability of fixed points or periodic orbits as the parameters of the model are varied. You have met bifurcations in continuous-time models already in your Classical Dynamics module. You have seen there that in one-dimensional systems described by a single ODE there are three different types of bifurcation: saddle-node, pitchfork, transcritical. The same types of bifurcations can occur in discrete-time models and we will discuss and visualise each of these bifurcation types below. These bifurcations happen if there is a fixed point with <span class="math inline">\(f'(N^*)=1\)</span>. Then there is also one more type: the period-doubling bifurcation, which happens when <span class="math inline">\(f'(N^*)=-1\)</span>, and which we have met in <a href="#sec-period-doubling" class="quarto-xref"><span>Section 2.7</span></a>.</p>
 <section id="saddle-node-bifurcation" class="level3" data-number="2.8.1">
 <h3 data-number="2.8.1" class="anchored" data-anchor-id="saddle-node-bifurcation"><span class="header-section-number">2.8.1</span> Saddle-node bifurcation</h3>
@@ -30122,8 +30122,8 @@ Figure&nbsp;2.14: Plot showing a pitchfork bifurcation.
 <li><p>Use the above to show that the number of breeding pairs at the start of the breeding season in year <span class="math inline">\(t\)</span> is <span class="math display">\[P_t:=P(T)=\frac{N_t^2}{r+2N_t}.\]</span></p></li>
 <li><p>Show that the population <span class="math inline">\(N_{t+1}\)</span> at the beginning of winter in year <span class="math inline">\(t+1\)</span> is given by <span id="eq-Nt"><span class="math display">\[
 N_{t+1}=s\,N_t+\frac{c\,N_t^2}{r+2N_t+N_t^2/\delta}.
-\tag{2.21}\]</span></span></p></li>
-<li><p>Find the realistic steady states of the model in <a href="#eq-Nt" class="quarto-xref">Eq.&nbsp;<span>2.21</span></a> for the case that <span class="math display">\[\frac{c}{1-s}-2\geq \sqrt{\frac{4r}{\delta}}.\]</span></p></li>
+\tag{2.30}\]</span></span></p></li>
+<li><p>Find the realistic steady states of the model in <a href="#eq-Nt" class="quarto-xref">Eq.&nbsp;<span>2.30</span></a> for the case that <span class="math display">\[\frac{c}{1-s}-2\geq \sqrt{\frac{4r}{\delta}}.\]</span></p></li>
 <li><p>Draw a cobweb diagram to illustrate the stability of the steady states in the case that there are two positive steady states. Label key features of the curves.</p></li>
 <li><p>What type of bifurcation occurs when there is equality in the condition in part f)?</p></li>
 </ol>
@@ -30132,7 +30132,7 @@ N_{t+1}=s\,N_t+\frac{c\,N_t^2}{r+2N_t+N_t^2/\delta}.
 <div id="exr-1.1" class="theorem exercise">
 <p><span class="theorem-title"><strong>Exercise 2.7 (Period-doubling and tangent bifurcations)</strong></span> Consider the discrete time model <span id="eq-ex_discrete_time"><span class="math display">\[
 N_{t+1}=\frac{rN_t}{1+(N_t/K)^b}
-\tag{2.22}\]</span></span> where <span class="math inline">\(r\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(K\)</span> are positive parameters with <span class="math inline">\(b&gt;1\)</span>. Show that the model has two steady states. Investigate the stability of the extinction steady state. Show that the non-trivial (non-zero) steady state can lose stability through a period doubling bifurcation at <span class="math inline">\(b=2r/(r-1)\)</span>, or a tangent bifurcation at <span class="math inline">\(r=1\)</span>.</p>
+\tag{2.31}\]</span></span> where <span class="math inline">\(r\)</span>, <span class="math inline">\(b\)</span> and <span class="math inline">\(K\)</span> are positive parameters with <span class="math inline">\(b&gt;1\)</span>. Show that the model has two steady states. Investigate the stability of the extinction steady state. Show that the non-trivial (non-zero) steady state can lose stability through a period doubling bifurcation at <span class="math inline">\(b=2r/(r-1)\)</span>, or a transcritical bifurcation at <span class="math inline">\(r=1\)</span>.</p>
 </div>
 <hr>
 </section>

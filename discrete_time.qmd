@@ -576,25 +576,25 @@ and investigate their stability. Do this both analytically and by drawing cobweb
 We will now look at an example of a discrete-time model with harvesting and apply the techniques we have learned. The model has the standard discrete-time model form $N_{t+1}=f(N_t)$, where $f$ in our example is
 $$
 f(N) = \frac{b N^2}{1+N^2}-EN.
-$$
+$$ {#eq-discrete-harvesting}
 The constant $b>2$ determines the growth rate of the population and the harvesting rate is determined by the harvesting effort $E$. 
 
 We start by studying the model without harvesting, so we set $E=0$ for now. As usual, we start by looking at the steady states of the model. The fixed points are the solutions to the equation 
 $$
 N^* = \frac{b\,{N^*}^2}{1+{N^*}^2}.
-$$ 
+$$ {#eq-discrete-harvesting_fixed_points}
 There is the obvious solution $N^*=0$. We can then find the non-zero solutions by dividing both sides by $N^*$ and multiply them by $1+{N^*}^2$ to get the equation
 $$
 1+{N^*}^2 = bN^*.
-$$
+$$ {#eq-discrete-harvesting_fixed_points_nonzero}
 This is a quadratic equation for $N^*$, which we could rewrite in the more conventional form
 $$
 {N^*}^2 - bN^* + 1 = 0.
-$$
+$$ {#eq-discrete-harvesting_fixed_points_nonzero_quadratic}
 The solutions to this equation are
 $$
 N^*_\pm = \frac{b\pm\sqrt{b^2-4}}{2}.
-$$
+$$ {#eq-discrete-harvesting_fixed_points_nonzero_quadratic_solution}
 The solutions are real if $b^2-4\geq 0$, i.e. if $b\geq 2$, which we have stipulated earlier. Both solutions are positive. 
 
 We now have enough information to draw a good sketch to understand the dynamics of the model. We can draw the function $f(N)$ and the line $N_{t+1}=N_t$. It may not be immediately obvious what the sketch of $f(N)=bN^2/(1+N^2)$ looks like. We'll reason ourselves through this in steps:
@@ -731,15 +731,15 @@ We see that as the harvesting effort $E$ increases, the two fixed points move cl
 Let us find the critical value $E_c$. For that we first determine the location of the fixed points in the presence of harvesting. So we solve the equation
 $$
 N^* = \frac{b\,{N^*}^2}{1+{N^*}^2}-EN^*.
-$$
+$$ {#eq-discrete-harvesting_fixed_points_harvesting}
 Again this has a solution $N^*=0$. We can then find the non-zero solutions by dividing both sides by $N^*$ and multiply them by $1+{N^*}^2$ to get the equation
 $$
 (1+E){N^*}^2-bN^*+1+E = 0.
-$$
+$$ {#eq-discrete-harvesting_fixed_points_harvesting_nonzero}
 This is solved by
 $$
 N^*_\pm = \frac{\frac{b}{1+E}\pm\sqrt{\left(\frac{b}{1+E}\right)^2-4}}{2}.
-$$
+$$ {#eq-discrete-harvesting_fixed_points_harvesting_nonzero_solution}
 
 We see that these solutions are real only if $\left(\frac{b}{1+E}\right)^2-4\geq 0$, i.e., if $E< \frac{b-2}{2}$. Thus the critical effort is $E_c=\frac{b-2}{2}$. Fishing above this level will lead to extinction of the population. But even fishing just near this level is risky because the population number will be very close to the minimum viable population and a small disturbance could lead to extinction.
 
@@ -797,7 +797,7 @@ We will use the logistic map to illustrate the period-doubling route to chaos, a
 the phenomenon is more general. The logistic map is a simple discrete-time model for population growth that exhibits a period-doubling route to chaos. It is defined as
 $$
 X_{t+1} = R\,X_t\,(1-X_t) =: f(X_t).
-$$
+$$ {#eq-logistic-map}
 It is the same as the Verhulst model @eq-verhulst, just written in terms of $X_t = N_t/\tilde{K}$.
 @fig-period-doubling-bifurcation shows the graph of $f(X)$ of the Verhulst model at
 three different values of the intrinsic growth factor $R$. For $R=2.8$ the slope of 
@@ -938,7 +938,7 @@ plt.show()
 In the chaotic regime the system displays highly sensitive dependence on initial conditions, where small differences in the starting population can result in vastly different outcomes over time. The period-doubling route to chaos, as seen in the logistic map, is a classic example of how simple nonlinear equations can produce complex and unpredictable behavior. How important chaos is for ecological systems is a subject of ongoing debate.
 
 
-## Transcritical and pitchfork bifurcations
+## Bifurcations
 
 As mentioned before, a bifurcation is a change in the existence and stability of fixed points or periodic orbits as the parameters of the model are varied.
 You have met bifurcations in continuous-time models already in your Classical Dynamics module. You have seen there that in one-dimensional systems described by a single ODE there are three different types of bifurcation: saddle-node, pitchfork, transcritical. The same types of bifurcations can occur in discrete-time models and we will discuss and visualise each of these bifurcation types below. These bifurcations happen if there is a fixed point with $f'(N^*)=1$. Then there is also one more type: the period-doubling bifurcation, which happens when $f'(N^*)=-1$, and which we have met in @sec-period-doubling.
@@ -1038,9 +1038,9 @@ ax.spines['right'].set_visible(False)
 ax.spines['bottom'].set_position(('data', 0))
 ax.spines['left'].set_position(('data', 0))
 # Define the range for N
-N_vals = np.linspace(0, 0.5, 200)
+N_vals = np.linspace(0, 2, 200)
 # Plot f(N) for different values of r to illustrate the bifurcation
-for rv in [-0.5, 0, 0.5]:
+for rv in [-0.5,0,0.5]:
   if rv < 0:
     label = '$r<0$'
   elif rv == 0:
@@ -1246,7 +1246,7 @@ where $r$, $b$ and $K$ are positive parameters with $b>1$. Show that
 the model has two steady states. Investigate the stability of the
 extinction steady state. Show that the non-trivial (non-zero) steady state can lose
 stability through a period doubling bifurcation at $b=2r/(r-1)$, or a
-tangent bifurcation at $r=1$. 
+transcritical bifurcation at $r=1$. 
 :::
 
 ----------------------------------------------------------------------
