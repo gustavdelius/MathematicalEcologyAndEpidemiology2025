@@ -1237,7 +1237,7 @@ h) What type of bifurcation occurs when there is equality in the condition in pa
 
 
 ::: {#exr-1.1}
-#### Period-doubling and tangent bifurcations
+#### Period-doubling and transcritical bifurcations
 Consider the discrete time model
 $$
 N_{t+1}=\frac{rN_t}{1+(N_t/K)^b}

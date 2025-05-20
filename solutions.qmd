@@ -198,6 +198,25 @@ Because $f(N)$ is positive for all $N<K$, the only way for $N_{t+1}$ to be negat
 is for $N_t$ to be greater than $K$. This in turn is only possible if $f(N_{t-1})>K$. So the function $f$ at its maximum needs to be larger than $K$. Because the function describes an upside-down parabola with
 zeros at $0$ and $K$, its maximum is in the middle at $N=K/2$, where $f(K/2)=rK/4$. Thus the population can get negative iff $rK/4>K$, which is equivalent to $r>4$.
 
+
+
+### Period-doubling and transcritical bifurcations  {.unnumbered}
+@exr-1.1:
+
+We consider the discrete-time model
+$$N_{t+1}=\frac{rN_t}{1+(N_t/K)^b}=f(N_t)$$
+where $r,b$ and $k$ are positive parameters with $b>1$.
+
+The steady-state equation is $f(N^*)=N^*$ which we'll write as $f(N^*)-N^*=0$. Substituting in the expression for $f(N^*)$ and bringing everything on a common denominator gives
+$$N^*\frac{r-1-(N^*/K)^b}{1+(N^*/K)^b}=0,$$
+which has the solutions $N^*=0$ and $N^*=K(r-1)^{1/b}$. Note that at $r=1$ these two fixed points coincide, which means there will be a bifurcation there. There are two types of bifurcation where two fixed points meet: in the saddle-node bifurcation (also called tangent bifurcation) the two fixed points annihilate each other, in the transcritical bifurcation they move through each other but exchange their stability. Because the fixed point at $x=0$ clearly does not disappear in the bifurcation at $r=1$, we have a transcritical bifurcation.
+
+To determine the stability of the extinction fixed point we calculate the derivative of $f$ and evaluate at $0$ which gives $f'(0)=r$. Because a fixed point is stable if $|f(N^*)|<1$ we see that the extinction fixed point is stable as long as $r<1$. At $r=1$ there is the tangent bifurcation that we already discussed above and for $r>1$ the extinction fixed point is unstable. 
+
+When evaluating $f'(N^*)$ at the non-zero fixed point it is easier to use that $(N^*/K)^b=r-1$ than to use the expression for $N^*$ directly. This is a common theme that you also meet in the stability analysis in 2-dim dynamical systems when you evaluate a Jacobian at a fixed point: it saves time to use relationships that are true at the fixed point to simplify expressions. Anyway, the upshot will be that
+$$f'(N^*)=1-b\frac{r-1}{r}.$$
+Thus the non-zero fixed point is stable if $|1-b(r-1)/r|<1$ which means $1<r<2r/(r-1)$. Hence besides the bifurcation at $r=1$ there is a bifurcation at $r=2r/(r-1)$. Because that bifurcation happens when $f'(N^*)=-1$ we know that it is a period-doubling bifurcation.
+
 ----------------------------------------------------
 
 ## Sex-structured population models
